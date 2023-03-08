@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
+import { BsPersonCircle } from "react-icons/bs";
 
 function Header() {
 
@@ -7,7 +8,10 @@ function Header() {
 		<header className="py-3 flex justify-between items-center">
 			<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
-			<button>アカウント</button>
+			<button>
+
+				<BsPersonCircle className="text-2xl"/>
+			</button>
 		</header>
 	)
 }
