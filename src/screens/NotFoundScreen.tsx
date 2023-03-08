@@ -1,9 +1,17 @@
+import Header from "../components/Header"
+
 function NotFoundScreen() {
 
 	return (
 		<div>
-			<h1>Page not found</h1>
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non sapiente id architecto reiciendis. Porro, enim laborum! Veritatis, recusandae magni? Temporibus.</p>
+
+			<Header/>
+
+			<main>
+
+				<h1>Page not found</h1>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non sapiente id architecto reiciendis. Porro, enim laborum! Veritatis, recusandae magni? Temporibus.</p>
+			</main>
 		</div>
 	)
 }

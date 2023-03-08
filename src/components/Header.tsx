@@ -1,8 +1,10 @@
+import { NavLink } from "react-router-dom"
+
 function Header() {
 
 	return (
 		<header>
-			<a>Todo Diaries</a>
+			<NavLink to="/">Todo Diaries</NavLink>
 		</header>
 	)
 }
