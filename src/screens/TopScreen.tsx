@@ -3,7 +3,7 @@ import Header from "../components/Header"
 function TopScreen() {
 
 	return (
-		<div>
+		<div className="bg-gray-100 h-screen">
 
 			<Header/>
 
