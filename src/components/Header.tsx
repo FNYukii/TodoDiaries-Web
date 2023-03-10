@@ -5,13 +5,17 @@ function Header() {
 
 	return (
 
-		<header className="py-3 flex justify-between items-center">
-			<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
+		<header className='w-full mx-auto px-4 lg:width-lg lg:px-0'>
 
-			<button>
+			<div className='py-2 flex justify-between items-center'>
 
-				<BsPersonCircle className="text-2xl"/>
-			</button>
+				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
+
+				<button>
+
+					<BsPersonCircle className="text-2xl"/>
+				</button>
+			</div>
 		</header>
 	)
 }

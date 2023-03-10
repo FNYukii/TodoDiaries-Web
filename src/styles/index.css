@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+	.width-xl {
+		width: 1280px;
+	}
+
+	.width-lg {
+		width: 1024px;
+	}
+
+	.width-md {
+		width: 768px;
+	}
+
+	.width-sm {
+		width: 640px;
+	}
+}
