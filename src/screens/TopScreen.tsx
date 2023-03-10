@@ -24,7 +24,7 @@ function TopScreen() {
 						</div>
 					</div>
 
-					<div>
+					<div className="hidden sm:block">
 
 						<h2 className="text-2xl font-bold">達成履歴</h2>
 
@@ -37,7 +37,7 @@ function TopScreen() {
 						</div>
 					</div>
 
-					<div>
+					<div className="hidden md:block">
 
 						<h2 className="text-2xl font-bold">統計</h2>
 
