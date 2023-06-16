@@ -30,7 +30,7 @@ function SignInSection(props: { setIsShowSignUpSection: React.Dispatch<React.Set
 
 			<form onSubmit={(e) => onSubmit(e)}>
 
-				<div >
+				<div className="mt-4 px-8">
 
 					<p className="text-2xl font-bold">サインイン</p>
 
@@ -38,7 +38,7 @@ function SignInSection(props: { setIsShowSignUpSection: React.Dispatch<React.Set
 					<PasswordInput value={password} onChange={setPassword} className="mt-4" />
 				</div>
 
-				<div className="mt-4 flex justify-between items-center">
+				<div className="mt-4 flex justify-between items-center pr-6 pl-8 pb-6">
 
 					<button type="button" onClick={() => props.setIsShowSignUpSection(true)} className="hover:underline h-fit">新しいアカウントを作成</button>
 
