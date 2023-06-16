@@ -45,10 +45,7 @@ function Modal(props: Props) {
 					</button>
 				</div>
 
-				<div className="mt-4 px-8 pb-8">
-
-					{props.children}
-				</div>
+				{props.children}
 			</div>
 		</div>
 	);
