@@ -6,7 +6,7 @@ import TodosSection from "../components/sections/TodosSection"
 function TopScreen() {
 
 	return (
-		<div className="bg-slate-100 h-screen">
+		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
 
 			<Header />
 

@@ -32,16 +32,16 @@ function Modal(props: Props) {
 
 	return (
 
-		<div className="z-30 fixed top-0 left-0 w-full h-full flex justify-center items-center">
+		<div className="z-30 fixed top-0 left-0 w-full h-full flex justify-center items-center dark:text-white">
 
-			<div onClick={() => navigate(-1)} className="w-full h-full bg-black/30"></div>
+			<div onClick={() => navigate(-1)} className="w-full h-full bg-black/30 dark:bg-white/20"></div>
 
-			<div className="absolute bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto">
+			<div className="absolute bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
 
 				<div className="pt-4 pl-4">
 
-					<button onClick={() => navigate(-1)} className="p-4 transition hover:bg-gray-100 rounded-full">
-						<MdOutlineClose className="text-2xl text-gray-500" />
+					<button onClick={() => navigate(-1)} className="p-4 transition rounded-full hover:bg-gray-100 dark:hover:bg-slate-900">
+						<MdOutlineClose className="text-2xl text-slate-500" />
 					</button>
 				</div>
 

@@ -16,7 +16,7 @@ function AchievedTodosSection(props: Props) {
 
 					<span className="inline-block text-slate-500">2023年6月16日 金曜日</span>
 
-					<div className="mt-2 bg-white p-2 rounded-xl divide-y">
+					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
 						<div className="p-2">
 							<p>やよい軒に行く</p>
@@ -32,7 +32,7 @@ function AchievedTodosSection(props: Props) {
 
 					<span className="inline-block text-slate-500">2023年6月15日 木曜日</span>
 
-					<div className="mt-2 bg-white p-2 rounded-xl divide-y">
+					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
 						<div className="p-2">
 							<p>お絵描き</p>
@@ -43,7 +43,7 @@ function AchievedTodosSection(props: Props) {
 				<div>
 					<span className="inline-block text-slate-500">2023年6月15日 木曜日</span>
 
-					<div className="mt-2 bg-white p-2 rounded-xl divide-y">
+					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
 						<div className="p-2">
 							<p>買い物</p>
