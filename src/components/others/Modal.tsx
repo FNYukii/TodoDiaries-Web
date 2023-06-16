@@ -38,14 +38,14 @@ function Modal(props: Props) {
 
 			<div className="absolute bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto">
 
-				<div className="pt-3 pl-3">
+				<div className="pt-4 pl-4">
 
-					<button onClick={() => navigate(-1)} className="p-3 transition hover:bg-gray-100 rounded-full">
+					<button onClick={() => navigate(-1)} className="p-4 transition hover:bg-gray-100 rounded-full">
 						<MdOutlineClose className="text-2xl text-gray-500" />
 					</button>
 				</div>
 
-				<div className="mt-3 px-6 pb-6">
+				<div className="mt-4 px-8 pb-8">
 
 					{props.children}
 				</div>
