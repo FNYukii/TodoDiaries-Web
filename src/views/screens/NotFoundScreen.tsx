@@ -1,4 +1,4 @@
-import Header from "../sections/Header"
+import Header from "../components/sections/Header"
 
 function NotFoundScreen() {
 

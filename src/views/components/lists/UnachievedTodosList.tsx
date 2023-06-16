@@ -1,7 +1,7 @@
 import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../utilities/firebase";
-import Todo from "../../entities/Todo";
+import { db } from "../../../utilities/firebase";
+import Todo from "../../../entities/Todo";
 
 interface Props {
 	pinned?: boolean

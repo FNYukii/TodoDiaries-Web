@@ -1,7 +1,7 @@
-import AchievedTodosSection from "../sections/AchievedTodosSection"
-import Header from "../sections/Header"
-import StatsSection from "../sections/StatsSection"
-import TodosSection from "../sections/TodosSection"
+import AchievedTodosSection from "../components/sections/AchievedTodosSection"
+import Header from "../components/sections/Header"
+import StatsSection from "../components/sections/StatsSection"
+import TodosSection from "../components/sections/TodosSection"
 
 function TopScreen() {
 

@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import NotFoundScreen from "./components/screens/NotFoundScreen";
-import SignInScreen from "./components/screens/SignInScreen";
-import TopScreen from "./components/screens/TopScreen";
+import NotFoundScreen from "./views/screens/NotFoundScreen";
+import SignInScreen from "./views/screens/SignInScreen";
+import TopScreen from "./views/screens/TopScreen";
 
 function App() {
 
