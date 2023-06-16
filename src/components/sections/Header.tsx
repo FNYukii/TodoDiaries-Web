@@ -11,10 +11,10 @@ function Header() {
 
 				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
-				<button>
+				<NavLink to="sign-in">
 
 					<BsPersonCircle className="text-2xl text-slate-500"/>
-				</button>
+				</NavLink>
 			</div>
 		</header>
 	)
