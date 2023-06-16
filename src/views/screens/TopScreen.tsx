@@ -15,8 +15,8 @@ function TopScreen() {
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
 
 					<TodosSection />
-					<AchievedTodosSection className="hidden sm:block"/>
-					<StatsSection className="hidden lg:block"/>
+					<AchievedTodosSection className="hidden sm:block" />
+					<StatsSection className="hidden lg:block" />
 				</div>
 			</main>
 		</div>

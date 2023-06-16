@@ -1,7 +1,9 @@
 function EmailInput(props: { value: string, onChange: React.Dispatch<React.SetStateAction<string>>, placeholder?: string, className?: string }) {
 
 	return (
+
 		<div className={props.className}>
+
 			<input
 				type="email"
 				value={props.value}

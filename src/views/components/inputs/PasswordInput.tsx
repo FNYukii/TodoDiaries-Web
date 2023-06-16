@@ -6,6 +6,7 @@ function PasswordInput(props: { value: string, onChange: React.Dispatch<React.Se
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
 	return (
+
 		<div className={`relative ${props.className}`}>
 
 			<input
@@ -17,6 +18,7 @@ function PasswordInput(props: { value: string, onChange: React.Dispatch<React.Se
 			/>
 
 			<button type="button" onClick={() => setIsPasswordVisible(!isPasswordVisible)} className="absolute top-0 right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900">
+
 				{!isPasswordVisible &&
 					<AiOutlineEyeInvisible className="text-xl text-slate-500" />
 				}
