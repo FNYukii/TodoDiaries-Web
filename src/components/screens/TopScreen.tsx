@@ -1,54 +1,22 @@
+import AchievedTodosSection from "../sections/AchievedTodosSection"
 import Header from "../sections/Header"
+import StatsSection from "../sections/StatsSection"
+import TodosSection from "../sections/TodosSection"
 
 function TopScreen() {
 
 	return (
-		<div className="bg-gray-100 h-screen">
+		<div className="bg-slate-100 h-screen">
 
 			<Header />
 
 			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
 
-				<div className="flex justify-between gap-x-4">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
 
-					<div>
-
-						<h2 className="text-2xl font-bold">Todo</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
-
-					<div className="hidden sm:block">
-
-						<h2 className="text-2xl font-bold">達成履歴</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
-
-					<div className="hidden md:block">
-
-						<h2 className="text-2xl font-bold">統計</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
+					<TodosSection />
+					<AchievedTodosSection className="hidden sm:block"/>
+					<StatsSection className="hidden lg:block"/>
 				</div>
 			</main>
 		</div>

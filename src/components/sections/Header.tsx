@@ -13,7 +13,7 @@ function Header() {
 
 				<button>
 
-					<BsPersonCircle className="text-2xl text-gray-500"/>
+					<BsPersonCircle className="text-2xl text-slate-500"/>
 				</button>
 			</div>
 		</header>
