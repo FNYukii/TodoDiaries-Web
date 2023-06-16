@@ -1,15 +1,28 @@
+import { useState } from "react";
 import Modal from "../others/Modal";
+import SignInSection from "../sections/SignInSection";
+import SignUpSection from "../sections/SignUpSection";
 
 function SignInScreen() {
 
+	const [isShowSignUpSection, setIsShowSignUpSection] = useState(false)
+
 	return (
 
-		<Modal title="サインイン">
+		<Modal title="サインイン - Meetings">
 
-			<h1 className="text-2xl">Sign in modal</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident asperiores perferendis eligendi excepturi aliquid distinctio voluptate esse nostrum molestias architecto.</p>
+			<div>
+				
+				{!isShowSignUpSection &&
+					<SignInSection setIsShowSignUpSection={setIsShowSignUpSection} />
+				}
+
+				{isShowSignUpSection &&
+					<SignUpSection setIsShowSignUpSection={setIsShowSignUpSection} />
+				}
+			</div>
 		</Modal>
-	);
+	)
 }
 
 export default SignInScreen;
