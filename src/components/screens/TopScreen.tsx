@@ -1,4 +1,7 @@
+import AchievedTodosSection from "../sections/AchievedTodosSection"
 import Header from "../sections/Header"
+import StatsSection from "../sections/StatsSection"
+import TodosSection from "../sections/TodosSection"
 
 function TopScreen() {
 
@@ -11,44 +14,9 @@ function TopScreen() {
 
 				<div className="flex justify-between gap-x-4">
 
-					<div>
-
-						<h2 className="text-2xl font-bold">Todo</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
-
-					<div className="hidden sm:block">
-
-						<h2 className="text-2xl font-bold">達成履歴</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
-
-					<div className="hidden md:block">
-
-						<h2 className="text-2xl font-bold">統計</h2>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-
-						<div className="mt-4 bg-white p-2 rounded-xl">
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum distinctio facilis atque id sed ipsa, molestiae libero consequuntur minus!</p>
-						</div>
-					</div>
+					<TodosSection />
+					<AchievedTodosSection />
+					<StatsSection />
 				</div>
 			</main>
 		</div>
