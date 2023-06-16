@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { MdOutlineClose } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 
 interface Props {
@@ -35,9 +36,19 @@ function Modal(props: Props) {
 
 			<div onClick={() => navigate(-1)} className="w-full h-full bg-black/30"></div>
 
-			<div className="absolute bg-white p-6 rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto">
+			<div className="absolute bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto">
 
-				{props.children}
+				<div className="pt-3 pl-3">
+
+					<button onClick={() => navigate(-1)} className="p-3 transition hover:bg-gray-100 rounded-full">
+						<MdOutlineClose className="text-2xl text-gray-500" />
+					</button>
+				</div>
+
+				<div className="mt-3 px-6 pb-6">
+
+					{props.children}
+				</div>
 			</div>
 		</div>
 	);
