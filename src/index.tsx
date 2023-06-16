@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Routes from './Routes';
 import './styles/index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFoundScreen from './components/screens/NotFoundScreen';
+import TopScreen from './components/screens/TopScreen';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -9,6 +11,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<React.StrictMode>
-		<Routes />
+		<BrowserRouter>
+			<Routes>
+
+				<Route path="/" element={<TopScreen />} />
+				<Route path="*" element={<NotFoundScreen />} />
+			</Routes>
+		</BrowserRouter>
 	</React.StrictMode>
 );
