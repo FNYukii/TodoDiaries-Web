@@ -15,8 +15,8 @@ function TopScreen() {
 				<div className="flex justify-between gap-x-4">
 
 					<TodosSection />
-					<AchievedTodosSection />
-					<StatsSection />
+					<AchievedTodosSection className="hidden sm:block"/>
+					<StatsSection className="hidden md:block"/>
 				</div>
 			</main>
 		</div>

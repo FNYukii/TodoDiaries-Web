@@ -1,6 +1,12 @@
-function AchievedTodosSection() {
+interface Props {
+	className?: string
+}
+
+function AchievedTodosSection(props: Props) {
+
 	return (
-		<div className="hidden sm:block">
+
+		<div className={props.className}>
 
 			<h2 className="text-2xl font-bold">達成履歴</h2>
 

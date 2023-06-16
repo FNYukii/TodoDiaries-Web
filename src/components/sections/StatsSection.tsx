@@ -1,6 +1,12 @@
-function StatsSection() {
+interface Props {
+	className?: string
+}
+
+function StatsSection(props: Props) {
+
 	return (
-		<div className="hidden md:block">
+
+		<div className={props.className}>
 
 			<h2 className="text-2xl font-bold">統計</h2>
 

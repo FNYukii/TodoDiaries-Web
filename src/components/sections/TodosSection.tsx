@@ -1,6 +1,12 @@
-function TodosSection() {
+interface Props {
+	className?: string
+}
+
+function TodosSection(props: Props) {
+
 	return (
-		<div>
+		
+		<div className={props.className}>
 
 			<h2 className="text-2xl font-bold">Todo</h2>
 
