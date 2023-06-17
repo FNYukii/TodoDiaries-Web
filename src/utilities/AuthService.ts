@@ -12,12 +12,12 @@ class AuthService {
 				// UIDをresolve
 				const uid = user?.uid ?? null
 
-				resolve(uid);
+				resolve(uid)
 
 				// 登録解除
-				unsubscribe();
-			});
-		});
+				unsubscribe()
+			})
+		})
 	}
 
 	static email(): string | null {
@@ -30,31 +30,31 @@ class AuthService {
 
 	static async signInWithGoogle(): Promise<string | null> {
 
-		const provider = new GoogleAuthProvider();
+		const provider = new GoogleAuthProvider()
 
 		return signInWithPopup(auth, provider)
 			.then((result) => {
 
 				// Google APIにアクセスするために、Googleアクセストークンを取得
-				// const credential = GoogleAuthProvider.credentialFromResult(result);
-				// const token = credential.accessToken;
+				// const credential = GoogleAuthProvider.credentialFromResult(result)
+				// const token = credential.accessToken
 
 				// サインインしたユーザー
-				const user = result.user;
+				const user = result.user
 
 				return user.uid
 
 			}).catch((error) => {
 
 				// エラーの詳細
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				const email = error.customData.email;
+				const errorCode = error.code
+				const errorMessage = error.message
+				const email = error.customData.email
 
 				console.log(`Fail! Error to sign in. ${errorCode}, ${errorMessage}, ${email}`)
 
 				return null
-			});
+			})
 	}
 
 	static async signOut(): Promise<string | null> {

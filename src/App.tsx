@@ -1,12 +1,11 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import NotFoundScreen from "./views/screens/NotFoundScreen";
-import SignInScreen from "./views/screens/SignInScreen";
-import TopScreen from "./views/screens/TopScreen";
-import WelcomeScreen from "./views/screens/WelcomeScreen";
-import { onAuthStateChanged } from "firebase/auth";
-import { useState, useEffect } from "react";
-import { auth } from "./utilities/firebase";
-import AuthStateChecker from "./views/components/others/AuthStateChecker";
+import { Routes, Route, useLocation } from "react-router-dom"
+import NotFoundScreen from "./views/screens/NotFoundScreen"
+import SignInScreen from "./views/screens/SignInScreen"
+import TopScreen from "./views/screens/TopScreen"
+import WelcomeScreen from "./views/screens/WelcomeScreen"
+import { onAuthStateChanged } from "firebase/auth"
+import { useState, useEffect } from "react"
+import { auth } from "./utilities/firebase"
 
 function App() {
 
@@ -59,7 +58,7 @@ function App() {
 				<Route path='*' element={<div />} />
 			</Routes>
 		</>
-	);
+	)
 }
 
-export default App;
+export default App
