@@ -4,6 +4,7 @@ import { db } from "../../../utilities/firebase"
 import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
 
+
 interface Props {
 	pinned?: boolean
 	className?: string
