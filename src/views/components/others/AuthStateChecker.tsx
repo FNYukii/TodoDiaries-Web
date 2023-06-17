@@ -27,9 +27,11 @@ function AuthStateChecker() {
 
 	return (
 		<div>
+
 			<p>UID: {uid ?? "Null"}</p>
 
-			<button onClick={() => AuthService.signOut()} className="text-red-500 font-bold disabled:text-slate-500" disabled={uid === null}>Sign out</button>
+			<button onClick={() => AuthService.signInWithGoogle()} className="block font-bold disabled:text-slate-500" disabled={uid !== null}>Sign In</button>
+			<button onClick={() => AuthService.signOut()} className="block text-red-500 font-bold disabled:text-slate-500" disabled={uid === null}>Sign Out</button>
 		</div>
 	)
 }
