@@ -1,7 +1,7 @@
-import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../../../utilities/firebase";
-import Todo from "../../../entities/Todo";
+import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore"
+import { useEffect, useState } from "react"
+import { db } from "../../../utilities/firebase"
+import Todo from "../../../entities/Todo"
 
 interface Props {
 	pinned?: boolean
@@ -21,12 +21,13 @@ function UnachievedTodosList(props: Props) {
 		const isPinned: boolean = props.pinned ? true : false
 
 		// 読み取りクエリを作成
-		const q = query(collection(db, "todos"), where("achievedAt", "==", null), where("isPinned", "==", isPinned), where("userId", "==", userId), orderBy("order", "asc"), limit(100));
+		const q = query(collection(db, "todos"), where("achievedAt", "==", null), where("isPinned", "==", isPinned), where("userId", "==", userId), orderBy("order", "asc"), limit(100))
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
 
-			if (querySnapshot.metadata.hasPendingWrites) return;
+			// TODO: このコードの意味を調べる
+			if (querySnapshot.metadata.hasPendingWrites) return
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
@@ -58,13 +59,15 @@ function UnachievedTodosList(props: Props) {
 
 				// 配列に追加
 				todos.push(todo)
-			});
+			})
 
+			// Stateを更新
 			setTodos(todos)
 			setIsLoaded(true)
 
 		}, (error) => {
 
+			// エラーならログ出力 & State更新
 			console.log(`Comments reading failed. ${error}`)
 			setIsLoaded(true)
 		})
@@ -105,7 +108,7 @@ function UnachievedTodosList(props: Props) {
 				</div>
 			}
 		</div>
-	);
+	)
 }
 
-export default UnachievedTodosList;
+export default UnachievedTodosList

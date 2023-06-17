@@ -1,3 +1,4 @@
+import AuthStateChecker from "../components/others/AuthStateChecker"
 import AchievedTodosSection from "../components/sections/AchievedTodosSection"
 import Header from "../components/sections/Header"
 import StatsSection from "../components/sections/StatsSection"
@@ -12,11 +13,13 @@ function TopScreen() {
 
 			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
 
+				<AuthStateChecker />
+
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
 
 					<TodosSection />
-					<AchievedTodosSection className="hidden sm:block"/>
-					<StatsSection className="hidden lg:block"/>
+					<AchievedTodosSection className="hidden sm:block" />
+					<StatsSection className="hidden lg:block" />
 				</div>
 			</main>
 		</div>

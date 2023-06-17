@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Modal from "../components/others/Modal";
-import SignInSection from "../components/sections/SignInSection";
-import SignUpSection from "../components/sections/SignUpSection";
+import { useState } from "react"
+import Modal from "../components/others/Modal"
+import SignInSection from "../components/sections/SignInSection"
+import SignUpSection from "../components/sections/SignUpSection"
 
 function SignInScreen() {
 
@@ -12,7 +12,7 @@ function SignInScreen() {
 		<Modal title="サインイン - Meetings">
 
 			<div>
-				
+
 				{!isShowSignUpSection &&
 					<SignInSection setIsShowSignUpSection={setIsShowSignUpSection} />
 				}
@@ -25,4 +25,4 @@ function SignInScreen() {
 	)
 }
 
-export default SignInScreen;
+export default SignInScreen

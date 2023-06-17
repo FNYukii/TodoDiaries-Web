@@ -15,8 +15,13 @@ function Modal(props: Props) {
 
 	useEffect(() => {
 
+		// ページTitle設定
 		document.title = props.title
+
+		// キーイベント設定
 		document.addEventListener("keydown", onKeyDown, false)
+
+		// 画面スクロール無効
 		body.style.overflowY = "hidden"
 
 		return () => {
@@ -48,7 +53,7 @@ function Modal(props: Props) {
 				{props.children}
 			</div>
 		</div>
-	);
+	)
 }
 
-export default Modal;
+export default Modal

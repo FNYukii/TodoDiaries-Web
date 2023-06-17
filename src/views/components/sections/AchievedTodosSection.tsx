@@ -63,4 +63,4 @@ function AchievedTodosSection(props: Props) {
 	);
 }
 
-export default AchievedTodosSection;
+export default AchievedTodosSection

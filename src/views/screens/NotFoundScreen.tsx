@@ -5,7 +5,7 @@ function NotFoundScreen() {
 	return (
 		<div>
 
-			<Header/>
+			<Header />
 
 			<main>
 

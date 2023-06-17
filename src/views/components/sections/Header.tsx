@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { BsPersonCircle } from "react-icons/bs";
+import { NavLink } from "react-router-dom"
+import { BsPersonCircle } from "react-icons/bs"
 
 function Header() {
 

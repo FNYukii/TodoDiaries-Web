@@ -1,4 +1,4 @@
-import UnachievedTodosList from "../lists/UnachievedTodosList";
+import UnachievedTodosList from "../lists/UnachievedTodosList"
 
 interface Props {
 	className?: string
@@ -26,7 +26,7 @@ function TodosSection(props: Props) {
 				<UnachievedTodosList className="mt-2" />
 			</section>
 		</section>
-	);
+	)
 }
 
-export default TodosSection;
+export default TodosSection

@@ -21,4 +21,4 @@ function StatsSection(props: Props) {
 	)
 }
 
-export default StatsSection;
+export default StatsSection

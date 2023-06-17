@@ -8,7 +8,6 @@ type Todo = {
 
 	createdAt: Date
 	achievedAt: Date | null
-	
 }
 
 export default Todo
