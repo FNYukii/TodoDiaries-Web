@@ -29,7 +29,7 @@ function AuthStateChecker() {
 		<div>
 			<p>UID: {uid ?? "Null"}</p>
 
-			<button onClick={() => AuthService.signOut()} className="text-red-500 font-bold" disabled={uid === null}>Sign out</button>
+			<button onClick={() => AuthService.signOut()} className="text-red-500 font-bold disabled:text-slate-500" disabled={uid === null}>Sign out</button>
 		</div>
 	)
 }
