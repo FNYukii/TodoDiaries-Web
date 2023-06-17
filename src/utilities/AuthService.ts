@@ -3,15 +3,21 @@ import { auth } from "./firebase"
 
 class AuthService {
 
-	static uid(): string | null {
+	static uid(): Promise<string | null> {
 
-		const uid = auth.currentUser?.uid
+		return new Promise((resolve) => {
 
-		if (uid) {
-			return uid
-		} else {
-			return null
-		}
+			var unsubscribe = auth.onAuthStateChanged((user) => {
+
+				// UIDをresolve
+				const uid = user?.uid ?? null
+
+				resolve(uid);
+
+				// 登録解除
+				unsubscribe();
+			});
+		});
 	}
 
 	static email(): string | null {
