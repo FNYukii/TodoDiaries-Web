@@ -8,7 +8,7 @@ function TopScreen() {
 	return (
 		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
 
-			<Header />
+			<Header showAccountButton />
 
 			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
 

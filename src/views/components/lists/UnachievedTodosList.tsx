@@ -2,6 +2,8 @@ import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/f
 import { useEffect, useState } from "react"
 import { db } from "../../../utilities/firebase"
 import Todo from "../../../entities/Todo"
+import AuthService from "../../../utilities/AuthService"
+
 
 interface Props {
 	pinned?: boolean
@@ -15,8 +17,16 @@ function UnachievedTodosList(props: Props) {
 
 	async function listen() {
 
-		// userID 仮
-		const userId = process.env.REACT_APP_SAMPLE_UID
+		// UserIDを取得
+		const userId = await AuthService.uid()
+		
+		// 未ログインなら、エラーとする
+		if (userId === null) {
+
+			console.log("Fail! Error to listen todos. 未ログイン状態です。")
+			setIsLoaded(true)
+			return
+		}
 
 		const isPinned: boolean = props.pinned ? true : false
 
