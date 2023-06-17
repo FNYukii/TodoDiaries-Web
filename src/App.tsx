@@ -6,6 +6,7 @@ import WelcomeScreen from "./views/screens/WelcomeScreen"
 import { onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { auth } from "./utilities/firebase"
+import AccountScreen from "./views/screens/AccountScreen"
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
 	const isShowSignInModal = currentPath === "/sign-in"
 	const isShowCreateTodoModal = currentPath === "/new-todo"
 	const isShowTodoModal = currentPath.match(/^\/todos\/\w{20}\$/)
-	const isShowModal = isShowSignInModal || isShowCreateTodoModal || isShowTodoModal ? true : false
+	const isShowAccountModal = currentPath === "/account"
+	const isShowModal = isShowSignInModal || isShowCreateTodoModal || isShowTodoModal || isShowAccountModal ? true : false
 
 	// ログイン状態
 	const [isSignedIn, setIsSignedIn] = useState(false)
@@ -55,6 +57,7 @@ function App() {
 			<Routes location={isShowModal ? currentPath : ""}>
 
 				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen /> : <SignInScreen />} />
+				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen />} />
 				<Route path='*' element={<div />} />
 			</Routes>
 		</>
