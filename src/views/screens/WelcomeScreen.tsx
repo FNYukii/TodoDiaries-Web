@@ -13,7 +13,6 @@ function WelcomeScreen() {
 
 		// 失敗
 		if (uid === null) {
-			alert("サインイン失敗")
 			return
 		}
 

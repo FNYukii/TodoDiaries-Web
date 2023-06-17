@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom"
 import { BsPersonCircle } from "react-icons/bs"
 
-function Header() {
+interface Props {
+	showAccountButton?: boolean
+}
+
+function Header(props: Props) {
 
 	return (
 
@@ -11,10 +15,12 @@ function Header() {
 
 				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
-				<NavLink to="sign-in">
+				{props.showAccountButton &&
+					<NavLink to="/account">
 
-					<BsPersonCircle className="text-2xl text-slate-500"/>
-				</NavLink>
+						<BsPersonCircle className="text-2xl text-slate-500" />
+					</NavLink>
+				}
 			</div>
 		</header>
 	)
