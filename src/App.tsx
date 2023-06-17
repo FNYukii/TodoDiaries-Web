@@ -47,8 +47,6 @@ function App() {
 	return (
 		<>
 
-			<AuthStateChecker />
-
 			<Routes location={isShowModal ? previousPath : currentPath}>
 
 				<Route path="/" element={isSignedIn ? <TopScreen /> : <WelcomeScreen />} />
