@@ -26,12 +26,15 @@ function AuthStateChecker() {
 	}, [])
 
 	return (
-		<div>
+		<div className="p-2">
 
 			<p>UID: {uid ?? "Null"}</p>
 
-			<button onClick={() => AuthService.signInWithGoogle()} className="block font-bold disabled:text-slate-500" disabled={uid !== null}>Sign In</button>
-			<button onClick={() => AuthService.signOut()} className="block text-red-500 font-bold disabled:text-slate-500" disabled={uid === null}>Sign Out</button>
+			<div className="flex space-x-4">
+				<button onClick={() => AuthService.signInWithGoogle()} className="font-bold disabled:text-slate-400" disabled={uid !== null}>Sign In</button>
+				<button onClick={() => AuthService.signOut()} className="text-red-500 font-bold disabled:text-slate-400" disabled={uid === null}>Sign Out</button>
+			</div>
+
 		</div>
 	)
 }
