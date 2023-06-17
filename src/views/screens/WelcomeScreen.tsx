@@ -1,10 +1,10 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/sections/Header";
 import AuthService from "../../utilities/AuthService";
+import NavLinkToModal from "../components/others/NavLinkToModal";
 
 function WelcomeScreen() {
 
-	const location = useLocation()
 	const navigate = useNavigate()
 
 	async function signInWithGoogle() {
@@ -38,7 +38,7 @@ function WelcomeScreen() {
 				<div className="flex justify-around">
 
 					<button onClick={signInWithGoogle}>Googleアカウントでサインイン</button>
-					<Link state={{ from: location.pathname }} to="/sign-in">TodoDiariesアカウントでサインイン</Link >
+					<NavLinkToModal to="/sign-in">TodoDiariesアカウントでサインイン</NavLinkToModal >
 				</div>
 			</main>
 		</div>

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { BsPersonCircle } from "react-icons/bs"
+import NavLinkToModal from "../others/NavLinkToModal"
 
 interface Props {
 	showAccountButton?: boolean
@@ -16,10 +17,10 @@ function Header(props: Props) {
 				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
 				{props.showAccountButton &&
-					<NavLink to="/account">
+					<NavLinkToModal to="/account">
 
 						<BsPersonCircle className="text-2xl text-slate-500" />
-					</NavLink>
+					</NavLinkToModal>
 				}
 			</div>
 		</header>
