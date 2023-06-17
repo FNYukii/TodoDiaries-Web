@@ -28,18 +28,10 @@ function WelcomeScreen() {
 
 			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
+				<p>サインインしてください。</p>
 
-					<div>Create Todos</div>
-					<div>Achieve Todos</div>
-					<div>Check Stats</div>
-				</div>
-
-				<div className="flex justify-around">
-
-					<button onClick={signInWithGoogle}>Googleアカウントでサインイン</button>
-					<NavLinkToModal to="/sign-in">TodoDiariesアカウントでサインイン</NavLinkToModal >
-				</div>
+				<button onClick={signInWithGoogle} className="mt-4 font-bold">Googleアカウントでサインイン</button>
+				<NavLinkToModal to="/sign-in" className="mt-2 block font-bold">TodoDiariesアカウントでサインイン</NavLinkToModal >
 			</main>
 		</div>
 	);

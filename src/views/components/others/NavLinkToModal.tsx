@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 
 interface Props {
 	to: string
+	className?: string
 	children: JSX.Element | JSX.Element[] | string
 }
 
@@ -11,7 +12,7 @@ function NavLinkToModal(props: Props) {
 
 	return (
 		
-		<Link state={{ from: location.pathname }} to={props.to}>
+		<Link state={{ from: location.pathname }} to={props.to} className={props.className}>
 			{props.children}
 		</Link >
 	)
