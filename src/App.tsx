@@ -46,7 +46,7 @@ function App() {
 	}, [])
 
 	return (
-		<>
+		<div className="dark:text-white">
 
 			<Routes location={isShowModal ? previousPath : currentPath}>
 
@@ -56,11 +56,11 @@ function App() {
 
 			<Routes location={isShowModal ? currentPath : ""}>
 
-				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen /> : <SignInScreen />} />
-				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen />} />
+				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen className="z-30 fixed top-0 left-0 w-full h-full bg-white dark:bg-black" /> : <SignInScreen />} />
+				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen className="z-30 fixed top-0 left-0 w-full h-full bg-white dark:bg-black" />} />
 				<Route path='*' element={<div />} />
 			</Routes>
-		</>
+		</div>
 	)
 }
 

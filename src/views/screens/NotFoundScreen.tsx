@@ -1,9 +1,14 @@
 import Header from "../components/sections/Header"
 
-function NotFoundScreen() {
+interface Props {
+	className?: string
+}
+
+function NotFoundScreen(props: Props) {
 
 	return (
-		<div>
+
+		<div className={props.className}>
 
 			<Header />
 
