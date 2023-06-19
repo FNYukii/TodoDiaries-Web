@@ -9,7 +9,7 @@ function NotFoundScreen(props: Props) {
 
 	return (
 
-		<div className={props.className}>
+		<div className={`dark:bg-black dark:text-white h-screen ${props.className}`}>
 
 			<Header />
 
