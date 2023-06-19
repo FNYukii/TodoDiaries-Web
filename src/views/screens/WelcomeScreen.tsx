@@ -30,6 +30,8 @@ function WelcomeScreen() {
 
 				<p>サインインしてください。</p>
 
+				<img src="/images/list-and-pencil.png"/>
+
 				<div className="mx-auto flex flex-wrap gap-8 w-fit">
 					<button onClick={signInWithGoogle} className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">Googleアカウントでサインイン</button>
 					<NavLinkToModal to="/sign-in" className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">TodoDiariesアカウントでサインイン</NavLinkToModal >
