@@ -7,6 +7,8 @@ interface Props {
 
 function NotFoundScreen(props: Props) {
 
+	document.title = "404 - Todo Diaries"
+
 	return (
 
 		<div className={`dark:bg-black dark:text-white h-screen ${props.className}`}>
