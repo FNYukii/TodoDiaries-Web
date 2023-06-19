@@ -5,7 +5,10 @@ import TodosSection from "../components/sections/TodosSection"
 
 function HomeScreen() {
 
+	document.title = "Todo Diaries"
+
 	return (
+
 		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
 
 			<Header showAccountButton />
