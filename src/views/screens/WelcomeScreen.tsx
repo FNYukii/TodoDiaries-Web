@@ -22,7 +22,7 @@ function WelcomeScreen() {
 
 	return (
 
-		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
+		<div className="dark:bg-black dark:text-white h-screen">
 
 			<Header />
 
@@ -30,8 +30,10 @@ function WelcomeScreen() {
 
 				<p>サインインしてください。</p>
 
-				<button onClick={signInWithGoogle} className="mt-4 font-bold">Googleアカウントでサインイン</button>
-				<NavLinkToModal to="/sign-in" className="mt-2 block font-bold">TodoDiariesアカウントでサインイン</NavLinkToModal >
+				<div className="mx-auto flex flex-wrap gap-8 w-fit">
+					<button onClick={signInWithGoogle} className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">Googleアカウントでサインイン</button>
+					<NavLinkToModal to="/sign-in" className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">TodoDiariesアカウントでサインイン</NavLinkToModal >
+				</div>
 			</main>
 		</div>
 	);
