@@ -28,9 +28,9 @@ function WelcomeScreen() {
 
 			<Header />
 
-			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
+			<main className="mt-4 pb-16 w-full mx-auto px-4 lg:width-lg lg:px-0">
 
-				<section className="mt-4 grid grid-cols-3 gap-8">
+				<section className="mt-4 grid grid-cols-1 px-8 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
 					<div className="bg-slate-100 rounded-xl p-8">
 
@@ -55,7 +55,7 @@ function WelcomeScreen() {
 
 				</section>
 
-				<section className="mt-8 mx-auto flex flex-wrap gap-8 w-fit">
+				<section className="mt-8 mx-auto flex flex-wrap gap-8 justify-center w-fit">
 
 					<button onClick={signInWithGoogle} className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">Googleアカウントでサインイン</button>
 					<NavLinkToModal to="/sign-in" className="font-bold py-2 px-8 bg-black text-white rounded-full hover:opacity-70 transition">TodoDiariesアカウントでサインイン</NavLinkToModal >
