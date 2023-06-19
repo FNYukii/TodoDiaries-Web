@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom"
 import NotFoundScreen from "./views/screens/NotFoundScreen"
 import SignInScreen from "./views/screens/SignInScreen"
-import TopScreen from "./views/screens/TopScreen"
+import HomeScreen from "./views/screens/HomeScreen"
 import WelcomeScreen from "./views/screens/WelcomeScreen"
 import { onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect } from "react"
@@ -50,7 +50,7 @@ function App() {
 
 			<Routes location={isShowModal ? previousPath : currentPath}>
 
-				<Route path="/" element={isSignedIn ? <TopScreen /> : <WelcomeScreen />} />
+				<Route path="/" element={isSignedIn ? <HomeScreen /> : <WelcomeScreen />} />
 				<Route path="*" element={<NotFoundScreen />} />
 			</Routes>
 

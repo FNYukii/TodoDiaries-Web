@@ -3,7 +3,7 @@ import Header from "../components/sections/Header"
 import StatsSection from "../components/sections/StatsSection"
 import TodosSection from "../components/sections/TodosSection"
 
-function TopScreen() {
+function HomeScreen() {
 
 	return (
 		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
@@ -23,4 +23,4 @@ function TopScreen() {
 	)
 }
 
-export default TopScreen
+export default HomeScreen
