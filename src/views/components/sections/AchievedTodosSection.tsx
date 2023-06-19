@@ -16,14 +16,16 @@ function AchievedTodosSection(props: Props) {
 
 					<span className="inline-block text-slate-500">2023年6月16日 金曜日</span>
 
-					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 bg-white dark:divide-slate-600">
+					<div className="mt-2 bg-white px-2 py-1 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
-						<div className="p-2">
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">16:20</span>
 							<p>やよい軒に行く</p>
 						</div>
 
-						<div className="p-2">
-							<p>映画の予約</p>
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">11:45</span>
+							<p>買い物</p>
 						</div>
 					</div>
 				</div>
@@ -32,9 +34,10 @@ function AchievedTodosSection(props: Props) {
 
 					<span className="inline-block text-slate-500">2023年6月15日 木曜日</span>
 
-					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 bg-white dark:divide-slate-600">
+					<div className="mt-2 bg-white px-2 py-1 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
-						<div className="p-2">
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">14:06</span>
 							<p>お絵描き</p>
 						</div>
 					</div>
@@ -43,18 +46,21 @@ function AchievedTodosSection(props: Props) {
 				<div>
 					<span className="inline-block text-slate-500">2023年6月15日 木曜日</span>
 
-					<div className="mt-2 p-2 rounded-xl divide-y dark:bg-slate-800 bg-white dark:divide-slate-600">
+					<div className="mt-2 bg-white px-2 py-1 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
 
-						<div className="p-2">
-							<p>買い物</p>
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">20:25</span>
+							<p>洗濯をする</p>
 						</div>
 
-						<div className="p-2">
-							<p>洗濯</p>
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">10:00</span>
+							<p>クーラーの掃除をする</p>
 						</div>
 
-						<div className="p-2">
-							<p>化粧水を買う</p>
+						<div className="p-2 flex gap-1">
+							<span className="text-slate-500">9:30</span>
+							<p>床の掃除をする</p>
 						</div>
 					</div>
 				</div>
