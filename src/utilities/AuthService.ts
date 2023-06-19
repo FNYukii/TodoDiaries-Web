@@ -20,6 +20,13 @@ class AuthService {
 		})
 	}
 
+	static uidFromLocalStorage(): string | null {
+
+		// Reactページ生成直後はAuthからUIDを取得できないので、LocalStorageから取得する
+		const uid = localStorage.getItem('uid')
+		return uid
+	}
+
 	static email(): string | null {
 
 		const email = auth.currentUser?.email
@@ -39,10 +46,14 @@ class AuthService {
 				// const credential = GoogleAuthProvider.credentialFromResult(result)
 				// const token = credential.accessToken
 
-				// サインインしたユーザー
-				const user = result.user
+				// サインインしたユーザーのUIDを取得
+				const uid = result.user.uid
 
-				return user.uid
+				// LocalStorageにUIDを保存
+				localStorage.setItem('uid', uid)
+
+				// UIDを返す
+				return uid
 
 			}).catch((error) => {
 
@@ -61,12 +72,19 @@ class AuthService {
 
 		const uid = this.uid()
 
+		// 未ログイン状態なら終了
 		if (uid === null) {
 			return null
 		}
 
+		// サインアウト実行
 		return auth.signOut()
 			.then(() => {
+
+				// 成功
+				// LocalStorageに保存していたUIDの値を削除
+				localStorage.removeItem('uid')
+
 				return uid
 			})
 			.catch((error) => {

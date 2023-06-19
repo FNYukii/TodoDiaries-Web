@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { auth } from "./utilities/firebase"
 import AccountScreen from "./views/screens/AccountScreen"
+import AuthService from "./utilities/AuthService"
 
 function App() {
 
@@ -30,6 +31,12 @@ function App() {
 
 	// ログイン状態を監視
 	useEffect(() => {
+
+		// Auth初期化前はAuthStateを取得できないので、それまではLocalStorageに保存しておいたUIDを確認
+		const uid = AuthService.uidFromLocalStorage()
+		if (uid) {
+			setIsSignedIn(true)
+		}
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
