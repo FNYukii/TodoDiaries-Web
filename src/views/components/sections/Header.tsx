@@ -17,7 +17,7 @@ function Header(props: Props) {
 				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
 				{props.showAccountButton &&
-					<NavLinkToModal to="/account">
+					<NavLinkToModal to="/account" className="hover:opacity-70 transition">
 
 						<BsPersonCircle className="text-2xl text-slate-500" />
 					</NavLinkToModal>
