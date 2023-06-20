@@ -29,7 +29,10 @@ class AuthService {
 
 	static email(): string | null {
 
-		const email = auth.currentUser?.email
+		const user = auth.currentUser
+		if (!user) return null
+
+		const email = user.email
 		if (!email) return null
 
 		return email
