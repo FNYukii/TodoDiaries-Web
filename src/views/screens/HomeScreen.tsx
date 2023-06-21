@@ -1,7 +1,7 @@
 import AchievedTodosSection from "../components/sections/AchievedTodosSection"
 import Header from "../components/sections/Header"
 import StatsSection from "../components/sections/StatsSection"
-import UnachievedTodosSection from "../components/sections/TodosSection"
+import UnachievedTodosSection from "../components/sections/UnachievedTodosSection"
 
 function HomeScreen() {
 
