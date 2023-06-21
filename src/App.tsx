@@ -63,8 +63,8 @@ function App() {
 
 			<Routes location={isShowModal ? currentPath : ""}>
 
-				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen className="z-30 fixed top-0 left-0 w-full h-full bg-white dark:bg-black" /> : <SignInScreen />} />
-				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen className="z-30 fixed top-0 left-0 w-full h-full bg-white dark:bg-black" />} />
+				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen onForeground /> : <SignInScreen />} />
+				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen onForeground />} />
 				<Route path='*' element={<div />} />
 			</Routes>
 		</div>

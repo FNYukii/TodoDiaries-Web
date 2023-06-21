@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 import Header from "../components/sections/Header"
 
 interface Props {
-	className?: string
+	onForeground?: boolean
 }
 
 function NotFoundScreen(props: Props) {
@@ -11,7 +11,7 @@ function NotFoundScreen(props: Props) {
 
 	return (
 
-		<div className={`dark:bg-black dark:text-white h-screen ${props.className}`}>
+		<div className={`dark:bg-black dark:text-white ${props.onForeground ? "z-30 fixed top-0 left-0 w-full h-full bg-white" : undefined}`}>
 
 			<Header />
 
