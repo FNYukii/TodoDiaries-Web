@@ -4,7 +4,7 @@ interface Props {
 	className?: string
 }
 
-function TodosSection(props: Props) {
+function UnachievedTodosSection(props: Props) {
 
 	return (
 
@@ -14,14 +14,14 @@ function TodosSection(props: Props) {
 
 			<section className="mt-4">
 
-				<span className="text-slate-500">固定済み</span>
+				<span className="text-zinc-500">固定済み</span>
 
 				<UnachievedTodosList pinned className="mt-2" />
 			</section>
 
 			<section className="mt-6">
 
-				<span className="text-slate-500">その他</span>
+				<span className="text-zinc-500">その他</span>
 
 				<UnachievedTodosList className="mt-2" />
 			</section>
@@ -29,4 +29,4 @@ function TodosSection(props: Props) {
 	)
 }
 
-export default TodosSection
+export default UnachievedTodosSection

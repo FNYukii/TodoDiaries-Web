@@ -107,7 +107,7 @@ function UnachievedTodosList(props: Props) {
 
 			{isLoaded && todos !== null && todos.length !== 0 &&
 
-				<div className="bg-white px-2 py-1 rounded-xl divide-y dark:bg-slate-800 dark:divide-slate-600">
+				<div className="bg-white px-2 py-1 rounded-xl divide-y dark:bg-zinc-800 dark:divide-zinc-600">
 
 					{todos.map(todo => (
 

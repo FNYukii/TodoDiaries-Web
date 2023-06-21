@@ -1,7 +1,7 @@
 import AchievedTodosSection from "../components/sections/AchievedTodosSection"
 import Header from "../components/sections/Header"
 import StatsSection from "../components/sections/StatsSection"
-import TodosSection from "../components/sections/TodosSection"
+import UnachievedTodosSection from "../components/sections/TodosSection"
 
 function HomeScreen() {
 
@@ -17,7 +17,7 @@ function HomeScreen() {
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
 
-					<TodosSection />
+					<UnachievedTodosSection />
 					<AchievedTodosSection className="hidden sm:block" />
 					<StatsSection className="hidden lg:block" />
 				</div>

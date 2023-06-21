@@ -45,8 +45,8 @@ function Modal(props: Props) {
 
 				<div className="pt-4 pl-4">
 
-					<button onClick={() => navigate(-1)} className="p-4 transition rounded-full hover:bg-gray-100 dark:hover:bg-slate-900">
-						<MdOutlineClose className="text-2xl text-slate-500" />
+					<button onClick={() => navigate(-1)} className="p-4 transition rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900">
+						<MdOutlineClose className="text-2xl text-zinc-500" />
 					</button>
 				</div>
 

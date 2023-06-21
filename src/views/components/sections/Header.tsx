@@ -19,7 +19,7 @@ function Header(props: Props) {
 				{props.showAccountButton &&
 					<NavLinkToModal to="/account" className="hover:opacity-70 transition">
 
-						<BsPersonCircle className="text-2xl text-slate-500" />
+						<BsPersonCircle className="text-2xl text-zinc-500" />
 					</NavLinkToModal>
 				}
 			</div>
