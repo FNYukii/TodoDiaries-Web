@@ -1,3 +1,4 @@
+import { AiOutlinePlus } from "react-icons/ai"
 import UnachievedTodosList from "../lists/UnachievedTodosList"
 
 interface Props {
@@ -10,7 +11,16 @@ function UnachievedTodosSection(props: Props) {
 
 		<section className={props.className}>
 
-			<h2 className="text-2xl font-bold">Todo</h2>
+			<div className="flex justify-between">
+
+				<h2 className="text-2xl font-bold">Todo</h2>
+
+				<button className="flex gap-1 items-center text-blue-500 hover:opacity-70 transition">
+					
+					<AiOutlinePlus className="text-xl"/>
+					<span>新規Todo</span>
+				</button>
+			</div>
 
 			<section className="mt-4">
 
