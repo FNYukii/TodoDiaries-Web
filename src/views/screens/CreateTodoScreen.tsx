@@ -1,7 +1,11 @@
 import Modal from "../components/others/Modal";
 
 function CreateTodoScreen() {
+
+	document.title = "新規Todo - Todo Diaries"
+
 	return (
+
 		<Modal>
 
 			<div className="px-8 pt-4 pb-7">
