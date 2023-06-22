@@ -3,7 +3,6 @@ import { MdOutlineClose } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 
 interface Props {
-	title: string
 	children: JSX.Element | JSX.Element[]
 }
 
@@ -14,9 +13,6 @@ function Modal(props: Props) {
 	const body = document.body
 
 	useEffect(() => {
-
-		// ページTitle設定
-		document.title = props.title
 
 		// キーイベント設定
 		document.addEventListener("keydown", onKeyDown, false)

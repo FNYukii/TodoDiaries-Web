@@ -22,7 +22,7 @@ function AccountScreen() {
 
 	return (
 
-		<Modal title="アカウント">
+		<Modal>
 
 			<div className="px-8 pt-4 pb-7">
 

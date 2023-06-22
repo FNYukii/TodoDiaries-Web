@@ -9,7 +9,7 @@ function SignInScreen() {
 
 	return (
 
-		<Modal title="サインイン - Meetings">
+		<Modal>
 
 			<div>
 
