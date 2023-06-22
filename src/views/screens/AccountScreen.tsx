@@ -4,6 +4,8 @@ import Modal from "../components/others/Modal";
 
 function AccountScreen() {
 
+	document.title = "アカウント - Todo Diaries"
+
 	const navigate = useNavigate()
 
 	async function signOut() {

@@ -5,6 +5,8 @@ import SignUpSection from "../components/sections/SignUpSection"
 
 function SignInScreen() {
 
+	document.title = "サインイン - Todo Diaries"
+
 	const [isShowSignUpSection, setIsShowSignUpSection] = useState(false)
 
 	return (

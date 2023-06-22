@@ -7,7 +7,7 @@ interface Props {
 
 function NotFoundScreen(props: Props) {
 
-	document.title = "404 - Todo Diaries"
+	document.title = "Not found - Todo Diaries"
 
 	return (
 
