@@ -8,6 +8,7 @@ import { useState, useEffect } from "react"
 import { auth } from "./utilities/firebase"
 import AccountScreen from "./views/screens/AccountScreen"
 import AuthService from "./utilities/AuthService"
+import CreateTodoScreen from "./views/screens/CreateTodoScreen"
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
 	// モーダル系の画面にアクセスされたら、変数isShowModalをtrueとする
 	const isShowSignInModal = currentPath === "/sign-in"
-	const isShowCreateTodoModal = currentPath === "/new-todo"
+	const isShowCreateTodoModal = currentPath === "/new"
 	const isShowTodoModal = currentPath.match(/^\/todos\/\w{20}\$/)
 	const isShowAccountModal = currentPath === "/account"
 	const isShowModal = isShowSignInModal || isShowCreateTodoModal || isShowTodoModal || isShowAccountModal ? true : false
@@ -64,6 +65,7 @@ function App() {
 			<Routes location={isShowModal ? currentPath : ""}>
 
 				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen onForeground /> : <SignInScreen />} />
+				<Route path="/new" element={isSignedIn ? <CreateTodoScreen /> : <NotFoundScreen onForeground />} />
 				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen onForeground />} />
 				<Route path='*' element={<div />} />
 			</Routes>
