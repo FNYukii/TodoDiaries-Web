@@ -1,5 +1,6 @@
 import { AiOutlinePlus } from "react-icons/ai"
 import UnachievedTodosList from "../lists/UnachievedTodosList"
+import NavLinkToModal from "../others/NavLinkToModal"
 
 interface Props {
 	className?: string
@@ -15,11 +16,11 @@ function UnachievedTodosSection(props: Props) {
 
 				<h2 className="text-2xl font-bold">Todo</h2>
 
-				<button className="flex gap-1 items-center text-blue-500 hover:opacity-70 transition">
+				<NavLinkToModal to="/new" className="flex gap-1 items-center text-blue-500 hover:opacity-70 transition">
 					
 					<AiOutlinePlus className="text-xl"/>
 					<span>新規Todo</span>
-				</button>
+				</NavLinkToModal>
 			</div>
 
 			<section className="mt-4">
