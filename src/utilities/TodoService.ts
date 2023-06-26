@@ -15,7 +15,7 @@ class TodoService {
 
 		// クエリを用意
 		const q = query(
-			collection(db, "comments"),
+			collection(db, "todos"),
 			where("userId", "==", uid),
 			where("achievedAt", "==", null),
 			where("isPinned", "==", isPinned),
@@ -28,12 +28,21 @@ class TodoService {
 			// サーバーorキャッシュから読み取り
 			const querySnapshot = await getDocs(q)
 
+			console.log(`querySnapshot.docs.length: ${querySnapshot.docs.length}`)
+
 			// 成功
 			// orderの最大値を取得する
-			const doc = querySnapshot.docs[0]
-			const order: number = doc.data().order ?? 0
+			let maxOrder: number = 0
 
-			return order
+			if (querySnapshot.docs.length === 0) {
+				maxOrder = 0
+			}
+
+			if (querySnapshot.docs.length !== 0) {
+				maxOrder = querySnapshot.docs[0].data().order
+			}
+
+			return maxOrder
 
 		} catch (error) {
 
@@ -53,13 +62,21 @@ class TodoService {
 			return null
 		}
 
-		// orderの値を決定
-		const order = await this.readMaxOrder(isPinned)
-
-		// 新しいTodoのorderの値が決められないなら終了
-		if (order === null) {
+		// contentが空なら終了
+		if (content.length === 0 || content.length > 100) {
 			return null
 		}
+
+		// 現在のorderの最大値を取得
+		const maxOrder = await this.readMaxOrder(isPinned)
+
+		// 取得できなければ終了
+		if (maxOrder === null) {
+			return null
+		}
+
+		// 新しいTodoのorderの値を決める
+		const order: number | null = achievedAt === null ? maxOrder + 100 : null
 
 		// Todoドキュメントを追加
 		try {
