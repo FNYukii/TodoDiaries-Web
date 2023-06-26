@@ -8,6 +8,9 @@ function CreateTodoScreen() {
 	document.title = "新規Todo - Todo Diaries"
 
 	const [content, setContent] = useState("")
+	const [isPinned, setIsPinned] = useState(false)
+	const [isAchieved, setIsAchieved] = useState(false)
+
 	// eslint-disable-next-line 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -27,13 +30,13 @@ function CreateTodoScreen() {
 				<label id="input-isPinned" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 rounded-full transition">
 
 					<span>固定する</span>
-					<input id="input-isPinned" type="checkbox" className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
+					<input id="input-isPinned" type="checkbox" checked={isPinned} onChange={() => setIsPinned(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
 				</label>
 
 				<label id="input-isAchieved" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 rounded-full transition">
 
 					<span>達成済み</span>
-					<input id="input-isAchieved" type="checkbox" className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
+					<input id="input-isAchieved" type="checkbox" checked={isAchieved} onChange={() => setIsAchieved(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
 				</label>
 			</div>
 
