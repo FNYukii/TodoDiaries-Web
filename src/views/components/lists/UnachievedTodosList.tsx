@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { db } from "../../../utilities/firebase"
 import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
+import NavLinkToModal from "../others/NavLinkToModal"
 
 
 interface Props {
@@ -107,13 +108,13 @@ function UnachievedTodosList(props: Props) {
 
 			{isLoaded && todos !== null && todos.length !== 0 &&
 
-				<div className="bg-white px-2 py-1 rounded-xl divide-y dark:bg-zinc-800 dark:divide-zinc-600">
+				<div className="bg-white rounded-xl divide-y dark:bg-zinc-800 dark:divide-zinc-600">
 
 					{todos.map(todo => (
 
-						<div key={todo.id} className="p-2">
+						<NavLinkToModal to={`/todos/${todo.id}`} key={todo.id} className="block py-3 px-4 hover:bg-zinc-100 transition">
 							<p>{todo.content}</p>
-						</div>
+						</NavLinkToModal>
 					))}
 				</div>
 			}
