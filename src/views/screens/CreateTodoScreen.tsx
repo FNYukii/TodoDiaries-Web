@@ -3,6 +3,7 @@ import DynamicTextarea from "../components/inputs/DynamicTextarea"
 import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
+import { useNavigate } from "react-router-dom"
 
 function CreateTodoScreen() {
 
@@ -12,8 +13,9 @@ function CreateTodoScreen() {
 	const [isPinned, setIsPinned] = useState(false)
 	const [isAchieved, setIsAchieved] = useState(false)
 
-	// eslint-disable-next-line 
 	const [isLoading, setIsLoading] = useState(false)
+
+	const navigate = useNavigate()
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
@@ -27,7 +29,7 @@ function CreateTodoScreen() {
 		}
 
 		if (todoId) {
-			alert(`Success! ID: ${todoId}`)
+			navigate("/")
 		}
 
 		setIsLoading(false)

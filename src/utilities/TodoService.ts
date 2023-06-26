@@ -27,9 +27,7 @@ class TodoService {
 
 			// サーバーorキャッシュから読み取り
 			const querySnapshot = await getDocs(q)
-
-			console.log(`querySnapshot.docs.length: ${querySnapshot.docs.length}`)
-
+			
 			// 成功
 			// orderの最大値を取得する
 			let maxOrder: number = 0
