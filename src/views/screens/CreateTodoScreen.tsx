@@ -63,6 +63,8 @@ function CreateTodoScreen() {
 					</label>
 				</div>
 
+				<input type="datetime-local" className="mt-4 mx-3 py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition "/>
+
 				<div className="mt-4 mb-7 mr-4 ml-8 flex justify-end items-center">
 
 					<SubmitButton text="追加" isLoading={isLoading} disabled={content === ""} />
