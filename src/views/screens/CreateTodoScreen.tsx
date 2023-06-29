@@ -48,22 +48,29 @@ function CreateTodoScreen() {
 					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
 				</div>
 
-				<div className="mt-4 ml-4 mr-8 flex gap-2">
+				<div className="mt-3 ml-4 mr-8 flex gap-2 items-center">
 
-					<label id="input-isPinned" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
+					<div className="flex gap-2 py-1">
 
-						<span>固定する</span>
-						<input id="input-isPinned" type="checkbox" checked={isPinned} onChange={() => setIsPinned(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
-					</label>
+						<label id="input-isPinned" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
 
-					<label id="input-isAchieved" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
+							<span>固定する</span>
+							<input id="input-isPinned" type="checkbox" checked={isPinned} onChange={() => setIsPinned(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
+						</label>
 
-						<span>達成済み</span>
-						<input id="input-isAchieved" type="checkbox" checked={isAchieved} onChange={() => setIsAchieved(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
-					</label>
+						<label id="input-isAchieved" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
+
+							<span>達成済み</span>
+							<input id="input-isAchieved" type="checkbox" checked={isAchieved} onChange={() => setIsAchieved(prevState => !prevState)} className="w-4 h-4 cursor-pointer bg-blue-500 hover:bg-blue-500" />
+						</label>
+					</div>
+
+					<div>
+						{isAchieved &&
+							<input type="datetime-local" className="py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition " />
+						}
+					</div>
 				</div>
-
-				<input type="datetime-local" className="mt-4 mx-3 py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition "/>
 
 				<div className="mt-4 mb-7 mr-4 ml-8 flex justify-end items-center">
 
