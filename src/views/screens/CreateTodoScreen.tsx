@@ -12,6 +12,7 @@ function CreateTodoScreen() {
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
 	const [isAchieved, setIsAchieved] = useState(false)
+	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -48,7 +49,7 @@ function CreateTodoScreen() {
 					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
 				</div>
 
-				<div className="mt-3 ml-4 mr-8 flex gap-2 items-center">
+				<div className="mt-3 ml-4 mr-8 flex flex-wrap gap-2 items-center">
 
 					<div className="flex gap-2 py-1">
 
@@ -67,7 +68,10 @@ function CreateTodoScreen() {
 
 					<div>
 						{isAchieved &&
-							<input type="datetime-local" className="py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition " />
+							<div>
+								<span>達成日時</span>
+								<input type="datetime-local" defaultValue="2023-06-29 12:34:00" className="py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition" />
+							</div>
 						}
 					</div>
 				</div>
