@@ -4,6 +4,8 @@ import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
+import { LocalizationProvider, MobileDatePicker, MobileTimePicker } from "@mui/x-date-pickers"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 function CreateTodoScreen() {
 
@@ -66,8 +68,14 @@ function CreateTodoScreen() {
 					{isAchieved &&
 						<div className="space-x-2">
 							<span>達成日時</span>
-							<button type="button" className="py-1 px-2 bg-gray-200 rounded-md">2023/06/29</button>
-							<button type="button" className="py-1 px-2 bg-gray-200 rounded-md">12:34</button>
+
+
+							<LocalizationProvider dateAdapter={AdapterDayjs}>
+
+								<MobileDatePicker />
+
+								<MobileTimePicker />
+							</LocalizationProvider>
 						</div>
 					}
 				</div>
