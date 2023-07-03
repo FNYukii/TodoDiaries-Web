@@ -66,8 +66,8 @@ function CreateTodoScreen() {
 					{isAchieved &&
 						<div className="space-x-2">
 							<span>達成日時</span>
-							<button className="py-1 px-2 bg-gray-200 rounded-md">2023/06/29</button>
-							<button className="py-1 px-2 bg-gray-200 rounded-md">12:34</button>
+							<button type="button" className="py-1 px-2 bg-gray-200 rounded-md">2023/06/29</button>
+							<button type="button" className="py-1 px-2 bg-gray-200 rounded-md">12:34</button>
 						</div>
 					}
 				</div>
