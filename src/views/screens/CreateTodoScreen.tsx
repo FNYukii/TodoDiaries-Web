@@ -64,10 +64,11 @@ function CreateTodoScreen() {
 					</label>
 
 					{isAchieved &&
-						<label id="input-isAchieved" className="py-1 px-4 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<div className="space-x-2">
 							<span>達成日時</span>
-							<span className="ml-2">06 / 29 12:34</span>
-						</label>
+							<button className="py-1 px-2 bg-gray-200 rounded-md">2023/06/29</button>
+							<button className="py-1 px-2 bg-gray-200 rounded-md">12:34</button>
+						</div>
 					}
 				</div>
 
