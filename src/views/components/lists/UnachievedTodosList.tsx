@@ -113,7 +113,7 @@ function UnachievedTodosList(props: Props) {
 					{todos.map(todo => (
 
 						<NavLinkToModal to={`/todos/${todo.id}`} key={todo.id} className="block py-3 px-4 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition">
-							<p>{todo.content}</p>
+							<p className="whitespace-pre-line">{todo.content}</p>
 						</NavLinkToModal>
 					))}
 				</div>
