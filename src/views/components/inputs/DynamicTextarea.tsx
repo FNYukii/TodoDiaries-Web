@@ -5,6 +5,7 @@ interface Props {
 	setValue: React.Dispatch<React.SetStateAction<string>>
 	placeholder?: string
 	className?: string
+	autoFocus?: boolean
 }
 
 function DynamicTextarea(props: Props) {
@@ -19,6 +20,7 @@ function DynamicTextarea(props: Props) {
 			ref={textAreaRef}
 			placeholder={props.placeholder ?? ""}
 			className={`resize-none ${props.className}`}
+			autoFocus={props.autoFocus}
 		/>
 	)
 }
