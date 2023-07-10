@@ -108,11 +108,11 @@ function UnachievedTodosList(props: Props) {
 
 			{isLoaded && todos !== null && todos.length !== 0 &&
 
-				<div className="bg-white rounded-xl divide-y dark:bg-zinc-800 dark:divide-zinc-600">
+				<div className="divide-y dark:divide-zinc-600">
 
 					{todos.map(todo => (
 
-						<NavLinkToModal to={`/todos/${todo.id}`} key={todo.id} className="block py-3 px-4 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition">
+						<NavLinkToModal to={`/todos/${todo.id}`} key={todo.id} className="block py-3 px-4 bg-white dark:bg-zinc-800  hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl">
 							<p className="whitespace-pre-line">{todo.content}</p>
 						</NavLinkToModal>
 					))}
