@@ -11,7 +11,7 @@ function NotFoundScreen(props: Props) {
 
 	return (
 
-		<div className={`dark:bg-black dark:text-white ${props.onForeground ? "z-30 fixed top-0 left-0 w-full h-full bg-white" : undefined}`}>
+		<div className={`dark:text-white ${props.onForeground ? "z-30 fixed top-0 left-0 w-full h-full bg-white" : undefined}`}>
 
 			<Header />
 
