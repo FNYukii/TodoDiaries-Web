@@ -53,7 +53,7 @@ function CreateTodoScreen() {
 
 				<div className="mt-2 ml-5 mr-8 flex gap-2 items-center">
 
-					<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 transition">
+					<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
 						{!isPinned &&
 							<BsPin className="text-xl" />
@@ -64,7 +64,7 @@ function CreateTodoScreen() {
 						}
 					</button>
 
-					<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 transition">
+					<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
 						{!isAchieved &&
 							<BsCalendarCheck className="text-xl" />
