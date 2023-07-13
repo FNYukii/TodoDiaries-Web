@@ -9,6 +9,8 @@ import React from "react";
 interface Props {
 	date: Date
 	setDate: React.Dispatch<React.SetStateAction<Date>>
+
+	className?: string
 }
 
 function DatetimePicker(props: Props) {
@@ -25,15 +27,18 @@ function DatetimePicker(props: Props) {
 	)
 
 	return (
-		<div className="space-x-2">
+		<div className={props.className}>
 
-			<ThemeProvider theme={theme}>
-				<LocalizationProvider dateAdapter={AdapterDayjs}>
+			<div className="space-x-2">
 
-					<MobileDatePicker value={dayjs('2022-04-17')} />
-					<MobileTimePicker value={dayjs('2022-04-17T15:30')} />
-				</LocalizationProvider>
-			</ThemeProvider>
+				<ThemeProvider theme={theme}>
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
+
+						<MobileDatePicker value={dayjs('2022-04-17')} slotProps={{ textField: { size: 'small' } }} />
+						<MobileTimePicker value={dayjs('2022-04-17T15:30')} slotProps={{ textField: { size: 'small' } }} />
+					</LocalizationProvider>
+				</ThemeProvider>
+			</div>
 		</div>
 	)
 }

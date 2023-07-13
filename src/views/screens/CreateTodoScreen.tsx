@@ -5,6 +5,7 @@ import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
 import DatetimePicker from "../components/inputs/DatetimePicker"
+import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
 
 function CreateTodoScreen() {
 
@@ -50,26 +51,32 @@ function CreateTodoScreen() {
 					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" autoFocus />
 				</div>
 
-				<div className="mt-4 ml-4 mr-8 flex flex-col gap-2">
+				<div className="mt-2 ml-5 mr-8 flex gap-2 items-center">
 
-					<label id="input-isPinned" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
+					<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
-						<span>固定する</span>
-						<input id="input-isPinned" type="checkbox" checked={isPinned} onChange={() => setIsPinned(prevState => !prevState)} className="w-4 h-4 cursor-pointer" />
-					</label>
+						{!isPinned &&
+							<BsPin className="text-xl" />
+						}
 
-					<label id="input-isAchieved" className="w-fit py-1 px-4 cursor-pointer flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full transition">
+						{isPinned &&
+							<BsFillPinFill className="text-xl" />
+						}
+					</button>
 
-						<span>達成済み</span>
-						<input id="input-isAchieved" type="checkbox" checked={isAchieved} onChange={() => setIsAchieved(prevState => !prevState)} className="w-4 h-4 cursor-pointer" />
-					</label>
+					<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+
+						{!isAchieved &&
+							<BsCalendarCheck className="text-xl" />
+						}
+
+						{isAchieved &&
+							<BsCalendarCheckFill className="text-xl" />
+						}
+					</button>
 
 					{isAchieved &&
-						<div className="ml-4 mt-1 flex gap-2">
-							<span>達成日時</span>
-
-							<DatetimePicker date={achievedAt} setDate={setAchievedAt}/>
-						</div>
+						<DatetimePicker date={achievedAt} setDate={setAchievedAt} />
 					}
 				</div>
 
