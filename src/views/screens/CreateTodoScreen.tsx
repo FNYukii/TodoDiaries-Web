@@ -4,9 +4,7 @@ import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
-import { LocalizationProvider, MobileDatePicker, MobileTimePicker } from "@mui/x-date-pickers"
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs from "dayjs"
+import DatetimePicker from "../components/inputs/DatetimePicker"
 
 function CreateTodoScreen() {
 
@@ -15,7 +13,7 @@ function CreateTodoScreen() {
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
 	const [isAchieved, setIsAchieved] = useState(false)
-	// const [achievedAt, setAchievedAt] = useState<Date>(new Date())
+	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -67,16 +65,10 @@ function CreateTodoScreen() {
 					</label>
 
 					{isAchieved &&
-						<div className="ml-4 space-x-2">
+						<div className="ml-4 flex gap-2">
 							<span>達成日時</span>
 
-
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
-
-								<MobileDatePicker value={dayjs('2022-04-17')} />
-
-								<MobileTimePicker value={dayjs('2022-04-17T15:30')} />
-							</LocalizationProvider>
+							<DatetimePicker date={achievedAt} setDate={setAchievedAt}/>
 						</div>
 					}
 				</div>
