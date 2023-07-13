@@ -51,7 +51,7 @@ function CreateTodoScreen() {
 					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" autoFocus />
 				</div>
 
-				<div className="mt-2 ml-5 mr-8 flex gap-2">
+				<div className="mt-2 ml-5 mr-8 flex gap-2 items-center">
 
 					<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 transition">
 
@@ -76,7 +76,7 @@ function CreateTodoScreen() {
 					</button>
 
 					{isAchieved &&
-						<DatetimePicker date={achievedAt} setDate={setAchievedAt} className="mt-1 ml-4" />
+						<DatetimePicker date={achievedAt} setDate={setAchievedAt} />
 					}
 				</div>
 
