@@ -1,8 +1,10 @@
 import { ThemeProvider } from "@emotion/react";
+import { useMediaQuery } from "@mui/material";
 import createTheme from "@mui/material/styles/createTheme";
 import { LocalizationProvider, MobileDatePicker, MobileTimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import React from "react";
 
 interface Props {
 	date: Date
@@ -11,16 +13,21 @@ interface Props {
 
 function DatetimePicker(props: Props) {
 
-	const darkTheme = createTheme({
-		palette: {
-			mode: 'dark',
-		}
-	})
+	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
 
 	return (
 		<div className="space-x-2">
 
-			<ThemeProvider theme={darkTheme}>
+			<ThemeProvider theme={theme}>
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
 
 					<MobileDatePicker value={dayjs('2022-04-17')} />
