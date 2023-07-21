@@ -80,8 +80,6 @@ function CreateTodoScreen() {
 					}
 				</div>
 
-				<p>achievedAt: {achievedAt.toString()}</p>
-
 				<div className="mt-4 mb-7 mr-4 ml-8 flex justify-end items-center">
 
 					<SubmitButton text="追加" isLoading={isLoading} disabled={content === ""} />
