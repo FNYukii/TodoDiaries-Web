@@ -50,7 +50,7 @@ class TodoService {
 		}
 	}
 
-	static async createTodo(content: string, isPinned: boolean, achievedAt: Date | null): Promise<string | null> {
+	static async createUnachievedTodo(content: string, isPinned: boolean): Promise<string | null> {
 
 		// UserIdを取得
 		const uid = await AuthService.uid()
@@ -74,7 +74,7 @@ class TodoService {
 		}
 
 		// 新しいTodoのorderの値を決める
-		const order: number | null = achievedAt === null ? maxOrder + 100 : null
+		const order: number | null = maxOrder + 100
 
 		// Todoドキュメントを追加
 		try {
@@ -84,6 +84,42 @@ class TodoService {
 				content: content,
 				isPinned: isPinned,
 				order: order,
+				createdAt: serverTimestamp(),
+				achievedAt: null
+			})
+
+			return ref.id
+
+		} catch (error) {
+
+			console.log(`Failed to Todo creation. ${error}`)
+			return null
+		}
+	}
+
+	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
+
+		// UserIdを取得
+		const uid = await AuthService.uid()
+
+		// サインインしていないなら終了　
+		if (uid === null) {
+			return null
+		}
+
+		// contentが空なら終了
+		if (content.length === 0 || content.length > 100) {
+			return null
+		}
+
+		// Todoドキュメントを追加
+		try {
+
+			const ref = await addDoc(collection(db, "todos"), {
+				userId: uid,
+				content: content,
+				isPinned: false,
+				order: null,
 				createdAt: serverTimestamp(),
 				achievedAt: achievedAt
 			})
