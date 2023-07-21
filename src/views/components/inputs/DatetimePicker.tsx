@@ -34,8 +34,8 @@ function DatetimePicker(props: Props) {
 				<ThemeProvider theme={theme}>
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 
-						<MobileDatePicker value={dayjs('2022-04-17')} slotProps={{ textField: { size: 'small' } }} />
-						<MobileTimePicker value={dayjs('2022-04-17T15:30')} slotProps={{ textField: { size: 'small' } }} />
+						<MobileDatePicker value={dayjs(props.date)} slotProps={{ textField: { size: 'small' } }} />
+						<MobileTimePicker value={dayjs(props.date)} slotProps={{ textField: { size: 'small' } }} />
 					</LocalizationProvider>
 				</ThemeProvider>
 			</div>
