@@ -96,6 +96,42 @@ class TodoService {
 			return null
 		}
 	}
+
+	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
+
+		// UserIdを取得
+		const uid = await AuthService.uid()
+
+		// サインインしていないなら終了　
+		if (uid === null) {
+			return null
+		}
+
+		// contentが空なら終了
+		if (content.length === 0 || content.length > 100) {
+			return null
+		}
+
+		// Todoドキュメントを追加
+		try {
+
+			const ref = await addDoc(collection(db, "todos"), {
+				userId: uid,
+				content: content,
+				isPinned: false,
+				order: null,
+				createdAt: serverTimestamp(),
+				achievedAt: achievedAt
+			})
+
+			return ref.id
+
+		} catch (error) {
+
+			console.log(`Failed to Todo creation. ${error}`)
+			return null
+		}
+	}
 }
 
 export default TodoService
