@@ -25,7 +25,7 @@ function CreateTodoScreen() {
 
 		setIsLoading(true)
 
-		const todoId = await TodoService.createTodo(content, isPinned, null)
+		const todoId = await TodoService.createUnachievedTodo(content, isPinned)
 
 		if (!todoId) {
 			alert("Todoの作成に失敗しました。")

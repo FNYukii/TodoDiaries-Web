@@ -50,7 +50,7 @@ class TodoService {
 		}
 	}
 
-	static async createTodo(content: string, isPinned: boolean, achievedAt: Date | null): Promise<string | null> {
+	static async createUnachievedTodo(content: string, isPinned: boolean): Promise<string | null> {
 
 		// UserIdを取得
 		const uid = await AuthService.uid()
@@ -74,7 +74,7 @@ class TodoService {
 		}
 
 		// 新しいTodoのorderの値を決める
-		const order: number | null = achievedAt === null ? maxOrder + 100 : null
+		const order: number | null = maxOrder + 100
 
 		// Todoドキュメントを追加
 		try {
@@ -85,7 +85,7 @@ class TodoService {
 				isPinned: isPinned,
 				order: order,
 				createdAt: serverTimestamp(),
-				achievedAt: achievedAt
+				achievedAt: null
 			})
 
 			return ref.id
