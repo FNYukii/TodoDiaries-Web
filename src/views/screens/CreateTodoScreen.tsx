@@ -4,8 +4,9 @@ import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
-import DatetimePicker from "../components/inputs/DatetimePicker"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
+import MyDatePicker from "../components/inputs/MyDatePicker"
+import MyTimePicker from "../components/inputs/MyTimePicker"
 
 function CreateTodoScreen() {
 
@@ -51,36 +52,41 @@ function CreateTodoScreen() {
 					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" autoFocus />
 				</div>
 
-				<div className="mt-2 ml-5 mr-8 flex gap-2 items-center">
+				<div className="mt-2 mb-7 ml-5 mr-4 flex gap-2 items-center justify-between">
 
-					<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+					<div className="flex gap-2 items-center">
 
-						{!isPinned &&
-							<BsPin className="text-xl" />
-						}
+						<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
-						{isPinned &&
-							<BsFillPinFill className="text-xl" />
-						}
-					</button>
+							{!isPinned &&
+								<BsPin className="text-xl" />
+							}
 
-					<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+							{isPinned &&
+								<BsFillPinFill className="text-xl" />
+							}
+						</button>
 
-						{!isAchieved &&
-							<BsCalendarCheck className="text-xl" />
-						}
+						<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+
+							{!isAchieved &&
+								<BsCalendarCheck className="text-xl" />
+							}
+
+							{isAchieved &&
+								<BsCalendarCheckFill className="text-xl" />
+							}
+						</button>
 
 						{isAchieved &&
-							<BsCalendarCheckFill className="text-xl" />
+
+							<div className="ml-3 flex gap-4">
+
+								<MyDatePicker date={achievedAt} setDate={setAchievedAt} />
+								<MyTimePicker date={achievedAt} setDate={setAchievedAt} />
+							</div>
 						}
-					</button>
-
-					{isAchieved &&
-						<DatetimePicker date={achievedAt} setDate={setAchievedAt} />
-					}
-				</div>
-
-				<div className="mt-4 mb-7 mr-4 ml-8 flex justify-end items-center">
+					</div>
 
 					<SubmitButton text="追加" isLoading={isLoading} disabled={content === ""} />
 				</div>
