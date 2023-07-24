@@ -31,7 +31,7 @@ function MyDatePicker(props: Props) {
 		<>
 
 			<button type="button" onClick={() => setIsOpen(true)} className="py-1 px-4 bg-zinc-200 dark:bg-zinc-800 rounded-md hover:brightness-90 dark:hover:brightness-125 transition">
-				{dayjs(props.date).format('MM/DD')}
+				{dayjs(props.date).format('YYYY/MM/DD')}
 			</button>
 
 			{isOpen &&
