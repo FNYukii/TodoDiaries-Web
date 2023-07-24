@@ -4,8 +4,8 @@ import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
-import DatetimePicker from "../components/inputs/DatetimePicker"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
+import MyDatePicker from "../components/inputs/MyDatePicker"
 
 function CreateTodoScreen() {
 
@@ -76,7 +76,12 @@ function CreateTodoScreen() {
 					</button>
 
 					{isAchieved &&
-						<DatetimePicker date={achievedAt} setDate={setAchievedAt} />
+						// <DatetimePicker date={achievedAt} setDate={setAchievedAt} />
+
+						<MyDatePicker date={achievedAt} setDate={setAchievedAt}/>
+
+
+
 					}
 				</div>
 
