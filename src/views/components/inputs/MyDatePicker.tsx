@@ -52,6 +52,9 @@ function MyDatePicker(props: Props) {
 									slotProps={{
 										toolbar: {
 											hidden: true
+										},
+										actionBar: {
+											actions: []
 										}
 									}}
 								/>

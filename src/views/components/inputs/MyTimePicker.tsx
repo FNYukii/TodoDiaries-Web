@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react"
 import { createTheme, useMediaQuery } from "@mui/material"
-import { LocalizationProvider, StaticTimePicker } from "@mui/x-date-pickers"
+import { LocalizationProvider, MultiSectionDigitalClock } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs from "dayjs"
 import React from "react"
@@ -40,20 +40,18 @@ function MyTimePicker(props: Props) {
 
 					<div onClick={() => setIsOpen(false)} className="w-full h-full bg-black/30 dark:bg-white/20"></div>
 
-					<div className="absolute">
+					<div className="absolute bg-white dark:bg-black p-4">
 
 						<ThemeProvider theme={theme}>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 
-								<StaticTimePicker
+								<MultiSectionDigitalClock
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
-									onClose={() => setIsOpen(false)}
-									slotProps={{
-										toolbar: {
-											hidden: false
-										}
-									}}
+									// onClose={() => setIsOpen(false)}
+									ampm={false}
+									timeSteps={{ hours: 1, minutes: 1 }}
+									
 								/>
 
 							</LocalizationProvider>
