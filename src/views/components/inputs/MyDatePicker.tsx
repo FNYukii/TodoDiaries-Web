@@ -2,7 +2,7 @@ import { ThemeProvider } from "@emotion/react"
 import { createTheme, useMediaQuery } from "@mui/material"
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import dayjs, { Dayjs } from "dayjs"
+import dayjs from "dayjs"
 import React from "react"
 import { useState } from "react"
 
