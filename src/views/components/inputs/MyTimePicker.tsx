@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react"
 import { createTheme, useMediaQuery } from "@mui/material"
-import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers"
+import { LocalizationProvider, StaticTimePicker } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs from "dayjs"
 import React from "react"
@@ -11,7 +11,7 @@ interface Props {
 	setDate: React.Dispatch<React.SetStateAction<Date>>
 }
 
-function MyDatePicker(props: Props) {
+function MyTimePicker(props: Props) {
 
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -31,7 +31,7 @@ function MyDatePicker(props: Props) {
 		<>
 
 			<button type="button" onClick={() => setIsOpen(true)} className="py-1 px-4 bg-zinc-200 dark:bg-zinc-800 rounded-md hover:brightness-90 dark:hover:brightness-125 transition">
-				{dayjs(props.date).format('MM/DD')}
+				{dayjs(props.date).format('HH:mm')}
 			</button>
 
 			{isOpen &&
@@ -45,13 +45,13 @@ function MyDatePicker(props: Props) {
 						<ThemeProvider theme={theme}>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 
-								<StaticDatePicker
+								<StaticTimePicker
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
 									onClose={() => setIsOpen(false)}
 									slotProps={{
 										toolbar: {
-											hidden: true
+											hidden: false
 										}
 									}}
 								/>
@@ -65,4 +65,4 @@ function MyDatePicker(props: Props) {
 	)
 }
 
-export default MyDatePicker
+export default MyTimePicker

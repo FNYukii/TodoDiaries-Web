@@ -6,6 +6,7 @@ import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
+import MyTimePicker from "../components/inputs/MyTimePicker"
 
 function CreateTodoScreen() {
 
@@ -76,12 +77,12 @@ function CreateTodoScreen() {
 					</button>
 
 					{isAchieved &&
-						// <DatetimePicker date={achievedAt} setDate={setAchievedAt} />
 
-						<MyDatePicker date={achievedAt} setDate={setAchievedAt}/>
+						<div className="flex gap-2">
 
-
-
+							<MyDatePicker date={achievedAt} setDate={setAchievedAt} />
+							<MyTimePicker date={achievedAt} setDate={setAchievedAt} />
+						</div>
 					}
 				</div>
 
