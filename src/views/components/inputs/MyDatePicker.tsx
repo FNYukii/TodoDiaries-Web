@@ -21,6 +21,9 @@ function MyDatePicker(props: Props) {
 		createTheme({
 			palette: {
 				mode: prefersDarkMode ? 'dark' : 'light',
+				primary: {
+					main: '#3b82f6'
+				}
 			},
 		}),
 		[prefersDarkMode],

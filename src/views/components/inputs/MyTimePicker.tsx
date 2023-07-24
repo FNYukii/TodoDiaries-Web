@@ -15,13 +15,16 @@ function MyTimePicker(props: Props) {
 
 	const [isOpen, setIsOpen] = useState(false)
 
-	// DatePickerのテーマ設定
+	// テーマ設定
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = React.useMemo(() =>
 		createTheme({
 			palette: {
 				mode: prefersDarkMode ? 'dark' : 'light',
-			},
+				primary: {
+					main: '#3b82f6'
+				}
+			}
 		}),
 		[prefersDarkMode],
 	)
@@ -49,7 +52,7 @@ function MyTimePicker(props: Props) {
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
 									ampm={false}
-									minutesStep={1}								
+									minutesStep={1}
 								/>
 
 							</LocalizationProvider>
