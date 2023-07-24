@@ -48,10 +48,8 @@ function MyTimePicker(props: Props) {
 								<MultiSectionDigitalClock
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
-									// onClose={() => setIsOpen(false)}
 									ampm={false}
-									timeSteps={{ hours: 1, minutes: 1 }}
-									
+									timeSteps={{ hours: 1, minutes: 1 }}									
 								/>
 
 							</LocalizationProvider>
