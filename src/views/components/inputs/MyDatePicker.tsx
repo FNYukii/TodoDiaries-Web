@@ -45,7 +45,22 @@ function MyDatePicker(props: Props) {
 						<ThemeProvider theme={theme}>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 
-								<StaticDatePicker value={dayjs(props.date)} onChange={(newValue) => props.setDate(newValue!.toDate())} />
+								<StaticDatePicker
+									value={dayjs(props.date)}
+									onChange={(newValue) => {
+										props.setDate(newValue!.toDate())
+										setIsOpen(false)
+									}}
+									slotProps={{
+										toolbar: {
+											hidden: true
+										},
+										actionBar: {
+											actions: [],
+										},
+									}}
+								/>
+
 							</LocalizationProvider>
 						</ThemeProvider>
 					</div>
