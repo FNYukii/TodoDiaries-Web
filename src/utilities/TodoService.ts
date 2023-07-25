@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -12,7 +12,7 @@ class TodoService {
 		try {
 
 			// データ読み取り
-			const doc = await getDoc(docRef)
+			const doc = await getDocFromCache(docRef)
 
 			// フィールドの値を取得
 			const id: string = doc.id ?? ""
