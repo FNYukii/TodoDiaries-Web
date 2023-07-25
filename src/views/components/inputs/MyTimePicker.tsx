@@ -52,7 +52,7 @@ function MyTimePicker(props: Props) {
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
 									ampm={false}
-									minutesStep={1}
+									timeSteps={{minutes: 1}}
 								/>
 
 							</LocalizationProvider>
