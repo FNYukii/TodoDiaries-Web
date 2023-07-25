@@ -1,8 +1,49 @@
-import { addDoc, collection, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
+import Todo from "../entities/Todo"
 
 class TodoService {
+
+	static async readTodo(todoId: string): Promise<Todo | null> {
+
+		const docRef = doc(db, "todos", todoId)
+
+		try {
+
+			// データ読み取り
+			const doc = await getDoc(docRef)
+
+			// フィールドの値を取得
+			const id: string = doc.id ?? ""
+			const userId: string = doc.get('userId') ?? ""
+			const content: string = doc.get('content') ?? ""
+			const order: number = doc.get('order') ?? 0
+			const isPinned: boolean = doc.get('isPinned') ?? false
+			const createdAt: Date = doc.get('createdAt').toDate() ?? new Date()
+			const achievedAtFieldValue = doc.get('achievedAt')
+			const achievedAt: Date | null = achievedAtFieldValue === null ? null : achievedAtFieldValue.toDate()
+
+			// Todoオブジェクトを生成
+			const todo: Todo = {
+				id: id,
+				userId: userId,
+				content: content,
+				order: order,
+				isPinned: isPinned,
+				createdAt: createdAt,
+				achievedAt: achievedAt
+			}
+
+			return todo
+
+		} catch (e) {
+
+			console.log("Fail! Error reading todo.", e)
+		}
+
+		return null
+	}
 
 	static async readMaxOrder(isPinned: boolean): Promise<number | null> {
 
@@ -27,7 +68,7 @@ class TodoService {
 
 			// サーバーorキャッシュから読み取り
 			const querySnapshot = await getDocs(q)
-			
+
 			// 成功
 			// orderの最大値を取得する
 			let maxOrder: number = 0

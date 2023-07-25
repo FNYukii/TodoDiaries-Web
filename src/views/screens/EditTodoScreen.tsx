@@ -5,10 +5,14 @@ import SubmitButton from "../components/buttons/SubmitButton"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
+import { useParams } from "react-router-dom"
+import TodoService from "../../utilities/TodoService"
 
 function EditTodoScreen() {
 
 	document.title = "Todoを編集 - Todo Diaries"
+
+	const { todoId } = useParams()
 
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
@@ -20,6 +24,20 @@ function EditTodoScreen() {
 	useEffect(() => {
 
 		(async () => {
+
+			// 既存Todoを読み取り
+			const todo = await TodoService.readTodo(todoId!)
+
+			// 読み取りに失敗したら終了
+			if (!todo) {
+				return
+			}
+
+			setContent(todo.content)
+			setIsPinned(todo.isPinned)
+			setIsAchieved(todo.achievedAt !== null)
+			setAchievedAt(todo.achievedAt ?? new Date())
+
 
 
 		})()
