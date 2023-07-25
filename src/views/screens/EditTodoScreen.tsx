@@ -101,7 +101,7 @@ function EditTodoScreen() {
 						}
 					</div>
 
-					<SubmitButton text="追加" isLoading={isLoading} disabled={content === ""} />
+					<SubmitButton text="更新" isLoading={isLoading} disabled={content === ""} />
 				</div>
 			</form>
 		</Modal>
