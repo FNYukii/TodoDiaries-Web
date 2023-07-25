@@ -33,14 +33,13 @@ function EditTodoScreen() {
 				return
 			}
 
+			// 画面に反映
 			setContent(todo.content)
 			setIsPinned(todo.isPinned)
 			setIsAchieved(todo.achievedAt !== null)
 			setAchievedAt(todo.achievedAt ?? new Date())
-
-
-
 		})()
+		
 	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
