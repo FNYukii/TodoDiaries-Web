@@ -41,7 +41,7 @@ function EditTodoScreen() {
 
 
 		})()
-	}, [])
+	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
