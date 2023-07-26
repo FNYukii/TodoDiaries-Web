@@ -20,7 +20,7 @@ function EditTodoScreen() {
 	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
 
 	const [isLoading, setIsLoading] = useState(false)
-	
+
 	useEffect(() => {
 
 		(async () => {
@@ -39,7 +39,7 @@ function EditTodoScreen() {
 			setIsAchieved(todo.achievedAt !== null)
 			setAchievedAt(todo.achievedAt ?? new Date())
 		})()
-		
+
 	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -47,7 +47,7 @@ function EditTodoScreen() {
 
 		setIsLoading(true)
 
-		// データを更新
+		// Todo: データを更新
 
 		setIsLoading(false)
 	}
@@ -62,7 +62,7 @@ function EditTodoScreen() {
 
 					<h1 className="mt-4 text-2xl font-bold">Todoを編集</h1>
 
-					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" autoFocus />
+					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
 				</div>
 
 				<div className="mt-2 mb-7 ml-5 mr-4 flex gap-2 items-center justify-between">
