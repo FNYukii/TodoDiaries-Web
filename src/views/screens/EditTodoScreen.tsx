@@ -30,6 +30,8 @@ function EditTodoScreen() {
 
 			// 読み取りに失敗したら終了
 			if (!todo) {
+
+				alert("IDに該当するTodoがありません")
 				return
 			}
 

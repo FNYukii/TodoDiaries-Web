@@ -24,7 +24,7 @@ function App() {
 	// モーダル系の画面にアクセスされたら、変数isShowModalをtrueとする
 	const isShowSignInModal = currentPath === "/sign-in"
 	const isShowCreateTodoModal = currentPath === "/new"
-	const isShowEditTodoModal: boolean = /^\/todos\/[A-Za-z0-9]{20}/.test(currentPath)
+	const isShowEditTodoModal: boolean = /^\/todos\/[A-Za-z0-9]{1,}/.test(currentPath)
 	const isShowAccountModal = currentPath === "/account"
 	const isShowModal = isShowSignInModal || isShowCreateTodoModal || isShowEditTodoModal || isShowAccountModal ? true : false
 
