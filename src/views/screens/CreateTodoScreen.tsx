@@ -55,7 +55,7 @@ function CreateTodoScreen() {
 
 					<div className="flex gap-2 items-center">
 
-						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
+						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent dark:disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
 
 							{!isPinned &&
 								<BsPin className="text-xl" />
