@@ -46,7 +46,7 @@ function MyDatePicker(props: Props) {
 					<div className="absolute">
 
 						<ThemeProvider theme={theme}>
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
+							<LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthAndYear: "YYYY年 M月" }}>
 
 								<StaticDatePicker
 									value={dayjs(props.date)}
