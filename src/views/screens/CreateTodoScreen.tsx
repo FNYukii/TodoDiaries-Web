@@ -88,7 +88,7 @@ function CreateTodoScreen() {
 						}
 					</div>
 
-					<SubmitButton text="追加" isLoading={isLoading} disabled={content === ""} />
+					<SubmitButton text="作成" isLoading={isLoading} disabled={content === ""} />
 				</div>
 			</form>
 		</Modal>
