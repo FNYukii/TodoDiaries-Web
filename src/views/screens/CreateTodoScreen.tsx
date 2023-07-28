@@ -55,7 +55,7 @@ function CreateTodoScreen() {
 
 					<div className="flex gap-2 items-center">
 
-						<button type="button" onClick={() => setIsPinned(!isPinned)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
 
 							{!isPinned &&
 								<BsPin className="text-xl" />
@@ -66,7 +66,18 @@ function CreateTodoScreen() {
 							}
 						</button>
 
-						<button type="button" onClick={() => setAchievedAt(!achievedAt ? new Date() : null)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<button type="button" onClick={() => {
+
+							if (!achievedAt) {
+								setAchievedAt(new Date())
+								setIsPinned(false)
+							}
+
+							else if (achievedAt) {
+								setAchievedAt(null)
+							}
+							
+						}} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
 							{!achievedAt &&
 								<BsCalendarCheck className="text-xl" />
