@@ -1,12 +1,13 @@
 type Todo = {
 	id: string
 	userId: string
+	createdAt: Date
 
 	content: string
+
 	isPinned: boolean | null
 	order: number | null
-
-	createdAt: Date
+	
 	achievedAt: Date | null
 }
 
