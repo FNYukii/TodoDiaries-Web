@@ -51,6 +51,8 @@ class TodoService {
 		const uid = await AuthService.uid()
 
 		if (uid === null) {
+
+			console.log('Fail! uidを取得できません')
 			return null
 		}
 

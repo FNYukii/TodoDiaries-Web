@@ -69,11 +69,11 @@ function EditTodoScreen() {
 		let newOrder: number | null = oldTodo.order
 
 		// 未達成のままで、非固定から固定になった場合
-		if (!oldTodo.achievedAt && !achievedAt && !oldTodo.isPinned && isPinned) {
+		if (!oldTodo.achievedAt && !achievedAt && oldTodo.isPinned === false && isPinned) {
 
 			const maxOrder = await TodoService.readOrder(true, true)
 
-			if (!maxOrder) {
+			if (maxOrder === null) {
 				return
 			}
 
@@ -85,7 +85,7 @@ function EditTodoScreen() {
 
 			const minOrder = await TodoService.readOrder(false, false)
 
-			if (!minOrder) {
+			if (minOrder === null) {
 				return
 			}
 
@@ -102,7 +102,7 @@ function EditTodoScreen() {
 
 			const minOrder = await TodoService.readOrder(false, false)
 
-			if (!minOrder) {
+			if (minOrder === null) {
 				return
 			}
 
@@ -114,7 +114,7 @@ function EditTodoScreen() {
 
 			const maxOrder = await TodoService.readOrder(true, true)
 
-			if (!maxOrder) {
+			if (maxOrder === null) {
 				return
 			}
 
