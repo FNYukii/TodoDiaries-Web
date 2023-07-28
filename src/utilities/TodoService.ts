@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
+import { FieldValue, addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -170,6 +170,38 @@ class TodoService {
 		} catch (error) {
 
 			console.log(`Failed to Todo creation. ${error}`)
+			return null
+		}
+	}
+
+	static async updateTodo(todoId: string, content: string, achievedAt: Date | null): Promise<string | null> {
+
+		// UserIdを取得
+		const uid = await AuthService.uid()
+
+		// サインインしていないなら終了　
+		if (uid === null) {
+			return null
+		}
+
+		// Firestoreのドキュメントへの参照を取得
+		const todoRef = doc(db, "todos", todoId)
+		
+		// Todoを編集
+		try {
+
+			await updateDoc(todoRef, {
+				content: content,
+				order: achievedAt === null ? FieldValue : null,
+				isPinned: achievedAt === null ? FieldValue : null,
+				achievedAt: achievedAt
+			})
+
+			return todoId
+
+		} catch (error) {
+
+			console.log(`Fail! Error to update todo. ${error}`)
 			return null
 		}
 	}
