@@ -1,4 +1,4 @@
-import { FieldValue, addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -190,13 +190,26 @@ class TodoService {
 		// Todoを編集
 		try {
 
-			await updateDoc(todoRef, {
-				content: content,
-				order: achievedAt === null ? FieldValue : null,
-				isPinned: achievedAt === null ? FieldValue : null,
-				achievedAt: achievedAt
-			})
+			// 未達成Todoの場合
+			if (!achievedAt) {
 
+				await updateDoc(todoRef, {
+					content: content,
+					achievedAt: null
+				})
+			}
+
+			// 達成済みTodoの場合
+			if (achievedAt) {
+
+				await updateDoc(todoRef, {
+					content: content,
+					order: null,
+					isPinned: null,
+					achievedAt: achievedAt
+				})
+			}
+			
 			return todoId
 
 		} catch (error) {
