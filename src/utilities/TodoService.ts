@@ -1,4 +1,4 @@
-import { FieldValue, addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { FieldPath, FieldValue, Firestore, addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"

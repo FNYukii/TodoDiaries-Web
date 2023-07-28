@@ -5,7 +5,7 @@ import SubmitButton from "../components/buttons/SubmitButton"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import TodoService from "../../utilities/TodoService"
 
 function EditTodoScreen() {
@@ -20,6 +20,8 @@ function EditTodoScreen() {
 	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
 
 	const [isLoading, setIsLoading] = useState(false)
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 
@@ -45,13 +47,24 @@ function EditTodoScreen() {
 	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault()
 
+		event.preventDefault()
 		setIsLoading(true)
 
-		// Todo: データを更新
+		// データを更新
+		const result = await TodoService.updateTodo(todoId!, content, isAchieved ? achievedAt : null)
 
-		setIsLoading(false)
+		// 失敗
+		if (!result) {
+
+			alert("Todoの更新に失敗しました。")
+			setIsLoading(false)
+
+			return
+		}
+
+		// 成功
+		navigate('/')
 	}
 
 	return (
