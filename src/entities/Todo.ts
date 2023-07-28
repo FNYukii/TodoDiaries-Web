@@ -3,8 +3,8 @@ type Todo = {
 	userId: string
 
 	content: string
-	isPinned: boolean
-	order: number
+	isPinned: boolean | null
+	order: number | null
 
 	createdAt: Date
 	achievedAt: Date | null

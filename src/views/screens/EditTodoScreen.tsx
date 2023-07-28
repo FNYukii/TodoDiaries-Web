@@ -7,6 +7,7 @@ import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
 import { useNavigate, useParams } from "react-router-dom"
 import TodoService from "../../utilities/TodoService"
+import Todo from "../../entities/Todo"
 
 function EditTodoScreen() {
 
@@ -18,6 +19,8 @@ function EditTodoScreen() {
 	const [isPinned, setIsPinned] = useState(false)
 	const [isAchieved, setIsAchieved] = useState(false)
 	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
+
+	const [oldTodo, setOldTodo] = useState<Todo | null>(null)
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -39,9 +42,12 @@ function EditTodoScreen() {
 
 			// 画面に反映
 			setContent(todo.content)
-			setIsPinned(todo.isPinned)
+			setIsPinned(todo.isPinned ?? false)
 			setIsAchieved(todo.achievedAt !== null)
 			setAchievedAt(todo.achievedAt ?? new Date())
+
+			// 古いデータを保持しておく
+			setOldTodo(todo)
 		})()
 
 	}, [todoId])
@@ -49,10 +55,78 @@ function EditTodoScreen() {
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 
 		event.preventDefault()
+
+		if (!oldTodo) {
+
+			alert("Todoの取得に失敗しているので、データを更新できません。")
+			return
+		}
+
 		setIsLoading(true)
 
+		const newContent = content
+		const newIsPinned = !isAchieved ? isPinned : null
+
+		// 新しいTodoのorderの値を設定していく
+		let newOrder: number | null = oldTodo.order
+
+		// 未達成のままで、非固定から固定になった場合
+		if (!oldTodo.achievedAt && !isAchieved && !oldTodo.isPinned && isPinned) {
+
+			const maxOrder = await TodoService.readOrder(true, true)
+
+			if (!maxOrder) {
+				return
+			}
+
+			newOrder = maxOrder + 100
+		}
+
+		// 未達成のままで、固定から非固定になった場合
+		else if (!oldTodo.achievedAt && !isAchieved && oldTodo.isPinned === true && !isPinned) {
+
+			const minOrder = await TodoService.readOrder(false, false)
+
+			if (!minOrder) {
+				return
+			}
+
+			newOrder = minOrder - 100
+		}
+
+		// 未達成から達成になった場合
+		else if (!oldTodo.achievedAt && isAchieved) {
+			newOrder = null
+		}
+
+		// 達成から未達成に戻し、未固定にする場合
+		else if (oldTodo.achievedAt && !isAchieved && !isPinned) {
+
+			const minOrder = await TodoService.readOrder(false, false)
+
+			if (!minOrder) {
+				return
+			}
+
+			newOrder = minOrder - 100
+		}
+
+		// 達成から未達成に戻し、固定する場合
+		else if (oldTodo.achievedAt && !isAchieved && isPinned) {
+
+			const maxOrder = await TodoService.readOrder(true, true)
+
+			if (!maxOrder) {
+				return
+			}
+
+			newOrder = maxOrder + 100
+		}
+
+		const newAchievedAt = !isAchieved ? null : achievedAt
+
 		// データを更新
-		const result = await TodoService.updateTodo(todoId!, content, isAchieved ? achievedAt : null)
+		const result = await TodoService.updateTodo(todoId!, newContent, newIsPinned, newOrder, newAchievedAt)
 
 		// 失敗
 		if (!result) {

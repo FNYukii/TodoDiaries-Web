@@ -174,7 +174,7 @@ class TodoService {
 		}
 	}
 
-	static async updateTodo(todoId: string, content: string, achievedAt: Date | null): Promise<string | null> {
+	static async updateTodo(todoId: string, content: string, isPinned: boolean | null, order: number | null, achievedAt: Date | null): Promise<string | null> {
 
 		// UserIdを取得
 		const uid = await AuthService.uid()
@@ -190,25 +190,12 @@ class TodoService {
 		// Todoを編集
 		try {
 
-			// 未達成Todoの場合
-			if (!achievedAt) {
-
-				await updateDoc(todoRef, {
-					content: content,
-					achievedAt: null
-				})
-			}
-
-			// 達成済みTodoの場合
-			if (achievedAt) {
-
-				await updateDoc(todoRef, {
-					content: content,
-					order: null,
-					isPinned: null,
-					achievedAt: achievedAt
-				})
-			}
+			await updateDoc(todoRef, {
+				content: content,
+				order: order,
+				isPinned: isPinned,
+				achievedAt: achievedAt
+			})
 
 			return todoId
 
@@ -217,71 +204,6 @@ class TodoService {
 			console.log(`Fail! Error to update todo. ${error}`)
 			return null
 		}
-	}
-
-	static async pinTodo(todoId: string): Promise<string | null> {
-
-		// このTodoをPinned Todosの一番下に表示したいので、pinnedTodosのorderの最大値+100の値を設定する
-		// 現在のPinned Todosのorder最大値を取得
-		const maxOrder = await TodoService.readOrder(true, true)
-
-		// 失敗
-		if (maxOrder === null) {
-			return null
-		}
-
-		// 成功
-		// 参照を取得
-		const todoRef = doc(db, "todos", todoId)
-
-		// Todoをピン留めし、orderを最も大きくなる値に設定
-		try {
-
-			await updateDoc(todoRef, {
-				isPinned: true,
-				order: maxOrder + 100
-			})
-
-			return todoId
-
-		} catch (error) {
-
-			console.log(`Fail! Error update to Todo. ${error}`)
-			return null
-		}
-	}
-
-	static async unpinTodo(todoId: string): Promise<string | null> {
-
-		// このTodoをUnpinned Todosの一番上に表示したいので、Unpinned Todossのorderの最小値 - 100の値を設定する
-		// 現在のUnpinned Todosのorder最小値を取得
-		const minOrder = await TodoService.readOrder(false, false)
-
-		// 失敗
-		if (minOrder === null) {
-			return null
-		}
-
-		// 成功
-		// 参照を取得
-		const todoRef = doc(db, "todos", todoId)
-
-		// Todoをピン留めし、orderを最も小さくなる値に設定
-		try {
-
-			await updateDoc(todoRef, {
-				isPinned: false,
-				order: minOrder + 100
-			})
-
-			return todoId
-
-		} catch (error) {
-
-			console.log(`Fail! Error update to Todo. ${error}`)
-			return null
-		}
-
 	}
 }
 
