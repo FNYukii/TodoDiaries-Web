@@ -18,7 +18,7 @@ function TodosList(props: Props) {
 				<span className="text-zinc-500">{props.label}</span>
 			}
 
-			<div className="mt-2 divide-y dark:divide-zinc-600">
+			<div className="mt-2 divide-y divide-zinc-200 dark:divide-zinc-700">
 
 				{props.todos.map(todo => (
 
