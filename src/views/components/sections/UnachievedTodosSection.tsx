@@ -45,7 +45,6 @@ function UnachievedTodosSection(props: Props) {
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
 
-			// TODO: このコードの意味を調べる
 			if (querySnapshot.metadata.hasPendingWrites) return
 
 			// Todoの配列を作成
@@ -117,8 +116,7 @@ function UnachievedTodosSection(props: Props) {
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
-
-			// TODO: このコードの意味を調べる
+			
 			if (querySnapshot.metadata.hasPendingWrites) return
 
 			// Todoの配列を作成
