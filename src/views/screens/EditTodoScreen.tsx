@@ -5,8 +5,9 @@ import SubmitButton from "../components/buttons/SubmitButton"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import TodoService from "../../utilities/TodoService"
+import Todo from "../../entities/Todo"
 
 function EditTodoScreen() {
 
@@ -16,10 +17,13 @@ function EditTodoScreen() {
 
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
-	const [isAchieved, setIsAchieved] = useState(false)
-	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
+	const [achievedAt, setAchievedAt] = useState<Date | null>(null)
+
+	const [oldTodo, setOldTodo] = useState<Todo | null>(null)
 
 	const [isLoading, setIsLoading] = useState(false)
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 
@@ -37,21 +41,102 @@ function EditTodoScreen() {
 
 			// 画面に反映
 			setContent(todo.content)
-			setIsPinned(todo.isPinned)
-			setIsAchieved(todo.achievedAt !== null)
-			setAchievedAt(todo.achievedAt ?? new Date())
+			setIsPinned(todo.isPinned ?? false)
+			setAchievedAt(todo.achievedAt)
+
+			// 古いデータを保持しておく
+			setOldTodo(todo)
 		})()
 
 	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+
 		event.preventDefault()
+
+		if (!oldTodo) {
+
+			alert("Todoの取得に失敗しているので、データを更新できません。")
+			return
+		}
 
 		setIsLoading(true)
 
-		// Todo: データを更新
+		const newContent = content
+		const newIsPinned = !achievedAt ? isPinned : null
 
-		setIsLoading(false)
+		// 新しいTodoのorderの値を設定していく
+		let newOrder: number | null = oldTodo.order
+
+		// 未達成のままで、非固定から固定になった場合
+		if (!oldTodo.achievedAt && !achievedAt && oldTodo.isPinned === false && isPinned) {
+
+			const maxOrder = await TodoService.readOrder(true, true)
+
+			if (maxOrder === null) {
+				return
+			}
+
+			newOrder = maxOrder + 100
+		}
+
+		// 未達成のままで、固定から非固定になった場合
+		else if (!oldTodo.achievedAt && !achievedAt && oldTodo.isPinned === true && !isPinned) {
+
+			const minOrder = await TodoService.readOrder(false, false)
+
+			if (minOrder === null) {
+				return
+			}
+
+			newOrder = minOrder - 100
+		}
+
+		// 未達成から達成になった場合
+		else if (!oldTodo.achievedAt && achievedAt) {
+			newOrder = null
+		}
+
+		// 達成から未達成に戻し、未固定にする場合
+		else if (oldTodo.achievedAt && !achievedAt && !isPinned) {
+
+			const minOrder = await TodoService.readOrder(false, false)
+
+			if (minOrder === null) {
+				return
+			}
+
+			newOrder = minOrder - 100
+		}
+
+		// 達成から未達成に戻し、固定する場合
+		else if (oldTodo.achievedAt && !achievedAt && isPinned) {
+
+			const maxOrder = await TodoService.readOrder(true, true)
+
+			if (maxOrder === null) {
+				return
+			}
+
+			newOrder = maxOrder + 100
+		}
+
+		const newAchievedAt = !achievedAt ? null : achievedAt
+
+		// データを更新
+		const result = await TodoService.updateTodo(todoId!, newContent, newIsPinned, newOrder, newAchievedAt)
+
+		// 失敗
+		if (!result) {
+
+			alert("Todoの更新に失敗しました。")
+			setIsLoading(false)
+
+			return
+		}
+
+		// 成功
+		navigate('/')
 	}
 
 	return (
@@ -82,18 +167,18 @@ function EditTodoScreen() {
 							}
 						</button>
 
-						<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<button type="button" onClick={() => setAchievedAt(!achievedAt ? new Date() : null)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
-							{!isAchieved &&
+							{!achievedAt &&
 								<BsCalendarCheck className="text-xl" />
 							}
 
-							{isAchieved &&
+							{achievedAt &&
 								<BsCalendarCheckFill className="text-xl" />
 							}
 						</button>
 
-						{isAchieved &&
+						{achievedAt &&
 
 							<div className="ml-3 flex gap-4">
 

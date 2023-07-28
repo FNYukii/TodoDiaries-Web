@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, where } from "firebase/firestore"
+import { addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -45,12 +45,14 @@ class TodoService {
 		return null
 	}
 
-	static async readMaxOrder(isPinned: boolean): Promise<number | null> {
+	static async readOrder(isPinned: boolean, maxOrder: boolean): Promise<number | null> {
 
 		// サインインしていないなら終了　
 		const uid = await AuthService.uid()
 
 		if (uid === null) {
+
+			console.log('Fail! uidを取得できません')
 			return null
 		}
 
@@ -60,7 +62,7 @@ class TodoService {
 			where("userId", "==", uid),
 			where("achievedAt", "==", null),
 			where("isPinned", "==", isPinned),
-			orderBy("order", "desc"),
+			orderBy("order", maxOrder ? "desc" : "asc"),
 			limit(1)
 		)
 
@@ -70,18 +72,18 @@ class TodoService {
 			const querySnapshot = await getDocs(q)
 
 			// 成功
-			// orderの最大値を取得する
-			let maxOrder: number = 0
+			// orderの最大値/最小値を取得する
+			let firstOrder: number = 0
 
 			if (querySnapshot.docs.length === 0) {
-				maxOrder = 0
+				firstOrder = 0
 			}
 
 			if (querySnapshot.docs.length !== 0) {
-				maxOrder = querySnapshot.docs[0].data().order
+				firstOrder = querySnapshot.docs[0].data().order
 			}
 
-			return maxOrder
+			return firstOrder
 
 		} catch (error) {
 
@@ -107,7 +109,7 @@ class TodoService {
 		}
 
 		// 現在のorderの最大値を取得
-		const maxOrder = await this.readMaxOrder(isPinned)
+		const maxOrder = await this.readOrder(isPinned, true)
 
 		// 取得できなければ終了
 		if (maxOrder === null) {
@@ -170,6 +172,38 @@ class TodoService {
 		} catch (error) {
 
 			console.log(`Failed to Todo creation. ${error}`)
+			return null
+		}
+	}
+
+	static async updateTodo(todoId: string, content: string, isPinned: boolean | null, order: number | null, achievedAt: Date | null): Promise<string | null> {
+
+		// UserIdを取得
+		const uid = await AuthService.uid()
+
+		// サインインしていないなら終了　
+		if (uid === null) {
+			return null
+		}
+
+		// Firestoreのドキュメントへの参照を取得
+		const todoRef = doc(db, "todos", todoId)
+
+		// Todoを編集
+		try {
+
+			await updateDoc(todoRef, {
+				content: content,
+				order: order,
+				isPinned: isPinned,
+				achievedAt: achievedAt
+			})
+
+			return todoId
+
+		} catch (error) {
+
+			console.log(`Fail! Error to update todo. ${error}`)
 			return null
 		}
 	}
