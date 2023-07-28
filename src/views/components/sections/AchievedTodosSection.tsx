@@ -38,9 +38,7 @@ function AchievedTodosSection(props: Props) {
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
-
-			if (querySnapshot.metadata.hasPendingWrites) return
-
+			
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
