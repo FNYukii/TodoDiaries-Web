@@ -17,8 +17,7 @@ function EditTodoScreen() {
 
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
-	const [isAchieved, setIsAchieved] = useState(false)
-	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
+	const [achievedAt, setAchievedAt] = useState<Date | null>(null)
 
 	const [oldTodo, setOldTodo] = useState<Todo | null>(null)
 
@@ -43,8 +42,7 @@ function EditTodoScreen() {
 			// 画面に反映
 			setContent(todo.content)
 			setIsPinned(todo.isPinned ?? false)
-			setIsAchieved(todo.achievedAt !== null)
-			setAchievedAt(todo.achievedAt ?? new Date())
+			setAchievedAt(todo.achievedAt)
 
 			// 古いデータを保持しておく
 			setOldTodo(todo)
@@ -65,13 +63,13 @@ function EditTodoScreen() {
 		setIsLoading(true)
 
 		const newContent = content
-		const newIsPinned = !isAchieved ? isPinned : null
+		const newIsPinned = !achievedAt ? isPinned : null
 
 		// 新しいTodoのorderの値を設定していく
 		let newOrder: number | null = oldTodo.order
 
 		// 未達成のままで、非固定から固定になった場合
-		if (!oldTodo.achievedAt && !isAchieved && !oldTodo.isPinned && isPinned) {
+		if (!oldTodo.achievedAt && !achievedAt && !oldTodo.isPinned && isPinned) {
 
 			const maxOrder = await TodoService.readOrder(true, true)
 
@@ -83,7 +81,7 @@ function EditTodoScreen() {
 		}
 
 		// 未達成のままで、固定から非固定になった場合
-		else if (!oldTodo.achievedAt && !isAchieved && oldTodo.isPinned === true && !isPinned) {
+		else if (!oldTodo.achievedAt && !achievedAt && oldTodo.isPinned === true && !isPinned) {
 
 			const minOrder = await TodoService.readOrder(false, false)
 
@@ -95,12 +93,12 @@ function EditTodoScreen() {
 		}
 
 		// 未達成から達成になった場合
-		else if (!oldTodo.achievedAt && isAchieved) {
+		else if (!oldTodo.achievedAt && achievedAt) {
 			newOrder = null
 		}
 
 		// 達成から未達成に戻し、未固定にする場合
-		else if (oldTodo.achievedAt && !isAchieved && !isPinned) {
+		else if (oldTodo.achievedAt && !achievedAt && !isPinned) {
 
 			const minOrder = await TodoService.readOrder(false, false)
 
@@ -112,7 +110,7 @@ function EditTodoScreen() {
 		}
 
 		// 達成から未達成に戻し、固定する場合
-		else if (oldTodo.achievedAt && !isAchieved && isPinned) {
+		else if (oldTodo.achievedAt && !achievedAt && isPinned) {
 
 			const maxOrder = await TodoService.readOrder(true, true)
 
@@ -123,7 +121,7 @@ function EditTodoScreen() {
 			newOrder = maxOrder + 100
 		}
 
-		const newAchievedAt = !isAchieved ? null : achievedAt
+		const newAchievedAt = !achievedAt ? null : achievedAt
 
 		// データを更新
 		const result = await TodoService.updateTodo(todoId!, newContent, newIsPinned, newOrder, newAchievedAt)
@@ -169,18 +167,18 @@ function EditTodoScreen() {
 							}
 						</button>
 
-						<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<button type="button" onClick={() => setAchievedAt(!achievedAt ? new Date() : null)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
-							{!isAchieved &&
+							{!achievedAt &&
 								<BsCalendarCheck className="text-xl" />
 							}
 
-							{isAchieved &&
+							{achievedAt &&
 								<BsCalendarCheckFill className="text-xl" />
 							}
 						</button>
 
-						{isAchieved &&
+						{achievedAt &&
 
 							<div className="ml-3 flex gap-4">
 

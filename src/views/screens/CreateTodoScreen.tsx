@@ -14,8 +14,7 @@ function CreateTodoScreen() {
 
 	const [content, setContent] = useState("")
 	const [isPinned, setIsPinned] = useState(false)
-	const [isAchieved, setIsAchieved] = useState(false)
-	const [achievedAt, setAchievedAt] = useState<Date>(new Date())
+	const [achievedAt, setAchievedAt] = useState<Date | null>(null)
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -26,7 +25,7 @@ function CreateTodoScreen() {
 
 		setIsLoading(true)
 
-		const todoId = !isAchieved ? await TodoService.createUnachievedTodo(content, isPinned) : await TodoService.createAchievedTodo(content, achievedAt)
+		const todoId = !achievedAt ? await TodoService.createUnachievedTodo(content, isPinned) : await TodoService.createAchievedTodo(content, achievedAt)
 
 		if (!todoId) {
 			alert("Todoの作成に失敗しました。")
@@ -67,18 +66,18 @@ function CreateTodoScreen() {
 							}
 						</button>
 
-						<button type="button" onClick={() => setIsAchieved(!isAchieved)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
+						<button type="button" onClick={() => setAchievedAt(!achievedAt ? new Date() : null)} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition">
 
-							{!isAchieved &&
+							{!achievedAt &&
 								<BsCalendarCheck className="text-xl" />
 							}
 
-							{isAchieved &&
+							{achievedAt &&
 								<BsCalendarCheckFill className="text-xl" />
 							}
 						</button>
 
-						{isAchieved &&
+						{achievedAt &&
 
 							<div className="ml-3 flex gap-4">
 

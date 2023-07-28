@@ -8,7 +8,7 @@ import { useState } from "react"
 
 interface Props {
 	date: Date
-	setDate: React.Dispatch<React.SetStateAction<Date>>
+	setDate: React.Dispatch<React.SetStateAction<Date | null>>
 }
 
 function MyDatePicker(props: Props) {
