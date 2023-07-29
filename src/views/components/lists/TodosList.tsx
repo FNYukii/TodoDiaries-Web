@@ -20,9 +20,9 @@ function TodosList(props: Props) {
 
 			<div className="mt-2 divide-y divide-zinc-200 dark:divide-zinc-700">
 
-				{props.todos.map(todo => (
+				{props.todos.map((todo, index) => (
 
-					<NavLinkToModal to={`/todos/${todo.id}`} key={todo.id} className="block py-3 px-4 flex gap-3 bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl">
+					<NavLinkToModal to={`/todos/${todo.id}`} key={index} className="block py-3 px-4 flex gap-3 bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl">
 
 						<>
 							{todo.achievedAt !== null &&

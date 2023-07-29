@@ -4,6 +4,7 @@ import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
+import dayjs from "dayjs"
 
 interface Props {
 	className?: string
@@ -12,6 +13,22 @@ interface Props {
 function AchievedTodosSection(props: Props) {
 
 	const [todos, setTodos] = useState<Todo[] | null>(null)
+
+	const sampleTodo: Todo = {
+		id: "xxxxxx",
+		userId: "xxxxxxx",
+		content: "買い物",
+		order: null,
+		isPinned: null,
+		createdAt: new Date(),
+		achievedAt: new Date()
+	}
+
+	const sampleGroupedTodos: Todo[][] = [
+		[sampleTodo, sampleTodo],
+		[sampleTodo, sampleTodo, sampleTodo],
+	]
+
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	async function listenPinnedTodos() {
@@ -38,7 +55,7 @@ function AchievedTodosSection(props: Props) {
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
-			
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -121,7 +138,13 @@ function AchievedTodosSection(props: Props) {
 				{isLoaded && todos !== null && todos.length !== 0 &&
 					<div>
 
-						<TodosList todos={todos} />
+						{sampleGroupedTodos.map((todos, index) => (
+
+							<div key={index}>
+
+								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY-MM-DD')} />
+							</div>
+						))}
 					</div>
 				}
 			</div>
