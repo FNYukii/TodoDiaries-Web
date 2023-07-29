@@ -12,22 +12,7 @@ interface Props {
 
 function AchievedTodosSection(props: Props) {
 
-	const [todos, setTodos] = useState<Todo[] | null>(null)
-
-	const sampleTodo: Todo = {
-		id: "xxxxxx",
-		userId: "xxxxxxx",
-		content: "買い物",
-		order: null,
-		isPinned: null,
-		createdAt: new Date(),
-		achievedAt: new Date()
-	}
-
-	const sampleGroupedTodos: Todo[][] = [
-		[sampleTodo, sampleTodo],
-		[sampleTodo, sampleTodo, sampleTodo],
-	]
+	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
 
 	const [isLoaded, setIsLoaded] = useState(false)
 
@@ -88,8 +73,33 @@ function AchievedTodosSection(props: Props) {
 				todos.push(todo)
 			})
 
+			// 配列todosを二次元配列groupedTodosに変換
+			let groupedTodos: Todo[][] = []
+			let beforeAchievedDay: string | null = null
+			let dayCounter = 0
+			todos.forEach(todo => {
+
+				// このTodoの達成日を取得
+				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
+
+				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
+				if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
+					dayCounter += 1
+				}
+
+				// TODO: 二次元配列にTodoを追加
+				// groupedTodos[dayCounter].push(todo)
+
+				let dayTodos = groupedTodos[dayCounter]
+				dayTodos.push(todo)
+				groupedTodos[dayCounter] = dayTodos
+
+				// 今回の達成日を前回の達成日にする
+				beforeAchievedDay = currentAchievedDay
+			})
+
 			// Stateを更新
-			setTodos(todos)
+			setGroupedTodos(groupedTodos)
 			setIsLoaded(true)
 
 		}, (error) => {
@@ -123,22 +133,22 @@ function AchievedTodosSection(props: Props) {
 					</div>
 				}
 
-				{isLoaded && todos === null &&
+				{isLoaded && groupedTodos === null &&
 					<div>
 						<p className="mt-4">Failed reading todos</p>
 					</div>
 				}
 
-				{isLoaded && todos !== null && todos.length === 0 &&
+				{isLoaded && groupedTodos !== null && groupedTodos.length === 0 &&
 					<div>
 						<p className="mt-4">There is no todo</p>
 					</div>
 				}
 
-				{isLoaded && todos !== null && todos.length !== 0 &&
+				{isLoaded && groupedTodos !== null && groupedTodos.length !== 0 &&
 					<div>
 
-						{sampleGroupedTodos.map((todos, index) => (
+						{groupedTodos.map((todos, index) => (
 
 							<div key={index}>
 
