@@ -89,7 +89,6 @@ function AchievedTodosSection(props: Props) {
 
 				// TODO: 二次元配列にTodoを追加
 				// groupedTodos[dayCounter].push(todo)
-
 				let dayTodos = groupedTodos[dayCounter]
 				dayTodos.push(todo)
 				groupedTodos[dayCounter] = dayTodos
