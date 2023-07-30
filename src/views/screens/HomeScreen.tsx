@@ -9,11 +9,11 @@ function HomeScreen() {
 
 	return (
 
-		<div className="bg-slate-100 dark:bg-black dark:text-white h-screen">
+		<div className="dark:text-white h-screen">
 
 			<Header showAccountButton />
 
-			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
+			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0 pb-16">
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
 

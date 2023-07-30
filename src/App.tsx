@@ -45,11 +45,13 @@ function App() {
 
 				// ログイン済み
 				setIsSignedIn(true)
+				document.body.classList.add('bg-slate-100')
 
 			} else {
 
 				// 未ログイン
 				setIsSignedIn(false)
+				document.body.classList.remove('bg-slate-100')
 			}
 		})
 	}, [])
