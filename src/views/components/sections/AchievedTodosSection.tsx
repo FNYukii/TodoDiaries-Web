@@ -4,6 +4,7 @@ import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
+import dayjs from "dayjs"
 
 interface Props {
 	className?: string
@@ -11,7 +12,8 @@ interface Props {
 
 function AchievedTodosSection(props: Props) {
 
-	const [todos, setTodos] = useState<Todo[] | null>(null)
+	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
+
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	async function listenPinnedTodos() {
@@ -38,7 +40,7 @@ function AchievedTodosSection(props: Props) {
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
-			
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -71,8 +73,36 @@ function AchievedTodosSection(props: Props) {
 				todos.push(todo)
 			})
 
+			// 配列todosを二次元配列groupedTodosに変換
+			let groupedTodos: Todo[][] = []
+			let beforeAchievedDay: string | null = null
+			let dayCounter = 0
+			todos.forEach(todo => {
+
+				// このTodoの達成日を取得
+				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
+
+				// 初回ループ
+				if (beforeAchievedDay === null) {
+					groupedTodos.push([])
+				}
+
+				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
+				else if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
+
+					dayCounter += 1
+					groupedTodos.push([])
+				}
+
+				// 二次元配列にTodoを追加
+				groupedTodos[dayCounter].push(todo)
+
+				// 今回の達成日を前回の達成日にする
+				beforeAchievedDay = currentAchievedDay
+			})
+
 			// Stateを更新
-			setTodos(todos)
+			setGroupedTodos(groupedTodos)
 			setIsLoaded(true)
 
 		}, (error) => {
@@ -106,22 +136,28 @@ function AchievedTodosSection(props: Props) {
 					</div>
 				}
 
-				{isLoaded && todos === null &&
+				{isLoaded && groupedTodos === null &&
 					<div>
 						<p className="mt-4">Failed reading todos</p>
 					</div>
 				}
 
-				{isLoaded && todos !== null && todos.length === 0 &&
+				{isLoaded && groupedTodos !== null && groupedTodos.length === 0 &&
 					<div>
 						<p className="mt-4">There is no todo</p>
 					</div>
 				}
 
-				{isLoaded && todos !== null && todos.length !== 0 &&
+				{isLoaded && groupedTodos !== null && groupedTodos.length !== 0 &&
 					<div>
 
-						<TodosList todos={todos} />
+						{groupedTodos.map((todos, index) => (
+
+							<div key={index}>
+
+								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日')} />
+							</div>
+						))}
 					</div>
 				}
 			</div>
