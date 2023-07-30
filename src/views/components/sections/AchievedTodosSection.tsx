@@ -82,16 +82,20 @@ function AchievedTodosSection(props: Props) {
 				// このTodoの達成日を取得
 				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
 
-				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
-				if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
-					dayCounter += 1
+				// 初回ループ
+				if (beforeAchievedDay === null) {
+					groupedTodos.push([])
 				}
 
-				// TODO: 二次元配列にTodoを追加
-				// groupedTodos[dayCounter].push(todo)
-				let dayTodos = groupedTodos[dayCounter]
-				dayTodos.push(todo)
-				groupedTodos[dayCounter] = dayTodos
+				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
+				else if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
+
+					dayCounter += 1
+					groupedTodos.push([])
+				}
+
+				// 二次元配列にTodoを追加
+				groupedTodos[dayCounter].push(todo)
 
 				// 今回の達成日を前回の達成日にする
 				beforeAchievedDay = currentAchievedDay
