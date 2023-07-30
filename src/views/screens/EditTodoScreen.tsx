@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
 import Modal from "../components/others/Modal"
 import SubmitButton from "../components/buttons/SubmitButton"
-import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin } from "react-icons/bs"
+import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin, BsTrash, BsTrash3 } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
 import { useNavigate, useParams } from "react-router-dom"
@@ -191,12 +191,17 @@ function EditTodoScreen() {
 
 						{achievedAt &&
 
-							<div className="ml-3 flex gap-4">
+							<div className="mx-3 flex gap-4">
 
 								<MyDatePicker date={achievedAt} setDate={setAchievedAt} />
 								<MyTimePicker date={achievedAt} setDate={setAchievedAt} />
 							</div>
 						}
+
+						<button type="button" className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900 transition">
+
+							<BsTrash3 className="text-xl" />
+						</button>
 					</div>
 
 					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} />
