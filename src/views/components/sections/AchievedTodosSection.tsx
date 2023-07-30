@@ -155,7 +155,7 @@ function AchievedTodosSection(props: Props) {
 
 							<div key={index}>
 
-								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY-MM-DD')} />
+								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日')} />
 							</div>
 						))}
 					</div>
