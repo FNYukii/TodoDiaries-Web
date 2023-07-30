@@ -198,7 +198,7 @@ function EditTodoScreen() {
 							</div>
 						}
 
-						<button type="button" className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900 transition">
+						<button type="button" className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 transition">
 
 							<BsTrash3 className="text-xl" />
 						</button>

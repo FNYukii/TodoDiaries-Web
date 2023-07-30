@@ -33,7 +33,7 @@ function AccountScreen() {
 				<p className="mt-4">メールアドレス</p>
 				<p className="text-zinc-500">{AuthService.email()}</p>
 
-				<button onClick={signOut} className="mt-4 mb-7 block mx-auto text-red-500 font-bold px-4 py-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900 transition">サインアウト</button>
+				<button onClick={signOut} className="mt-4 mb-7 block mx-auto text-red-500 font-bold px-4 py-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/50 transition">サインアウト</button>
 			</div>
 		</Modal>
 	);
