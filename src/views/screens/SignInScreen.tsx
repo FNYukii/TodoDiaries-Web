@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Modal from "../components/others/Modal"
+import URLModal from "../components/others/URLModal"
 import SignInSection from "../components/sections/SignInSection"
 import SignUpSection from "../components/sections/SignUpSection"
 
@@ -11,7 +11,7 @@ function SignInScreen() {
 
 	return (
 
-		<Modal>
+		<URLModal>
 
 			<div>
 
@@ -23,7 +23,7 @@ function SignInScreen() {
 					<SignUpSection setIsShowSignUpSection={setIsShowSignUpSection} />
 				}
 			</div>
-		</Modal>
+		</URLModal>
 	)
 }
 

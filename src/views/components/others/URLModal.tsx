@@ -6,7 +6,7 @@ interface Props {
 	children: JSX.Element | JSX.Element[]
 }
 
-function Modal(props: Props) {
+function URLModal(props: Props) {
 
 	const navigate = useNavigate()
 
@@ -52,4 +52,4 @@ function Modal(props: Props) {
 	)
 }
 
-export default Modal
+export default URLModal

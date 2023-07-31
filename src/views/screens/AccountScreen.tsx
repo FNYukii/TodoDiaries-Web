@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../utilities/AuthService";
-import Modal from "../components/others/Modal";
+import URLModal from "../components/others/URLModal";
 
 function AccountScreen() {
 
@@ -24,7 +24,7 @@ function AccountScreen() {
 
 	return (
 
-		<Modal>
+		<URLModal>
 
 			<div className="mx-8">
 
@@ -35,7 +35,7 @@ function AccountScreen() {
 
 				<button onClick={signOut} className="mt-4 mb-7 block mx-auto text-red-500 font-bold px-4 py-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/50 transition">サインアウト</button>
 			</div>
-		</Modal>
+		</URLModal>
 	);
 }
 

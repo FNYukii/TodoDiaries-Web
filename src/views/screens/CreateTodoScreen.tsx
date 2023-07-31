@@ -1,6 +1,6 @@
 import { useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
-import Modal from "../components/others/Modal"
+import URLModal from "../components/others/URLModal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
@@ -40,7 +40,7 @@ function CreateTodoScreen() {
 
 	return (
 
-		<Modal>
+		<URLModal>
 
 			<form onSubmit={(event) => onSubmit(event)}>
 
@@ -101,7 +101,7 @@ function CreateTodoScreen() {
 					<SubmitButton text="作成" isLoading={isLoading} disabled={content === ""} />
 				</div>
 			</form>
-		</Modal>
+		</URLModal>
 	)
 }
 

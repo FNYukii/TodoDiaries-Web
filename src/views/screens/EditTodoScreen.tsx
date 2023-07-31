@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
-import Modal from "../components/others/Modal"
+import URLModal from "../components/others/URLModal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin, BsTrash3 } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
@@ -141,7 +141,7 @@ function EditTodoScreen() {
 
 	return (
 
-		<Modal>
+		<URLModal>
 
 			<form onSubmit={(event) => onSubmit(event)}>
 
@@ -207,7 +207,7 @@ function EditTodoScreen() {
 					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} />
 				</div>
 			</form>
-		</Modal>
+		</URLModal>
 	)
 }
 
