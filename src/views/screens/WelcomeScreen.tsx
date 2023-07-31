@@ -24,7 +24,7 @@ function WelcomeScreen() {
 
 	return (
 
-		<div className="dark:bg-black dark:text-white h-screen">
+		<div className="dark:text-white h-screen">
 
 			<Header />
 
@@ -32,21 +32,21 @@ function WelcomeScreen() {
 
 				<section className="mt-4 grid grid-cols-1 px-8 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-8">
+					<div className="bg-white dark:bg-zinc-900 rounded-xl p-8">
 
 						<img src="/images/list-and-pencil.png" alt="List and pencil" className="block mx-auto brightness-125" />
 						<p className="mt-4 text-center font-bold">Todoを管理しよう</p>
 						<p className="mt-2 text-zinc-600 dark:text-zinc-400">やるべきこと・やりたいことをアプリに保存し、効率的に管理しましょう。</p>
 					</div>
 
-					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-8">
+					<div className="bg-white dark:bg-zinc-900 rounded-xl p-8">
 
 						<img src="/images/list-with-date.png" alt="List and pencil" className="block mx-auto brightness-125" />
 						<p className="mt-4 text-center font-bold">Todoを達成しよう</p>
 						<p className="mt-2 text-zinc-600 dark:text-zinc-400">Todoを達成したら、アプリ内で達成済みに変更しましょう。達成したTodoは後から振り返ることができます。</p>
 					</div>
 
-					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-8">
+					<div className="bg-white dark:bg-zinc-900 rounded-xl p-8">
 
 						<img src="/images/vertical-bar-chart.png" alt="List and pencil" className="block mx-auto brightness-125" />
 						<p className="mt-4 text-center font-bold">統計を見よう</p>
