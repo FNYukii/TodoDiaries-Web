@@ -24,7 +24,7 @@ function WelcomeScreen() {
 
 	return (
 
-		<div className="dark:text-white h-screen">
+		<div>
 
 			<Header />
 

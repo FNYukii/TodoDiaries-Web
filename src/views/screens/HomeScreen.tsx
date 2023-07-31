@@ -9,7 +9,7 @@ function HomeScreen() {
 
 	return (
 
-		<div className="dark:text-white h-screen">
+		<div>
 
 			<Header showAccountButton />
 
