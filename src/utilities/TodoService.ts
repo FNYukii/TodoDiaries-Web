@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -206,6 +206,20 @@ class TodoService {
 			console.log(`Fail! Error to update todo. ${error}`)
 			return null
 		}
+	}
+
+	static async deleteTodo(todoId: string): Promise<string | null> {
+
+		return deleteDoc(doc(db, "todos", todoId))
+			.then(() => {
+
+				return todoId
+			})
+			.catch((error) => {
+
+				console.log(`Fail! Error deleting todo. ${error}`)
+				return null
+			})
 	}
 }
 

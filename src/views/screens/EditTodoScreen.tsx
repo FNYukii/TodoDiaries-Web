@@ -212,7 +212,17 @@ function EditTodoScreen() {
 								acceptLabel="削除"
 								destractiveDialog
 								onClose={() => setIsShowDeleteModal(false)}
-								onAccept={() => alert("hey")}
+								onAccept={async () => {
+
+									const result = await TodoService.deleteTodo(todoId!)
+
+									if (result === null) {
+										alert("Todoの削除に失敗しました。")
+										return
+									}
+									
+									navigate('/')
+								}}
 							/>
 						}
 					</div>
