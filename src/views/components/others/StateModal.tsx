@@ -53,10 +53,10 @@ function StateModal(props: Props) {
 
 				<p className="mt-4 mx-8 text-xl font-bold">{props.title}</p>
 
-				<div className="flex mt-4 mx-8 pb-8 justify-between">
+				<div className="flex mt-5 mx-4 pb-8 justify-between">
 
-					<button type="button" onClick={props.onClose}>キャンセル</button>
-					<button type="button" onClick={props.onAccept} className={`font-bold ${props.destractiveDialog ? "text-red-500" : ""}`}>{props.acceptLabel}</button>
+					<button type="button" onClick={props.onClose} className="font-bold py-1 px-4 rounded-full transition hover:bg-zinc-100 dark:hover:bg-zinc-900">キャンセル</button>
+					<button type="button" onClick={props.onAccept} className={`font-bold py-1 px-4 rounded-full transition ${props.destractiveDialog ? "text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50" : "hover:bg-zinc-100 dark:hover:bg-zinc-900"}`}>{props.acceptLabel}</button>
 				</div>
 			</div>
 		</div>
