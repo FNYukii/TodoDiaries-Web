@@ -8,6 +8,7 @@ import MyTimePicker from "../components/inputs/MyTimePicker"
 import { useNavigate, useParams } from "react-router-dom"
 import TodoService from "../../utilities/TodoService"
 import Todo from "../../entities/Todo"
+import StateModal from "../components/others/StateModal"
 
 function EditTodoScreen() {
 
@@ -24,6 +25,7 @@ function EditTodoScreen() {
 	const [isLoading, setIsLoading] = useState(false)
 
 	const navigate = useNavigate()
+	const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
 
 	useEffect(() => {
 
@@ -198,10 +200,31 @@ function EditTodoScreen() {
 							</div>
 						}
 
-						<button type="button" className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 transition">
+						<button type="button" onClick={() => setIsShowDeleteModal(true)} className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 transition">
 
 							<BsTrash3 className="text-xl" />
 						</button>
+
+						{isShowDeleteModal &&
+
+							<StateModal
+								title="Todoを削除してもよろしいですか?"
+								acceptLabel="削除"
+								destractiveDialog
+								onClose={() => setIsShowDeleteModal(false)}
+								onAccept={async () => {
+
+									const result = await TodoService.deleteTodo(todoId!)
+
+									if (result === null) {
+										alert("Todoの削除に失敗しました。")
+										return
+									}
+									
+									navigate('/')
+								}}
+							/>
+						}
 					</div>
 
 					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} />
