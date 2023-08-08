@@ -5,6 +5,7 @@ import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
 import dayjs from "dayjs"
+import 'dayjs/locale/ja'
 
 interface Props {
 	className?: string
@@ -12,8 +13,9 @@ interface Props {
 
 function AchievedTodosSection(props: Props) {
 
-	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
+	dayjs.locale('ja')
 
+	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	async function listenPinnedTodos() {
@@ -155,7 +157,7 @@ function AchievedTodosSection(props: Props) {
 
 							<div key={index}>
 
-								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日')} />
+								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日 ddd曜日')} />
 							</div>
 						))}
 					</div>
