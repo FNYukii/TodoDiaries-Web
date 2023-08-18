@@ -52,7 +52,12 @@ function MyTimePicker(props: Props) {
 									value={dayjs(props.date)}
 									onChange={(newValue) => { props.setDate(newValue!.toDate()) }}
 									ampm={false}
-									timeSteps={{minutes: 1}}
+									timeSteps={{ minutes: 1 }}
+									sx={{
+										'& ::-webkit-scrollbar': {
+											display: "none"
+										}
+									}}
 								/>
 
 							</LocalizationProvider>
