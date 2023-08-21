@@ -11,7 +11,7 @@ interface Props {
 	className?: string
 }
 
-function UnachievedTodosSection(props: Props) {
+function FirstColumn(props: Props) {
 
 	const [pinnedTodos, setPinnedTodos] = useState<Todo[] | null>(null)
 	const [unpinnedTodos, setunpinnedTodos] = useState<Todo[] | null>(null)
@@ -232,4 +232,4 @@ function UnachievedTodosSection(props: Props) {
 	)
 }
 
-export default UnachievedTodosSection
+export default FirstColumn

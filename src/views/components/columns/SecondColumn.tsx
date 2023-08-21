@@ -11,7 +11,7 @@ interface Props {
 	className?: string
 }
 
-function AchievedTodosSection(props: Props) {
+function SecondColumn(props: Props) {
 
 	dayjs.locale('ja')
 
@@ -167,4 +167,4 @@ function AchievedTodosSection(props: Props) {
 	)
 }
 
-export default AchievedTodosSection
+export default SecondColumn

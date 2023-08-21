@@ -2,7 +2,7 @@ interface Props {
 	className?: string
 }
 
-function StatsSection(props: Props) {
+function ThirdColumn(props: Props) {
 
 	return (
 
@@ -21,4 +21,4 @@ function StatsSection(props: Props) {
 	)
 }
 
-export default StatsSection
+export default ThirdColumn
