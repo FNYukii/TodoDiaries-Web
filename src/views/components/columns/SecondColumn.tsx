@@ -37,7 +37,7 @@ function SecondColumn(props: Props) {
 			where("userId", "==", userId),
 			where("achievedAt", "!=", null),
 			orderBy("achievedAt", "desc"),
-			limit(10)
+			limit(50)
 		)
 
 		// リアルタイムリスナーを設定
