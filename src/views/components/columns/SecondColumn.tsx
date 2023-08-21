@@ -153,13 +153,20 @@ function SecondColumn(props: Props) {
 				{isLoaded && groupedTodos !== null && groupedTodos.length !== 0 &&
 					<div>
 
-						{groupedTodos.map((todos, index) => (
+						<div>
+							{groupedTodos.map((todos, index) => (
 
-							<div key={index}>
+								<div key={index}>
 
-								<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日 ddd曜日')} />
-							</div>
-						))}
+									<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日 ddd曜日')} />
+								</div>
+							))}
+						</div>
+
+						<div className="mt-4 flex justify-center">
+
+							<button className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900">もっと読み込む</button>
+						</div>
 					</div>
 				}
 			</div>
