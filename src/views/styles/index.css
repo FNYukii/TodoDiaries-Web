@@ -28,16 +28,13 @@
 		width: 400px;
 	}
 
-	.scrollbar-hidden {
+	.scrollbar-none {
 		-ms-overflow-style: none;
-		/* IE, Edge */
 		scrollbar-width: none;
-		/* Firefox */
 	}
 
-	.scrollbar-hidden::-webkit-scrollbar {
+	.scrollbar-none::-webkit-scrollbar {
 		display: none;
-		/* Safari, Google Chrome */
 	}
 
 	.scrollbar-transparent::-webkit-scrollbar {

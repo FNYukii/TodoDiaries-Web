@@ -13,7 +13,7 @@ function HomeScreen() {
 
 			<Header showAccountButton />
 
-			<main className="w-full mx-auto px-4 lg:width-lg lg:px-0 overflow-y-auto scrollbar-hidden">
+			<main className="w-full mx-auto px-4 lg:width-lg lg:px-0 overflow-y-auto scrollbar-none">
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
 
