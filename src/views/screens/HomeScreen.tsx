@@ -17,8 +17,8 @@ function HomeScreen() {
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
 
-					<FirstColumn className="pt-4 pb-8 pr-4 h-full overflow-y-auto scrollbar-styled transition" />
-					<SecondColumn className="pt-4 pb-8 pr-4 h-full overflow-y-auto scrollbar-styled transition hidden sm:block" />
+					<FirstColumn className="pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled" />
+					<SecondColumn className="pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled hidden sm:block" />
 					<ThirdColumn className="pt-4 hidden lg:block" />
 				</div>
 			</main>
