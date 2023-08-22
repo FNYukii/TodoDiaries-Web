@@ -13,12 +13,12 @@ function HomeScreen() {
 
 			<Header showAccountButton />
 
-			<main className="w-full mx-auto px-4 lg:width-lg lg:px-0 overflow-y-scroll scrollbar-hidden">
+			<main className="w-full mx-auto px-4 lg:width-lg lg:px-0 overflow-y-auto scrollbar-hidden">
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
 
-					<FirstColumn className="pt-4 pb-8 pr-4 h-full overflow-y-scroll" />
-					<SecondColumn className="pt-4 pb-8 pr-4 h-full overflow-y-scroll hidden sm:block" />
+					<FirstColumn className="pt-4 pb-8 pr-4 h-full overflow-y-auto" />
+					<SecondColumn className="pt-4 pb-8 pr-4 h-full overflow-y-auto hidden sm:block" />
 					<ThirdColumn className="pt-4 hidden lg:block" />
 				</div>
 			</main>
