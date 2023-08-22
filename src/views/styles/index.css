@@ -29,11 +29,30 @@
 	}
 
 	.scrollbar-hidden {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+		-ms-overflow-style: none;
+		/* IE, Edge */
+		scrollbar-width: none;
+		/* Firefox */
+	}
 
-  .scrollbar-hidden::-webkit-scrollbar {
-    display: none; /* Safari, Google Chrome */
-  }
+	.scrollbar-hidden::-webkit-scrollbar {
+		display: none;
+		/* Safari, Google Chrome */
+	}
+
+	.scrollbar-transparent::-webkit-scrollbar {
+		@apply w-2 bg-transparent
+	}
+
+	.scrollbar-styled::-webkit-scrollbar {
+		@apply w-2
+	}
+
+	.scrollbar-styled::-webkit-scrollbar-track {
+		@apply bg-transparent
+	}
+
+	.scrollbar-styled::-webkit-scrollbar-thumb {
+		@apply dark:bg-zinc-900 rounded-full
+	}
 }
