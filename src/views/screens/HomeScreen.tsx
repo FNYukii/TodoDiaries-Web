@@ -9,17 +9,17 @@ function HomeScreen() {
 
 	return (
 
-		<div>
+		<div className="h-screen flex flex-col">
 
 			<Header showAccountButton />
 
-			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0 pb-16">
+			<main className="w-full mx-auto px-4 lg:width-lg lg:px-0 overflow-scroll">
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
 
-					<FirstColumn />
-					<SecondColumn className="hidden sm:block" />
-					<ThirdColumn className="hidden lg:block" />
+					<FirstColumn className="pt-4 pb-8 pr-4 h-full overflow-scroll" />
+					<SecondColumn className="pt-4 pb-8 pr-4 h-full overflow-scroll hidden sm:block" />
+					<ThirdColumn className="pt-4 hidden lg:block" />
 				</div>
 			</main>
 		</div>
