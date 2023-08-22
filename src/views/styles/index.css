@@ -32,6 +32,10 @@
 		display: none;
 	}
 
+	.scrollbar-styled {
+		scrollbar-gutter: stable
+	}
+
 	.scrollbar-styled::-webkit-scrollbar {
 		@apply w-2
 	}
