@@ -29,7 +29,7 @@
 	}
 
 	.scrollbar-none::-webkit-scrollbar {
-		display: none;
+		@apply hidden
 	}
 
 	.scrollbar-styled {
