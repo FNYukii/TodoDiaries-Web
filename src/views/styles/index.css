@@ -27,4 +27,13 @@
 	.width-400 {
 		width: 400px;
 	}
+
+	.scrollbar-hidden {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Safari, Google Chrome */
+  }
 }
