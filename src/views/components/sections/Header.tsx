@@ -12,12 +12,12 @@ function Header(props: Props) {
 
 		<header className='w-full mx-auto px-4 lg:width-lg lg:px-0'>
 
-			<div className='py-2 flex justify-between items-center'>
+			<div className='py-1 flex justify-between items-center'>
 
 				<NavLink to="/" className="text-3xl">Todo Diaries</NavLink>
 
 				{props.showAccountButton &&
-					<NavLinkToModal to="/account" className="hover:opacity-70 transition">
+					<NavLinkToModal to="/account" className="mr-negative-3 p-3 rounded-full transition hover:bg-zinc-200 dark:hover:bg-zinc-900">
 
 						<BsPersonCircle className="text-2xl text-zinc-500" />
 					</NavLinkToModal>
