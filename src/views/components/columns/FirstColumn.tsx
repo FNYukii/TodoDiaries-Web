@@ -174,7 +174,7 @@ function FirstColumn(props: Props) {
 
 				<h2 className="text-2xl font-bold">Todo</h2>
 
-				<NavLinkToModal to="/new" className="mr-negative-4 py-1 px-4 flex gap-1 items-center text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900">
+				<NavLinkToModal to="/new" className="mr-negative-4 py-1 px-4 flex gap-1 items-center text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">
 
 					<AiOutlinePlus className="text-xl" />
 					<span>新規Todo</span>
