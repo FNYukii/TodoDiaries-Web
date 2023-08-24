@@ -16,7 +16,7 @@ function AccountScreen() {
 
 		<URLModal>
 
-			<div className="mx-8">
+			<div>
 
 				<h1 className="mt-4 text-2xl font-bold">アカウント</h1>
 
