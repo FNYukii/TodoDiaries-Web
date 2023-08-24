@@ -145,13 +145,13 @@ function EditTodoScreen() {
 
 		<URLModal>
 
-			<form onSubmit={(event) => onSubmit(event)} className="pb-5">
+			<form onSubmit={(event) => onSubmit(event)}>
 
 				<h1 className="mt-4 text-2xl font-bold">Todoを編集</h1>
 
 				<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
 
-				<div className="mt-1 flex gap-2 items-center justify-between">
+				<div className="mt-1 mb-5 flex gap-2 items-center justify-between">
 
 					<div className="flex gap-2 items-center">
 
