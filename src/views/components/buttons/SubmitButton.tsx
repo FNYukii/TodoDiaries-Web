@@ -1,9 +1,18 @@
 import ReactLoading from "react-loading"
 
-function SubmitButton(props: { text: string, isLoading: boolean, disabled: boolean }) {
+interface Props {
+	text: string
+	isLoading: boolean
+	disabled: boolean
+
+	className?: string
+}
+
+function SubmitButton(props: Props) {
 
 	return (
-		<div>
+		
+		<div className={props.className}>
 
 			{!props.isLoading &&
 

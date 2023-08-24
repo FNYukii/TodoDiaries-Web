@@ -145,20 +145,17 @@ function EditTodoScreen() {
 
 		<URLModal>
 
-			<form onSubmit={(event) => onSubmit(event)}>
+			<form onSubmit={(event) => onSubmit(event)} className="pb-5">
 
-				<div className="mx-8">
+				<h1 className="mt-4 text-2xl font-bold">Todoを編集</h1>
 
-					<h1 className="mt-4 text-2xl font-bold">Todoを編集</h1>
+				<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
 
-					<DynamicTextarea value={content} setValue={setContent} placeholder="やること" className="mt-4 w-full py-2 bg-transparent border-b border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-blue-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" />
-				</div>
-
-				<div className="mt-2 mb-7 ml-5 mr-4 flex gap-2 items-center justify-between">
+				<div className="mt-1 flex gap-2 items-center justify-between">
 
 					<div className="flex gap-2 items-center">
 
-						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent dark:disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
+						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="ml-negative-3 p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent dark:disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
 
 							{!isPinned &&
 								<BsPin className="text-xl" />
@@ -220,14 +217,14 @@ function EditTodoScreen() {
 										alert("Todoの削除に失敗しました。")
 										return
 									}
-									
+
 									navigate('/')
 								}}
 							/>
 						}
 					</div>
 
-					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} />
+					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} className="mr-negative-4"/>
 				</div>
 			</form>
 		</URLModal>

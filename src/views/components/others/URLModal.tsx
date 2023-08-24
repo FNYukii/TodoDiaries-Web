@@ -37,14 +37,11 @@ function URLModal(props: Props) {
 
 			<div onClick={() => navigate(-1)} className="w-full h-full bg-black/30 dark:bg-white/20"></div>
 
-			<div className="absolute bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
+			<div className="absolute pt-4 px-8 bg-white rounded-xl md:width-600 w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
 
-				<div className="pt-4 pl-4">
-
-					<button onClick={() => navigate(-1)} className="p-4 transition rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900">
-						<MdOutlineClose className="text-2xl text-zinc-500" />
-					</button>
-				</div>
+				<button onClick={() => navigate(-1)} className="ml-negative-4 p-4 transition rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900">
+					<MdOutlineClose className="text-2xl text-zinc-500" />
+				</button>
 
 				{props.children}
 			</div>
