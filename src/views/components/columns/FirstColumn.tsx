@@ -7,7 +7,7 @@ import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
 import ReactLoading from "react-loading"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
 	className?: string
