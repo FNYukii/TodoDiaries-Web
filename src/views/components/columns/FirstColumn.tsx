@@ -7,6 +7,7 @@ import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
 import ReactLoading from "react-loading"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
 	className?: string
@@ -165,6 +166,32 @@ function FirstColumn(props: Props) {
 		listenPinnedTodos()
 		listenUnpinnedTodos()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	// キーボードショートカット用
+	const navigate = useNavigate()
+	const body = document.body
+
+	const onKeyUp = (event: KeyboardEvent) => {
+
+		if (event.key === 'n') {
+			navigate('/new')
+		}
+	}
+
+	useEffect(() => {
+
+		// キーイベント設定
+		document.addEventListener("keyup", onKeyUp, false)
+
+		// 画面スクロール無効
+		body.style.overflowY = "hidden"
+
+		return () => {
+			document.removeEventListener("keyup", onKeyUp, false)
+			body.style.overflowY = ""
+		}
+		// eslint-disable-next-line
 	}, [])
 
 	return (
