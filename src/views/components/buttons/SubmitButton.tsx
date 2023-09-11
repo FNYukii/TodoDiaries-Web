@@ -23,11 +23,11 @@ function SubmitButton(props: Props) {
 
 			{props.isLoading &&
 
-				<div className="px-4">
+				<div className="px-2">
 
 					<ReactLoading
 						type="spin"
-						color="#333"
+						color="#666"
 						height="20px"
 						width="20px"
 						className="mx-2"
