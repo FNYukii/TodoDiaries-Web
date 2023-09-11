@@ -171,7 +171,7 @@ function FirstColumn(props: Props) {
 	// キーボードショートカット用
 	const navigate = useNavigate()
 
-	const onKeyUp = (event: KeyboardEvent) => {
+	function onKeyUp(event: KeyboardEvent) {
 		if (event.key === 'n') {
 			navigate('/new')
 		}
