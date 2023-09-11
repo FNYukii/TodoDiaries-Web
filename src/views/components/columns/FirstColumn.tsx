@@ -170,10 +170,8 @@ function FirstColumn(props: Props) {
 
 	// キーボードショートカット用
 	const navigate = useNavigate()
-	const body = document.body
 
 	const onKeyUp = (event: KeyboardEvent) => {
-
 		if (event.key === 'n') {
 			navigate('/new')
 		}
@@ -181,15 +179,9 @@ function FirstColumn(props: Props) {
 
 	useEffect(() => {
 
-		// キーイベント設定
 		document.addEventListener("keyup", onKeyUp, false)
-
-		// 画面スクロール無効
-		body.style.overflowY = "hidden"
-
 		return () => {
 			document.removeEventListener("keyup", onKeyUp, false)
-			body.style.overflowY = ""
 		}
 		// eslint-disable-next-line
 	}, [])
