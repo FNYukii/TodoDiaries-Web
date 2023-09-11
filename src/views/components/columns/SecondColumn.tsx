@@ -6,6 +6,7 @@ import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
 import dayjs from "dayjs"
 import 'dayjs/locale/ja'
+import ReactLoading from "react-loading"
 
 interface Props {
 	className?: string
@@ -133,8 +134,15 @@ function SecondColumn(props: Props) {
 			<div>
 
 				{!isLoaded &&
-					<div>
-						<p className="mt-4">Loading...</p>
+					<div className="flex justify-center">
+
+						<ReactLoading
+							type="spin"
+							color="#666"
+							height="20px"
+							width="20px"
+							className="mt-4"
+						/>
 					</div>
 				}
 
