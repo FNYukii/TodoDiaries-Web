@@ -11,7 +11,7 @@ interface Props {
 function SubmitButton(props: Props) {
 
 	return (
-		
+
 		<div className={props.className}>
 
 			{!props.isLoading &&
@@ -23,13 +23,16 @@ function SubmitButton(props: Props) {
 
 			{props.isLoading &&
 
-				<ReactLoading
-					type="spin"
-					color="#333"
-					height="20px"
-					width="20px"
-					className="mx-2"
-				/>
+				<div className="px-4">
+
+					<ReactLoading
+						type="spin"
+						color="#333"
+						height="20px"
+						width="20px"
+						className="mx-2"
+					/>
+				</div>
 			}
 		</div>
 	)
