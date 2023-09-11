@@ -6,6 +6,7 @@ import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/f
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
+import ReactLoading from "react-loading"
 
 interface Props {
 	className?: string
@@ -114,7 +115,7 @@ function FirstColumn(props: Props) {
 
 		// リアルタイムリスナーを設定
 		onSnapshot(q, async (querySnapshot) => {
-			
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -184,8 +185,15 @@ function FirstColumn(props: Props) {
 			<div>
 
 				{(!isLoadedPinnedTodos || !isLoadedUnpinnedTodos) &&
-					<div>
-						<p className="mt-4">Loading...</p>
+					<div className="flex justify-center">
+
+						<ReactLoading
+							type="spin"
+							color="#666"
+							height="20px"
+							width="20px"
+							className="mt-4"
+						/>
 					</div>
 				}
 
