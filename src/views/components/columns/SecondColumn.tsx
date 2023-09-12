@@ -173,7 +173,7 @@ function SecondColumn(props: Props) {
 
 						<div className="mt-4 flex justify-center">
 
-							<button className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900">もっと読み込む</button>
+							<button className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">もっと読み込む</button>
 						</div>
 					</div>
 				}
