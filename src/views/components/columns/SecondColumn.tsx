@@ -1,4 +1,4 @@
-import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore"
+import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
@@ -7,6 +7,7 @@ import TodosList from "../lists/TodosList"
 import dayjs from "dayjs"
 import 'dayjs/locale/ja'
 import ReactLoading from "react-loading"
+import TodoService from "../../../utilities/TodoService"
 
 interface Props {
 	className?: string
@@ -16,10 +17,17 @@ function SecondColumn(props: Props) {
 
 	dayjs.locale('ja')
 
+	// Todo格納用
 	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	async function listenPinnedTodos() {
+	// リスナーをデタッチするメソッド
+	let unsub: Unsubscribe | null = null
+
+	// 読み取り上限数
+	const [readLimit, setReadLimit] = useState(50)
+
+	async function listenTodos() {
 
 		// UserIDを取得
 		const userId = await AuthService.uid()
@@ -38,41 +46,17 @@ function SecondColumn(props: Props) {
 			where("userId", "==", userId),
 			where("achievedAt", "!=", null),
 			orderBy("achievedAt", "desc"),
-			limit(50)
+			limit(readLimit)
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsub = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
 
-				// ドキュメントの各フィールドの値を取り出す
-				const id: string = doc.id ?? ""
-				const userId: string = doc.data().userId ?? ""
-
-				const content: string = doc.data().content ?? ""
-				const order: number = doc.data().order ?? 0
-				const isPinned: boolean = doc.data().isPinned ?? false
-
-				const createdAt: Date = doc.data({ serverTimestamps: "estimate" }).createdAt.toDate() ?? new Date()
-
-				const achievedAtFieldValue = doc.data({ serverTimestamps: "estimate" }).achievedAt
-				const achievedAt: Date | null = achievedAtFieldValue === null ? null : achievedAtFieldValue.toDate()
-
-				// 値を使ってTodoオブジェクトを作成
-				const todo: Todo = {
-					id: id,
-					userId: userId,
-					content: content,
-					order: order,
-					isPinned: isPinned,
-					createdAt: createdAt,
-					achievedAt: achievedAt
-				}
-
-				// 配列に追加
+				const todo = TodoService.toTodo(doc)
 				todos.push(todo)
 			})
 
@@ -118,9 +102,26 @@ function SecondColumn(props: Props) {
 
 	useEffect(() => {
 
-		listenPinnedTodos()
+		listenTodos()
+
+		return () => {
+			if (unsub !== null) {
+				unsub()
+			}
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	useEffect(() => {
+
+		// 既存リスナーデタッチ
+		if (unsub) unsub()
+
+		// 新リスナー設定
+		listenTodos()
+
+		// eslint-disable-next-line
+	}, [readLimit])
 
 	return (
 
@@ -173,7 +174,12 @@ function SecondColumn(props: Props) {
 
 						<div className="mt-4 flex justify-center">
 
-							<button className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900">もっと読み込む</button>
+							<button onClick={() => {
+								
+								// 上限緩和
+								setReadLimit((prevValue) => prevValue + 50)
+
+							}} className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">もっと読み込む</button>
 						</div>
 					</div>
 				}

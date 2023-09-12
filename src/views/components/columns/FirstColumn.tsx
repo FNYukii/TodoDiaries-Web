@@ -2,12 +2,13 @@ import { AiOutlinePlus } from "react-icons/ai"
 import NavLinkToModal from "../others/NavLinkToModal"
 import { useEffect, useState } from "react"
 import Todo from "../../../entities/Todo"
-import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore"
+import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
 import ReactLoading from "react-loading"
 import { useNavigate } from "react-router-dom"
+import TodoService from "../../../utilities/TodoService"
 
 interface Props {
 	className?: string
@@ -17,9 +18,12 @@ function FirstColumn(props: Props) {
 
 	const [pinnedTodos, setPinnedTodos] = useState<Todo[] | null>(null)
 	const [unpinnedTodos, setunpinnedTodos] = useState<Todo[] | null>(null)
+	let unsubPinnedTodos: Unsubscribe | null = null
+
 
 	const [isLoadedPinnedTodos, setIsLoadedPinnedTodos] = useState(false)
 	const [isLoadedUnpinnedTodos, setIsLoadedUnpinnedTodos] = useState(false)
+	let unsubUnpinnedTodos: Unsubscribe | null = null
 
 	async function listenPinnedTodos() {
 
@@ -45,37 +49,13 @@ function FirstColumn(props: Props) {
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsubPinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
 
-				// ドキュメントの各フィールドの値を取り出す
-				const id: string = doc.id ?? ""
-				const userId: string = doc.data().userId ?? ""
-
-				const content: string = doc.data().content ?? ""
-				const order: number = doc.data().order ?? 0
-				const isPinned: boolean = doc.data().isPinned ?? false
-
-				const createdAt: Date = doc.data({ serverTimestamps: "estimate" }).createdAt.toDate() ?? new Date()
-
-				const achievedAtFieldValue = doc.data({ serverTimestamps: "estimate" }).achievedAt
-				const achievedAt: Date | null = achievedAtFieldValue === null ? null : achievedAtFieldValue.toDate()
-
-				// 値を使ってTodoオブジェクトを作成
-				const todo: Todo = {
-					id: id,
-					userId: userId,
-					content: content,
-					order: order,
-					isPinned: isPinned,
-					createdAt: createdAt,
-					achievedAt: achievedAt
-				}
-
-				// 配列に追加
+				const todo = TodoService.toTodo(doc)
 				todos.push(todo)
 			})
 
@@ -115,37 +95,13 @@ function FirstColumn(props: Props) {
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsubUnpinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
 
-				// ドキュメントの各フィールドの値を取り出す
-				const id: string = doc.id ?? ""
-				const userId: string = doc.data().userId ?? ""
-
-				const content: string = doc.data().content ?? ""
-				const order: number = doc.data().order ?? 0
-				const isPinned: boolean = doc.data().isPinned ?? false
-
-				const createdAt: Date = doc.data({ serverTimestamps: "estimate" }).createdAt.toDate() ?? new Date()
-
-				const achievedAtFieldValue = doc.data({ serverTimestamps: "estimate" }).achievedAt
-				const achievedAt: Date | null = achievedAtFieldValue === null ? null : achievedAtFieldValue.toDate()
-
-				// 値を使ってTodoオブジェクトを作成
-				const todo: Todo = {
-					id: id,
-					userId: userId,
-					content: content,
-					order: order,
-					isPinned: isPinned,
-					createdAt: createdAt,
-					achievedAt: achievedAt
-				}
-
-				// 配列に追加
+				const todo = TodoService.toTodo(doc)
 				todos.push(todo)
 			})
 
@@ -163,8 +119,21 @@ function FirstColumn(props: Props) {
 
 	useEffect(() => {
 
+		// リスナーを設定
 		listenPinnedTodos()
 		listenUnpinnedTodos()
+
+		return () => {
+
+			// リスナーをデタッチ
+			if (unsubPinnedTodos !== null) {
+				unsubPinnedTodos()
+			}
+
+			if (unsubUnpinnedTodos !== null) {
+				unsubUnpinnedTodos()
+			}
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
