@@ -1,4 +1,4 @@
-import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore"
+import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
@@ -17,10 +17,17 @@ function SecondColumn(props: Props) {
 
 	dayjs.locale('ja')
 
+	// Todo格納用
 	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	async function listenPinnedTodos() {
+	// リスナーをデタッチするメソッド
+	let unsub: Unsubscribe | null = null
+
+	// 読み取り上限数
+	const [readLimit, setReadLimit] = useState(50)
+
+	async function listenTodos() {
 
 		// UserIDを取得
 		const userId = await AuthService.uid()
@@ -39,11 +46,11 @@ function SecondColumn(props: Props) {
 			where("userId", "==", userId),
 			where("achievedAt", "!=", null),
 			orderBy("achievedAt", "desc"),
-			limit(50)
+			limit(readLimit)
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsub = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
@@ -95,9 +102,26 @@ function SecondColumn(props: Props) {
 
 	useEffect(() => {
 
-		listenPinnedTodos()
+		listenTodos()
+
+		return () => {
+			if (unsub !== null) {
+				unsub()
+			}
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	useEffect(() => {
+
+		// 既存リスナーデタッチ
+		if (unsub) unsub()
+
+		// 新リスナー設定
+		listenTodos()
+
+		// eslint-disable-next-line
+	}, [readLimit])
 
 	return (
 
@@ -150,7 +174,12 @@ function SecondColumn(props: Props) {
 
 						<div className="mt-4 flex justify-center">
 
-							<button className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">もっと読み込む</button>
+							<button onClick={() => {
+								
+								// 上限緩和
+								setReadLimit((prevValue) => prevValue + 50)
+
+							}} className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">もっと読み込む</button>
 						</div>
 					</div>
 				}
