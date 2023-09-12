@@ -2,7 +2,7 @@ import { AiOutlinePlus } from "react-icons/ai"
 import NavLinkToModal from "../others/NavLinkToModal"
 import { useEffect, useState } from "react"
 import Todo from "../../../entities/Todo"
-import { query, collection, where, orderBy, limit, onSnapshot } from "firebase/firestore"
+import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import TodosList from "../lists/TodosList"
@@ -18,9 +18,12 @@ function FirstColumn(props: Props) {
 
 	const [pinnedTodos, setPinnedTodos] = useState<Todo[] | null>(null)
 	const [unpinnedTodos, setunpinnedTodos] = useState<Todo[] | null>(null)
+	let unsubPinnedTodos: Unsubscribe | null = null
+
 
 	const [isLoadedPinnedTodos, setIsLoadedPinnedTodos] = useState(false)
 	const [isLoadedUnpinnedTodos, setIsLoadedUnpinnedTodos] = useState(false)
+	let unsubUnpinnedTodos: Unsubscribe | null = null
 
 	async function listenPinnedTodos() {
 
@@ -46,7 +49,7 @@ function FirstColumn(props: Props) {
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsubPinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
@@ -92,7 +95,7 @@ function FirstColumn(props: Props) {
 		)
 
 		// リアルタイムリスナーを設定
-		onSnapshot(q, async (querySnapshot) => {
+		unsubUnpinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
 			// Todoの配列を作成
 			let todos: Todo[] = []
@@ -116,8 +119,21 @@ function FirstColumn(props: Props) {
 
 	useEffect(() => {
 
+		// リスナーを設定
 		listenPinnedTodos()
 		listenUnpinnedTodos()
+
+		return () => {
+
+			// リスナーをデタッチ
+			if (unsubPinnedTodos !== null) {
+				unsubPinnedTodos()
+			}
+
+			if (unsubUnpinnedTodos !== null) {
+				unsubUnpinnedTodos()
+			}
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
