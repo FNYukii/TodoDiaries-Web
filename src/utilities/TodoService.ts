@@ -1,9 +1,40 @@
-import { addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { DocumentData, QueryDocumentSnapshot, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
 
 class TodoService {
+
+	static toTodo(from: QueryDocumentSnapshot<DocumentData>): Todo {
+		
+		const doc = from
+
+		// ドキュメントの各フィールドの値を取り出す
+		const id: string = doc.id ?? ""
+		const userId: string = doc.data().userId ?? ""
+
+		const content: string = doc.data().content ?? ""
+		const order: number = doc.data().order ?? 0
+		const isPinned: boolean = doc.data().isPinned ?? false
+
+		const createdAt: Date = doc.data({ serverTimestamps: "estimate" }).createdAt.toDate() ?? new Date()
+
+		const achievedAtFieldValue = doc.data({ serverTimestamps: "estimate" }).achievedAt
+		const achievedAt: Date | null = achievedAtFieldValue === null ? null : achievedAtFieldValue.toDate()
+
+		// 値を使ってTodoオブジェクトを作成
+		const todo: Todo = {
+			id: id,
+			userId: userId,
+			content: content,
+			order: order,
+			isPinned: isPinned,
+			createdAt: createdAt,
+			achievedAt: achievedAt
+		}
+
+		return todo
+	}
 
 	static async readTodo(todoId: string): Promise<Todo | null> {
 
