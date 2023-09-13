@@ -1,7 +1,7 @@
 import { useSensors, useSensor, PointerSensor, KeyboardSensor, DragEndEvent, DndContext, closestCenter } from "@dnd-kit/core"
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import Todo from "../../../entities/Todo"
-import SortableTodoRow from "./SortableTodoRow"
+import UnachievedTodoRow from "./UnachievedTodoRow"
 import TodoService from "../../../utilities/TodoService"
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 	label?: string
 }
 
-function SortableTodoList(props: Props) {
+function UnachievedTodoList(props: Props) {
 
 	// const [todos, setTodos] = useState<Todo[]>(props.todos)
 
@@ -58,7 +58,7 @@ function SortableTodoList(props: Props) {
 						<ul>
 
 							{props.todos.map((todo) => (
-								<SortableTodoRow todo={todo} key={todo.id} />
+								<UnachievedTodoRow todo={todo} key={todo.id} />
 							))}
 						</ul>
 					</SortableContext>
@@ -68,4 +68,4 @@ function SortableTodoList(props: Props) {
 	)
 }
 
-export default SortableTodoList
+export default UnachievedTodoList

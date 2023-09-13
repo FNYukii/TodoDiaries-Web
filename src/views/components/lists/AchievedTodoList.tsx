@@ -1,12 +1,12 @@
 import Todo from "../../../entities/Todo"
-import TodoRow from "./TodoRow"
+import AchievedTodoRow from "./AchievedTodoRow"
 
 interface Props {
 	todos: Todo[]
 	label?: string
 }
 
-function TodoList(props: Props) {
+function AchievedTodoList(props: Props) {
 
 	return (
 
@@ -20,11 +20,11 @@ function TodoList(props: Props) {
 
 				{props.todos.map((todo) => (
 
-					<TodoRow todo={todo} key={todo.id} />
+					<AchievedTodoRow todo={todo} key={todo.id} />
 				))}
 			</div>
 		</div>
 	)
 }
 
-export default TodoList
+export default AchievedTodoList

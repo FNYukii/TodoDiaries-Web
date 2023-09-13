@@ -8,7 +8,7 @@ import { db } from "../../../utilities/firebase"
 import ReactLoading from "react-loading"
 import { useNavigate } from "react-router-dom"
 import TodoService from "../../../utilities/TodoService"
-import SortableTodoList from "../lists/SortableTodoList"
+import UnachievedTodoList from "../lists/UnachievedTodoList"
 
 interface Props {
 	className?: string
@@ -203,22 +203,22 @@ function FirstColumn(props: Props) {
 						{pinnedTodos.length !== 0 && unpinnedTodos.length !== 0 &&
 							<div>
 
-								<SortableTodoList todos={pinnedTodos} label="固定済み" />
-								<SortableTodoList todos={unpinnedTodos} label="その他" />
+								<UnachievedTodoList todos={pinnedTodos} label="固定済み" />
+								<UnachievedTodoList todos={unpinnedTodos} label="その他" />
 							</div>
 						}
 
 						{pinnedTodos.length !== 0 && unpinnedTodos.length === 0 &&
 							<div>
 
-								<SortableTodoList todos={pinnedTodos} label="固定済み" />
+								<UnachievedTodoList todos={pinnedTodos} label="固定済み" />
 							</div>
 						}
 
 						{pinnedTodos.length === 0 && unpinnedTodos.length !== 0 &&
 							<div>
 
-								<SortableTodoList todos={unpinnedTodos} />
+								<UnachievedTodoList todos={unpinnedTodos} />
 							</div>
 						}
 					</div>

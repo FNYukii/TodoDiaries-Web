@@ -1,4 +1,3 @@
-import dayjs from "dayjs"
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
 // import { CSS } from "@dnd-kit/utilities"
@@ -7,7 +6,7 @@ interface Props {
 	todo: Todo
 }
 
-function SortableTodoRow(props: Props) {
+function UnachievedTodoRow(props: Props) {
 
 	const {
 		attributes,
@@ -44,15 +43,6 @@ function SortableTodoRow(props: Props) {
 
 			<div className="block py-3 px-4 flex gap-3">
 
-				<>
-					{props.todo.achievedAt !== null &&
-
-						<span className="text-zinc-500">
-							{dayjs(props.todo.achievedAt).format('HH:mm')}
-						</span>
-					}
-				</>
-
 				<p className="whitespace-pre-line">{props.todo.content}</p>
 
 				<p className="text-zinc-500">{props.todo.order}</p>
@@ -61,4 +51,4 @@ function SortableTodoRow(props: Props) {
 	)
 }
 
-export default SortableTodoRow
+export default UnachievedTodoRow
