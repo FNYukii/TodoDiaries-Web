@@ -32,9 +32,11 @@ function UnachievedTodoList(props: Props) {
 			const oldIndex = props.todos.findIndex((item) => item.id === active.id)
 			const newIndex = props.todos.findIndex((item) => item.id === over.id)
 
-			// TODO: orderの値を更新
-			await TodoService.moveTodo(props.todos, oldIndex, newIndex)
+			const result = await TodoService.moveTodo(props.todos, oldIndex, newIndex)
 
+			if (result === null) {
+				alert("Todoの並び替えに失敗しました。")
+			}
 		}
 	}
 
