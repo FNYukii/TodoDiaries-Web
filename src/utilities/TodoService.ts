@@ -6,7 +6,7 @@ import Todo from "../entities/Todo"
 class TodoService {
 
 	static toTodo(from: QueryDocumentSnapshot<DocumentData>): Todo {
-		
+
 		const doc = from
 
 		// ドキュメントの各フィールドの値を取り出す
@@ -237,6 +237,92 @@ class TodoService {
 			console.log(`Fail! Error to update todo. ${error}`)
 			return null
 		}
+	}
+
+	static async updateTodoOrder(todoId: string, order: number): Promise<string | null> {
+
+		// UserIdを取得
+		const uid = await AuthService.uid()
+
+		// サインインしていないなら終了　
+		if (uid === null) {
+			return null
+		}
+
+		// Firestoreのドキュメントへの参照を取得
+		const todoRef = doc(db, "todos", todoId)
+
+		// Todoを編集
+		try {
+
+			await updateDoc(todoRef, {
+				order: order
+			})
+
+			return todoId
+
+		} catch (error) {
+
+			console.log(`Fail! Error to update todo. ${error}`)
+			return null
+		}
+	}
+
+	static async moveTodo(todos: Todo[], from: number, destination: number): Promise<string | null> {
+
+		console.log(`${from} -> ${destination}`)
+
+		// 移動しないなら終了
+		if (from === destination) {
+			return null
+		}
+
+		// 以下、newOrderの値を決めていく処理
+		let newOrder = 0.0
+
+		// Todoを上に移動する場合
+		if (from > destination) {
+
+			// もしリストの先頭に移動するなら、newOrderはorder最小値-100とする
+			if (destination === 0) {
+				const minOrder = todos.at(0)!.order!
+				newOrder = minOrder - 100
+			}
+
+			// もしリストの先頭以外に移動するなら、newOrderは移動先の前後のTodoのorderの中間値とする
+			if (destination !== 0) {
+				const prevOrder = todos.at(destination - 1)!.order!
+				const nextOrder = todos.at(destination + 1)!.order!
+				newOrder = (prevOrder + nextOrder) / 2
+			}
+		}
+
+		// Todoを下に移動する場合
+		if (from < destination) {
+
+			// もしリストの末尾に移動するなら、newOrderはorder最大値+100とする
+			if (destination === todos.length - 1) {
+				const maxOrder = todos.at(-1)!.order!
+				newOrder = maxOrder + 100
+			}
+
+			// もしリストの末尾以外に移動するなら、newOrderは移動先の前後のTodoのorderの中間値とする
+			if (destination !== todos.length - 1) {
+				const prevOrder = todos.at(destination - 1)!.order!
+				const nextOrder = todos.at(destination + 1)!.order!
+				newOrder = (prevOrder + nextOrder) / 2
+			}
+		}
+
+		// order更新
+		const targetTodo = todos.at(from)!
+		const result = await this.updateTodoOrder(targetTodo.id, newOrder)
+
+		if (result == null) {
+			return null
+		}
+
+		return result
 	}
 
 	static async deleteTodo(todoId: string): Promise<string | null> {
