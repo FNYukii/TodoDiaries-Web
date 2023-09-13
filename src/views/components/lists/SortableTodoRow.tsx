@@ -2,7 +2,7 @@ import dayjs from "dayjs"
 import NavLinkToModal from "../others/NavLinkToModal"
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
-import { CSS } from "@dnd-kit/utilities";
+import { CSS } from "@dnd-kit/utilities"
 
 interface Props {
 	todo: Todo
@@ -16,18 +16,18 @@ function SortableTodoRow(props: Props) {
 		setNodeRef,
 		transform,
 		transition
-	} = useSortable({ id: props.todo.id });
+	} = useSortable({ id: props.todo.id })
 
 	const style = {
 		transform: CSS.Transform.toString(transform),
 		transition
-	};
+	}
 
 	return (
 
-		<div ref={setNodeRef} {...attributes} {...listeners} style={style}>
+		<div ref={setNodeRef} {...attributes} {...listeners} style={style} className="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition">
 
-			<NavLinkToModal to={`/todos/${props.todo.id}`} key={props.todo.id} className="block py-3 px-4 flex gap-3 bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl">
+			<NavLinkToModal to={`/todos/${props.todo.id}`} key={props.todo.id} className="block py-3 px-4 flex gap-3 ">
 
 				<>
 					{props.todo.achievedAt !== null &&
