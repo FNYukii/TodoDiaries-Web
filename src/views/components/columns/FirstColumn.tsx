@@ -5,7 +5,7 @@ import Todo from "../../../entities/Todo"
 import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
-import TodosList from "../lists/TodosList"
+import TodoList from "../lists/TodoList"
 import ReactLoading from "react-loading"
 import { useNavigate } from "react-router-dom"
 import TodoService from "../../../utilities/TodoService"
@@ -203,22 +203,22 @@ function FirstColumn(props: Props) {
 						{pinnedTodos.length !== 0 && unpinnedTodos.length !== 0 &&
 							<div>
 
-								<TodosList todos={pinnedTodos} label="固定済み" />
-								<TodosList todos={unpinnedTodos} label="その他" />
+								<TodoList todos={pinnedTodos} label="固定済み" />
+								<TodoList todos={unpinnedTodos} label="その他" />
 							</div>
 						}
 
 						{pinnedTodos.length !== 0 && unpinnedTodos.length === 0 &&
 							<div>
 
-								<TodosList todos={pinnedTodos} label="固定済み" />
+								<TodoList todos={pinnedTodos} label="固定済み" />
 							</div>
 						}
 
 						{pinnedTodos.length === 0 && unpinnedTodos.length !== 0 &&
 							<div>
 
-								<TodosList todos={unpinnedTodos} />
+								<TodoList todos={unpinnedTodos} />
 							</div>
 						}
 					</div>

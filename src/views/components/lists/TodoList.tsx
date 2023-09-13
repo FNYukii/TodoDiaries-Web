@@ -8,7 +8,7 @@ interface Props {
 	label?: string
 }
 
-function TodosList(props: Props) {
+function TodoList(props: Props) {
 
 	return (
 
@@ -41,4 +41,4 @@ function TodosList(props: Props) {
 	)
 }
 
-export default TodosList
+export default TodoList

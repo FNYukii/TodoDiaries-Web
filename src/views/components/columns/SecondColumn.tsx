@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
-import TodosList from "../lists/TodosList"
+import TodoList from "../lists/TodoList"
 import dayjs from "dayjs"
 import 'dayjs/locale/ja'
 import ReactLoading from "react-loading"
@@ -167,7 +167,7 @@ function SecondColumn(props: Props) {
 
 								<div key={index}>
 
-									<TodosList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日 ddd曜日')} />
+									<TodoList todos={todos} label={dayjs(todos[0].achievedAt).format('YYYY年 M月 D日 ddd曜日')} />
 								</div>
 							))}
 						</div>
