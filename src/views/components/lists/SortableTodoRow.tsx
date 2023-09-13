@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
-import { CSS } from "@dnd-kit/utilities"
+// import { CSS } from "@dnd-kit/utilities"
 
 interface Props {
 	todo: Todo
@@ -13,7 +13,7 @@ function SortableTodoRow(props: Props) {
 		attributes,
 		listeners,
 		setNodeRef,
-		transform,
+		// transform,
 		transition
 	} = useSortable({ id: props.todo.id })
 
