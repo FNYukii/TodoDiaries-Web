@@ -11,7 +11,7 @@ interface Props {
 
 function SortableTodoList(props: Props) {
 
-	const [todos, setTodos] = useState<Todo[]>(props.todos)
+	// const [todos, setTodos] = useState<Todo[]>(props.todos)
 
 	const sensors = useSensors(
 
@@ -31,9 +31,9 @@ function SortableTodoList(props: Props) {
 
 		if (active.id !== over.id) {
 
-			const oldIndex = todos.findIndex((v) => v.id === active.id)
-			const newIndex = todos.findIndex((v) => v.id === over.id)
-			setTodos(arrayMove(todos, oldIndex, newIndex))
+			// const oldIndex = todos.findIndex((v) => v.id === active.id)
+			// const newIndex = todos.findIndex((v) => v.id === over.id)
+			// setTodos(arrayMove(todos, oldIndex, newIndex))
 		}
 	}
 
@@ -49,11 +49,11 @@ function SortableTodoList(props: Props) {
 
 				<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
 
-					<SortableContext items={todos} strategy={verticalListSortingStrategy}>
+					<SortableContext items={props.todos} strategy={verticalListSortingStrategy}>
 
 						<ul>
 
-							{todos.map((todo) => (
+							{props.todos.map((todo) => (
 								<SortableTodoRow todo={todo} />
 							))}
 						</ul>
