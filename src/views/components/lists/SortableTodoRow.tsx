@@ -1,5 +1,4 @@
 import dayjs from "dayjs"
-import NavLinkToModal from "../others/NavLinkToModal"
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"

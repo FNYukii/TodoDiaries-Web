@@ -1,7 +1,6 @@
 import { useSensors, useSensor, PointerSensor, KeyboardSensor, DragEndEvent, DndContext, closestCenter } from "@dnd-kit/core"
-import { SortableContext, arrayMove, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import Todo from "../../../entities/Todo"
-import { useState } from "react"
 import SortableTodoRow from "./SortableTodoRow"
 
 interface Props {
@@ -34,6 +33,8 @@ function SortableTodoList(props: Props) {
 			// const oldIndex = todos.findIndex((v) => v.id === active.id)
 			// const newIndex = todos.findIndex((v) => v.id === over.id)
 			// setTodos(arrayMove(todos, oldIndex, newIndex))
+
+			// TODO: orderの値を更新
 		}
 	}
 
