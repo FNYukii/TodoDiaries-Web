@@ -11,8 +11,6 @@ interface Props {
 
 function UnachievedTodoList(props: Props) {
 
-	// const [todos, setTodos] = useState<Todo[]>(props.todos)
-
 	const sensors = useSensors(
 
 		useSensor(PointerSensor),
@@ -33,11 +31,10 @@ function UnachievedTodoList(props: Props) {
 
 			const oldIndex = props.todos.findIndex((item) => item.id === active.id)
 			const newIndex = props.todos.findIndex((item) => item.id === over.id)
-			// setTodos(arrayMove(todos, oldIndex, newIndex))
 
 			// TODO: orderの値を更新
 			await TodoService.moveTodo(props.todos, oldIndex, newIndex)
-			
+
 		}
 	}
 
