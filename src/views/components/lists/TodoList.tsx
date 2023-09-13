@@ -20,7 +20,7 @@ function TodoList(props: Props) {
 
 				{props.todos.map((todo) => (
 
-					<TodoRow todo={todo} />
+					<TodoRow todo={todo} key={todo.id} />
 				))}
 			</div>
 		</div>

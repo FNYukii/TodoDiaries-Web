@@ -18,7 +18,7 @@ function SortableTodoRow(props: Props) {
 	} = useSortable({ id: props.todo.id })
 
 	const style = {
-		transform: CSS.Transform.toString(transform),
+		// transform: CSS.Transform.toString(transform),
 		transition
 	}
 
@@ -42,7 +42,7 @@ function SortableTodoRow(props: Props) {
 				<p className="text-zinc-500">{props.todo.order}</p>
 			</NavLinkToModal> */}
 
-			<div className="block py-3 px-4 flex gap-3 ">
+			<div className="block py-3 px-4 flex gap-3">
 
 				<>
 					{props.todo.achievedAt !== null &&

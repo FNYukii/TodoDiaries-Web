@@ -2,6 +2,7 @@ import { useSensors, useSensor, PointerSensor, KeyboardSensor, DragEndEvent, Dnd
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import Todo from "../../../entities/Todo"
 import SortableTodoRow from "./SortableTodoRow"
+import TodoService from "../../../utilities/TodoService"
 
 interface Props {
 	todos: Todo[]
@@ -20,7 +21,7 @@ function SortableTodoList(props: Props) {
 		})
 	)
 
-	const onDragEnd = (event: DragEndEvent) => {
+	const onDragEnd = async (event: DragEndEvent) => {
 
 		const { active, over } = event
 
@@ -30,11 +31,13 @@ function SortableTodoList(props: Props) {
 
 		if (active.id !== over.id) {
 
-			// const oldIndex = todos.findIndex((v) => v.id === active.id)
-			// const newIndex = todos.findIndex((v) => v.id === over.id)
+			const oldIndex = props.todos.findIndex((item) => item.id === active.id)
+			const newIndex = props.todos.findIndex((item) => item.id === over.id)
 			// setTodos(arrayMove(todos, oldIndex, newIndex))
 
 			// TODO: orderの値を更新
+			await TodoService.moveTodo(props.todos, oldIndex, newIndex)
+			
 		}
 	}
 
@@ -55,7 +58,7 @@ function SortableTodoList(props: Props) {
 						<ul>
 
 							{props.todos.map((todo) => (
-								<SortableTodoRow todo={todo} />
+								<SortableTodoRow todo={todo} key={todo.id} />
 							))}
 						</ul>
 					</SortableContext>
