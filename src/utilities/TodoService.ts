@@ -286,14 +286,14 @@ class TodoService {
 			// もしリストの先頭に移動するなら、newOrderはorder最小値-100とする
 			if (destination === 0) {
 				const minOrder = todos.at(0)!.order!
-				newOrder = minOrder - 100
+				newOrder = minOrder - 100.0
 			}
 
 			// もしリストの先頭以外に移動するなら、newOrderは移動先の前後のTodoのorderの中間値とする
 			if (destination !== 0) {
 				const prevOrder = todos.at(destination - 1)!.order!
 				const nextOrder = todos.at(destination + 1)!.order!
-				newOrder = (prevOrder + nextOrder) / 2
+				newOrder = (prevOrder + nextOrder) / 2.0
 			}
 		}
 
@@ -303,14 +303,14 @@ class TodoService {
 			// もしリストの末尾に移動するなら、newOrderはorder最大値+100とする
 			if (destination === todos.length - 1) {
 				const maxOrder = todos.at(-1)!.order!
-				newOrder = maxOrder + 100
+				newOrder = maxOrder + 100.0
 			}
 
 			// もしリストの末尾以外に移動するなら、newOrderは移動先の前後のTodoのorderの中間値とする
 			if (destination !== todos.length - 1) {
 				const prevOrder = todos.at(destination - 1)!.order!
 				const nextOrder = todos.at(destination + 1)!.order!
-				newOrder = (prevOrder + nextOrder) / 2
+				newOrder = (prevOrder + nextOrder) / 2.0
 			}
 		}
 
