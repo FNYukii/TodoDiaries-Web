@@ -44,8 +44,6 @@ function UnachievedTodoRow(props: Props) {
 			>
 
 				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
-
-				<p className="text-zinc-500">{props.todo.order}</p>
 			</button>
 		</div>
 	)
