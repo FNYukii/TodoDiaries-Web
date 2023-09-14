@@ -1,5 +1,5 @@
-import { useSensors, useSensor, PointerSensor, KeyboardSensor, DragEndEvent, DndContext, closestCenter } from "@dnd-kit/core"
-import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { useSensors, useSensor, KeyboardSensor, DragEndEvent, DndContext, closestCenter, MouseSensor } from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import Todo from "../../../entities/Todo"
 import UnachievedTodoRow from "./UnachievedTodoRow"
 import TodoService from "../../../utilities/TodoService"
@@ -11,14 +11,19 @@ interface Props {
 
 function UnachievedTodoList(props: Props) {
 
-	const sensors = useSensors(
-
-		useSensor(PointerSensor),
-		useSensor(KeyboardSensor, {
-			coordinateGetter: sortableKeyboardCoordinates
-		})
+	// Sensorsを取得
+	const mouseSensor = useSensor(
+		MouseSensor,
+		{
+			activationConstraint: {
+				distance: 5,
+			},
+		}
 	)
+	const keyboardSensor = useSensor(KeyboardSensor)
+	const sensors = useSensors(mouseSensor, keyboardSensor)
 
+	// Drag後に実行される関数
 	const onDragEnd = async (event: DragEndEvent) => {
 
 		const { active, over } = event

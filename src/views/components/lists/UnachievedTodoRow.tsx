@@ -1,6 +1,6 @@
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
-import NavLinkToModal from "../others/NavLinkToModal"
+import { useNavigate } from "react-router-dom"
 // import { CSS } from "@dnd-kit/utilities"
 
 interface Props {
@@ -22,6 +22,9 @@ function UnachievedTodoRow(props: Props) {
 		transition
 	}
 
+	const navigate = useNavigate()
+
+
 	return (
 
 		<div
@@ -32,19 +35,18 @@ function UnachievedTodoRow(props: Props) {
 			className="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition"
 		>
 
-			<NavLinkToModal to={`/todos/${props.todo.id}`} className="block py-3 px-4 flex gap-3 ">
+			<button
+				type="button"
+				onClick={() => {
+					navigate(`/todos/${props.todo.id}`)
+				}}
+				className="block py-3 px-4 flex gap-3"
+			>
 
-				<p className="whitespace-pre-line">{props.todo.content}</p>
+				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
 
 				<p className="text-zinc-500">{props.todo.order}</p>
-			</NavLinkToModal>
-
-			{/* <div className="block py-3 px-4 flex gap-3">
-
-				<p className="whitespace-pre-line">{props.todo.content}</p>
-
-				<p className="text-zinc-500">{props.todo.order}</p>
-			</div> */}
+			</button>
 		</div>
 	)
 }
