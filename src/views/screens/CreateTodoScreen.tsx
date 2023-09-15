@@ -26,7 +26,8 @@ function CreateTodoScreen() {
 	}
 
 	function onKeyDown(event: KeyboardEvent) {
-		if (event.ctrlKey === true && event.key === 'Enter') {
+
+		if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
 
 			if (content !== "") {
 				createTodo()

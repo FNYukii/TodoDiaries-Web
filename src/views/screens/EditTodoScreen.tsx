@@ -54,10 +54,10 @@ function EditTodoScreen() {
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-		createTodo()
+		editTodo()
 	}
 
-	async function createTodo() {
+	async function editTodo() {
 		
 		if (!oldTodo) {
 
@@ -145,10 +145,10 @@ function EditTodoScreen() {
 	}
 
 	function onKeyDown(event: KeyboardEvent) {
-		if (event.ctrlKey === true && event.key === 'Enter') {
+		if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
 
 			if (content !== "") {
-				createTodo()
+				editTodo()
 			}
 		}
 	}
