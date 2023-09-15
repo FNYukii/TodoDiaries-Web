@@ -10,6 +10,7 @@ import AccountScreen from "./views/screens/AccountScreen"
 import AuthService from "./utilities/AuthService"
 import CreateTodoScreen from "./views/screens/CreateTodoScreen"
 import EditTodoScreen from "./views/screens/EditTodoScreen"
+import NKeyupNavigator from "./views/components/others/NKeyupNavigator"
 
 function App() {
 
@@ -63,6 +64,8 @@ function App() {
 			</Routes>
 
 			<Routes location={isShowModal ? currentPath : ""}>
+
+				<Route path="/" element={isSignedIn ? <NKeyupNavigator /> : <div />} />
 
 				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen onForeground /> : <SignInScreen />} />
 				<Route path="/new" element={isSignedIn ? <CreateTodoScreen /> : <NotFoundScreen onForeground />} />
