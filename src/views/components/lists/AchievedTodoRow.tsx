@@ -25,7 +25,7 @@ function AchievedTodoRow(props: Props) {
 					{dayjs(props.todo.achievedAt).format('HH:mm')}
 				</span>
 
-				<p className="whitespace-pre-line">{props.todo.content}</p>
+				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
 			</button>
 		</div>
 	)
