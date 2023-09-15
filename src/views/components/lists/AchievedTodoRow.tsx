@@ -18,7 +18,7 @@ function AchievedTodoRow(props: Props) {
 				onClick={() => {
 					navigate(`/todos/${props.todo.id}`)
 				}}
-				className="block py-3 px-4 flex gap-3"
+				className="w-full h-full py-3 px-4 flex gap-3"
 			>
 
 				<span className="text-zinc-500">

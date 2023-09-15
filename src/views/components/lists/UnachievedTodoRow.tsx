@@ -31,14 +31,14 @@ function UnachievedTodoRow(props: Props) {
 			{...attributes}
 			{...listeners}
 			style={style}
-			className="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition"
+			className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl"
 		>
 
 			<button
 				onClick={() => {
 					navigate(`/todos/${props.todo.id}`)
 				}}
-				className="block py-3 px-4 flex gap-3"
+				className="w-full h-full py-3 px-4"
 			>
 
 				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
