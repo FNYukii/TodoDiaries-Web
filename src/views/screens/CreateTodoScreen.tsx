@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
 import URLModal from "../components/others/URLModal"
 import SubmitButton from "../components/buttons/SubmitButton"
@@ -22,6 +22,25 @@ function CreateTodoScreen() {
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
+		createTodo()
+	}
+
+	function onKeyDown(event: KeyboardEvent) {
+		if (event.ctrlKey === true && event.key === 'Enter') {
+			createTodo()
+		}
+	}
+
+	useEffect(() => {
+
+		document.addEventListener("keydown", onKeyDown, false)
+		return () => {
+			document.removeEventListener("keydown", onKeyDown, false)
+		}
+		// eslint-disable-next-line
+	}, [content])
+
+	async function createTodo() {
 
 		setIsLoading(true)
 
@@ -95,7 +114,7 @@ function CreateTodoScreen() {
 						}
 					</div>
 
-					<SubmitButton text="作成" isLoading={isLoading} disabled={content === ""} className="mr-negative-4"/>
+					<SubmitButton text="作成" isLoading={isLoading} disabled={content === ""} className="mr-negative-4" />
 				</div>
 			</form>
 		</URLModal>
