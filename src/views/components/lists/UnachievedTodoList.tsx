@@ -53,18 +53,18 @@ function UnachievedTodoList(props: Props) {
 				<span className="text-zinc-500">{props.label}</span>
 			}
 
-			<div className="mt-2 divide-y divide-zinc-200 dark:divide-zinc-700">
+			<div className="mt-2">
 
 				<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
 
 					<SortableContext items={props.todos} strategy={verticalListSortingStrategy}>
 
-						<ul>
+						<div className="divide-y divide-zinc-200 dark:divide-zinc-700">
 
 							{props.todos.map((todo) => (
 								<UnachievedTodoRow todo={todo} key={todo.id} />
 							))}
-						</ul>
+						</div>
 					</SortableContext>
 				</DndContext>
 			</div>
