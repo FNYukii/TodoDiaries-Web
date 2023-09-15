@@ -53,9 +53,12 @@ function EditTodoScreen() {
 	}, [todoId])
 
 	async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-
 		event.preventDefault()
+		createTodo()
+	}
 
+	async function createTodo() {
+		
 		if (!oldTodo) {
 
 			alert("Todoの取得に失敗しているので、データを更新できません。")
@@ -141,6 +144,24 @@ function EditTodoScreen() {
 		navigate('/')
 	}
 
+	function onKeyDown(event: KeyboardEvent) {
+		if (event.ctrlKey === true && event.key === 'Enter') {
+
+			if (content !== "") {
+				createTodo()
+			}
+		}
+	}
+
+	useEffect(() => {
+
+		document.addEventListener("keydown", onKeyDown, false)
+		return () => {
+			document.removeEventListener("keydown", onKeyDown, false)
+		}
+		// eslint-disable-next-line
+	}, [content])
+
 	return (
 
 		<URLModal>
@@ -224,7 +245,7 @@ function EditTodoScreen() {
 						}
 					</div>
 
-					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} className="mr-negative-4"/>
+					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} className="mr-negative-4" />
 				</div>
 			</form>
 		</URLModal>
