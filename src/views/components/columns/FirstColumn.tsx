@@ -6,7 +6,6 @@ import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } fro
 import AuthService from "../../../utilities/AuthService"
 import { db } from "../../../utilities/firebase"
 import ReactLoading from "react-loading"
-import { useNavigate } from "react-router-dom"
 import TodoService from "../../../utilities/TodoService"
 import UnachievedTodoList from "../lists/UnachievedTodoList"
 
@@ -135,24 +134,6 @@ function FirstColumn(props: Props) {
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	// キーボードショートカット用
-	const navigate = useNavigate()
-
-	function onKeyUp(event: KeyboardEvent) {
-		if (event.key === 'n') {
-			navigate('/new')
-		}
-	}
-
-	useEffect(() => {
-
-		document.addEventListener("keyup", onKeyUp, false)
-		return () => {
-			document.removeEventListener("keyup", onKeyUp, false)
-		}
-		// eslint-disable-next-line
 	}, [])
 
 	return (
