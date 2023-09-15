@@ -24,7 +24,6 @@ function UnachievedTodoRow(props: Props) {
 
 	const navigate = useNavigate()
 
-
 	return (
 
 		<div
@@ -36,7 +35,6 @@ function UnachievedTodoRow(props: Props) {
 		>
 
 			<button
-				type="button"
 				onClick={() => {
 					navigate(`/todos/${props.todo.id}`)
 				}}
