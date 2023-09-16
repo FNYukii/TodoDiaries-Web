@@ -24,6 +24,12 @@ function UnachievedTodoRow(props: Props) {
 
 	const navigate = useNavigate()
 
+	function onContextMenu(event: React.MouseEvent) {
+    event.preventDefault();
+
+    console.log("Hello")
+  }
+
 	return (
 
 		<div
@@ -31,6 +37,7 @@ function UnachievedTodoRow(props: Props) {
 			{...attributes}
 			{...listeners}
 			style={style}
+			onContextMenu={onContextMenu}
 			className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl"
 		>
 
