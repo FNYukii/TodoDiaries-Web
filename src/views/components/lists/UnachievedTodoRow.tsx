@@ -37,27 +37,25 @@ function UnachievedTodoRow(props: Props) {
 	}
 
 	function checkTheme() {
-		
+
 		const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
 		setIsDark(isDark)
 	}
 
 	return (
 
-		<>
-			<div
-				ref={setNodeRef}
-				{...attributes}
-				{...listeners}
-				onContextMenu={onContextMenu}
-				className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl"
-			>
+		<div
+			ref={setNodeRef}
+			{...attributes}
+			{...listeners}
+			onContextMenu={onContextMenu}
+			className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl"
+		>
 
-				<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4">
+			<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4">
 
-					<p className="whitespace-pre-line text-left">{props.todo.content}</p>
-				</button>
-			</div>
+				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
+			</button>
 
 			<ControlledMenu
 				anchorPoint={anchorPoint}
@@ -70,7 +68,7 @@ function UnachievedTodoRow(props: Props) {
 				<MenuItem>達成済みにする</MenuItem>
 				<MenuItem>削除</MenuItem>
 			</ControlledMenu>
-		</>
+		</div>
 	)
 }
 
