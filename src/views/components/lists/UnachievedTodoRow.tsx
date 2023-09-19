@@ -1,7 +1,10 @@
 import Todo from "../../../entities/Todo"
 import { useSortable } from "@dnd-kit/sortable"
 import { useNavigate } from "react-router-dom"
-// import { CSS } from "@dnd-kit/utilities"
+import { useState } from "react"
+import '@szhsin/react-menu/dist/index.css'
+import "@szhsin/react-menu/dist/theme-dark.css"
+import TodoContextMenu from "../others/TodoContextMenu"
 
 interface Props {
 	todo: Todo
@@ -9,20 +12,28 @@ interface Props {
 
 function UnachievedTodoRow(props: Props) {
 
+	// 画面遷移
+	const navigate = useNavigate()
+
+	// ドラッグアンドドロップ
 	const {
 		attributes,
 		listeners,
-		setNodeRef,
-		// transform,
-		transition
+		setNodeRef
 	} = useSortable({ id: props.todo.id })
 
-	const style = {
-		// transform: CSS.Transform.toString(transform),
-		transition
-	}
+	// コンテキストメニュー
+	const [isOpen, setIsOpen] = useState(false)
+	const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 })
 
-	const navigate = useNavigate()
+	function onContextMenu(event: React.MouseEvent) {
+
+		if (typeof document.hasFocus === 'function' && !document.hasFocus()) return
+		event.preventDefault()
+
+		setAnchorPoint({ x: event.clientX, y: event.clientY })
+		setIsOpen(true)
+	}
 
 	return (
 
@@ -30,19 +41,16 @@ function UnachievedTodoRow(props: Props) {
 			ref={setNodeRef}
 			{...attributes}
 			{...listeners}
-			style={style}
+			onContextMenu={onContextMenu}
 			className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl"
 		>
 
-			<button
-				onClick={() => {
-					navigate(`/todos/${props.todo.id}`)
-				}}
-				className="w-full h-full py-3 px-4"
-			>
+			<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4">
 
 				<p className="whitespace-pre-line text-left">{props.todo.content}</p>
 			</button>
+
+			<TodoContextMenu isOpen={isOpen} setIsOpen={setIsOpen} anchorPoint={anchorPoint} todo={props.todo} />
 		</div>
 	)
 }
