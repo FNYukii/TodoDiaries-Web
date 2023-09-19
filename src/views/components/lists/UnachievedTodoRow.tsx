@@ -63,6 +63,7 @@ function UnachievedTodoRow(props: Props) {
 				direction="right"
 				onClose={() => setIsOpen(false)}
 				theming={isDark ? "dark" : undefined}
+				position="initial"
 			>
 
 				{props.todo.isPinned! &&
