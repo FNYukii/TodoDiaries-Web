@@ -5,6 +5,7 @@ import { ControlledMenu, MenuItem } from '@szhsin/react-menu'
 import { useState } from "react"
 import '@szhsin/react-menu/dist/index.css'
 import "@szhsin/react-menu/dist/theme-dark.css"
+import { BsCheckLg, BsFillPinFill, BsPin, BsTrash3 } from "react-icons/bs"
 
 interface Props {
 	todo: Todo
@@ -67,16 +68,40 @@ function UnachievedTodoRow(props: Props) {
 			>
 
 				{props.todo.isPinned! &&
-					<MenuItem>固定をやめる</MenuItem>
-
+					<MenuItem>
+					
+						<button className="py-1 flex items-center gap-4">
+							<BsPin className="text-lg text-zinc-500" />
+							<span>固定をやめる</span>
+						</button>
+					</MenuItem>
 				}
 
 				{!props.todo.isPinned! &&
-					<MenuItem>固定する</MenuItem>
+					<MenuItem>
+
+						<button className="py-1 flex items-center gap-4">
+							<BsFillPinFill className="text-lg text-zinc-500" />
+							<span>固定する</span>
+						</button>
+					</MenuItem>
 				}
 
-				<MenuItem>達成済みにする</MenuItem>
-				<MenuItem>削除</MenuItem>
+				<MenuItem>
+				
+					<button className="py-1 flex items-center gap-4">
+						<BsCheckLg className="text-lg text-zinc-500" />
+						<span>達成済みにする</span>
+					</button>
+				</MenuItem>
+
+				<MenuItem>
+
+					<button className="py-1 flex items-center gap-4">
+						<BsTrash3 className="text-lg text-zinc-500" />
+						<span>削除</span>
+					</button>
+				</MenuItem>
 			</ControlledMenu>
 		</div>
 	)
