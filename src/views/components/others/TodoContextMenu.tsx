@@ -2,6 +2,7 @@ import { ControlledMenu, MenuItem } from "@szhsin/react-menu"
 import { BsPin, BsFillPinFill, BsCheckLg, BsTrash3 } from "react-icons/bs"
 import Todo from "../../../entities/Todo"
 import { useEffect, useState } from "react"
+import { AiOutlineClose } from "react-icons/ai"
 
 interface Props {
 	isOpen: boolean
@@ -36,7 +37,7 @@ function TodoContextMenu(props: Props) {
 				position="initial"
 			>
 
-				{props.todo.isPinned! &&
+				{props.todo.achievedAt === null && props.todo.isPinned! &&
 					<MenuItem>
 
 						<button className="py-1 flex items-center gap-4">
@@ -46,7 +47,7 @@ function TodoContextMenu(props: Props) {
 					</MenuItem>
 				}
 
-				{!props.todo.isPinned! &&
+				{props.todo.achievedAt === null && !props.todo.isPinned! &&
 					<MenuItem>
 
 						<button className="py-1 flex items-center gap-4">
@@ -56,13 +57,25 @@ function TodoContextMenu(props: Props) {
 					</MenuItem>
 				}
 
-				<MenuItem>
+				{props.todo.achievedAt === null &&
+					< MenuItem >
 
-					<button className="py-1 flex items-center gap-4">
-						<BsCheckLg className="text-lg text-zinc-500" />
-						<span>達成済みにする</span>
-					</button>
-				</MenuItem>
+						<button className="py-1 flex items-center gap-4">
+							<BsCheckLg className="text-lg text-zinc-500" />
+							<span>達成済みにする</span>
+						</button>
+					</MenuItem>
+				}
+
+				{props.todo.achievedAt !== null &&
+					< MenuItem >
+
+						<button className="py-1 flex items-center gap-4">
+							<AiOutlineClose className="text-lg text-zinc-500" />
+							<span>未達成にする</span>
+						</button>
+					</MenuItem>
+				}
 
 				<MenuItem>
 
@@ -72,7 +85,7 @@ function TodoContextMenu(props: Props) {
 					</button>
 				</MenuItem>
 			</ControlledMenu>
-		</div>
+		</div >
 	)
 
 }
