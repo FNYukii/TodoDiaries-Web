@@ -64,7 +64,16 @@ function UnachievedTodoRow(props: Props) {
 				onClose={() => setIsOpen(false)}
 				theming={isDark ? "dark" : undefined}
 			>
-				<MenuItem>固定する</MenuItem>
+
+				{props.todo.isPinned! &&
+					<MenuItem>固定を解除</MenuItem>
+
+				}
+
+				{!props.todo.isPinned! &&
+					<MenuItem>固定する</MenuItem>
+				}
+
 				<MenuItem>達成済みにする</MenuItem>
 				<MenuItem>削除</MenuItem>
 			</ControlledMenu>
