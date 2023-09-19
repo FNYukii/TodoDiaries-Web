@@ -66,7 +66,7 @@ function UnachievedTodoRow(props: Props) {
 			>
 
 				{props.todo.isPinned! &&
-					<MenuItem>固定を解除</MenuItem>
+					<MenuItem>固定をやめる</MenuItem>
 
 				}
 
