@@ -1,12 +1,9 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import SubmitButton from "../buttons/SubmitButton"
 import EmailInput from "../inputs/EmailInput"
 import PasswordInput from "../inputs/PasswordInput"
 
 function SignInSection(props: { setIsShowSignUpSection: React.Dispatch<React.SetStateAction<boolean>> }) {
-
-	const navigate = useNavigate()
 
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -20,9 +17,9 @@ function SignInSection(props: { setIsShowSignUpSection: React.Dispatch<React.Set
 		e.preventDefault()
 
 		// TODO: サインイン
-
-		// 成功
-		navigate(-1)
+		// TODO: navigate(-1)
+		alert("失敗しました。TodoDiariesアカウントでのサインインは未実装です。")
+		setIsLoading(false)
 	}
 
 	return (
