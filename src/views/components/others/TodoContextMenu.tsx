@@ -4,6 +4,7 @@ import Todo from "../../../entities/Todo"
 import { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import TodoService from "../../../utilities/TodoService"
+import StateModal from "./StateModal"
 
 interface Props {
 	isOpen: boolean
@@ -26,6 +27,9 @@ function TodoContextMenu(props: Props) {
 		const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
 		setIsDark(isDark)
 	}, [props])
+
+	// モーダル表示のState
+	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
 
 	async function pinTodo() {
 
@@ -180,13 +184,33 @@ function TodoContextMenu(props: Props) {
 
 				<MenuItem>
 
-					<button className="py-1 flex items-center gap-4 text-red-500">
+					<button onClick={() => setIsOpenDeleteModal(true)} className="py-1 flex items-center gap-4 text-red-500">
 
 						<BsTrash3 className="text-lg" />
 						<span>削除</span>
 					</button>
 				</MenuItem>
 			</ControlledMenu>
+
+			{isOpenDeleteModal &&
+
+				<StateModal
+					title="Todoを削除してもよろしいですか?"
+					acceptLabel="削除"
+					destractiveDialog
+					onClose={() => setIsOpenDeleteModal(false)}
+					onAccept={async () => {
+
+						const result = await TodoService.deleteTodo(props.todo.id)
+
+						// 失敗
+						if (result === null) {
+							alert("Todoの削除に失敗しました。")
+							return
+						}
+					}}
+				/>
+			}
 		</div >
 	)
 }
