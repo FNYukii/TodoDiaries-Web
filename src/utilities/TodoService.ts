@@ -207,7 +207,13 @@ class TodoService {
 		}
 	}
 
-	static async updateTodo(todoId: string, content: string, isPinned: boolean | null, order: number | null, achievedAt: Date | null): Promise<string | null> {
+	static async updateTodo(
+		todoId: string,
+		content: string,
+		isPinned: boolean | null,
+		order: number | null,
+		achievedAt: Date | null
+	): Promise<string | null> {
 
 		// UserIdを取得
 		const uid = await AuthService.uid()
