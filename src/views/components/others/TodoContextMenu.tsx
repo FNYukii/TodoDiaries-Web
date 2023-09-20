@@ -37,7 +37,13 @@ function TodoContextMenu(props: Props) {
 		const newOrder = maxOrder + 100
 
 		// 更新
-		const result = await TodoService.updateTodo(props.todo.id, props.todo.content, true, newOrder, null)
+		const result = await TodoService.updateTodo(
+			props.todo.id,
+			props.todo.content,
+			true,
+			newOrder,
+			null
+		)
 
 		// 失敗
 		if (result === null) {
@@ -55,7 +61,13 @@ function TodoContextMenu(props: Props) {
 		const newOrder = minOrder - 100
 
 		// 更新
-		const result = await TodoService.updateTodo(props.todo.id, props.todo.content, false, newOrder, null)
+		const result = await TodoService.updateTodo(
+			props.todo.id,
+			props.todo.content,
+			false,
+			newOrder,
+			null
+		)
 
 		// 失敗
 		if (result === null) {
@@ -76,9 +88,11 @@ function TodoContextMenu(props: Props) {
 			>
 
 				{props.todo.achievedAt === null && props.todo.isPinned! &&
+
 					<MenuItem>
 
 						<button onClick={() => unpinTodo()} className="py-1 flex items-center gap-4">
+
 							<BsPin className="text-lg text-zinc-500" />
 							<span>固定をやめる</span>
 						</button>
@@ -86,9 +100,11 @@ function TodoContextMenu(props: Props) {
 				}
 
 				{props.todo.achievedAt === null && !props.todo.isPinned! &&
+
 					<MenuItem>
 
 						<button onClick={() => pinTodo()} className="py-1 flex items-center gap-4">
+
 							<BsFillPinFill className="text-lg text-zinc-500" />
 							<span>固定する</span>
 						</button>
@@ -96,9 +112,11 @@ function TodoContextMenu(props: Props) {
 				}
 
 				{props.todo.achievedAt === null &&
+
 					< MenuItem >
 
 						<button className="py-1 flex items-center gap-4">
+
 							<BsCheckLg className="text-lg text-zinc-500" />
 							<span>達成済みにする</span>
 						</button>
@@ -106,9 +124,11 @@ function TodoContextMenu(props: Props) {
 				}
 
 				{props.todo.achievedAt !== null &&
+
 					< MenuItem >
 
 						<button className="py-1 flex items-center gap-4">
+
 							<AiOutlineClose className="text-lg text-zinc-500" />
 							<span>未達成にする</span>
 						</button>
@@ -118,6 +138,7 @@ function TodoContextMenu(props: Props) {
 				<MenuItem>
 
 					<button className="py-1 flex items-center gap-4 text-red-500">
+
 						<BsTrash3 className="text-lg" />
 						<span>削除</span>
 					</button>
