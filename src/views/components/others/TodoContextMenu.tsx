@@ -79,8 +79,8 @@ function TodoContextMenu(props: Props) {
 
 				<MenuItem>
 
-					<button className="py-1 flex items-center gap-4">
-						<BsTrash3 className="text-lg text-zinc-500" />
+					<button className="py-1 flex items-center gap-4 text-red-500">
+						<BsTrash3 className="text-lg" />
 						<span>削除</span>
 					</button>
 				</MenuItem>
