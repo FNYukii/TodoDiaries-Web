@@ -25,7 +25,7 @@ function EditTodoScreen() {
 	const [isLoading, setIsLoading] = useState(false)
 
 	const navigate = useNavigate()
-	const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
+	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
 
 	useEffect(() => {
 
@@ -218,18 +218,18 @@ function EditTodoScreen() {
 							</div>
 						}
 
-						<button type="button" onClick={() => setIsShowDeleteModal(true)} className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 transition">
+						<button type="button" onClick={() => setIsOpenDeleteModal(true)} className="p-3 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 transition">
 
 							<BsTrash3 className="text-xl" />
 						</button>
 
-						{isShowDeleteModal &&
+						{isOpenDeleteModal &&
 
 							<StateModal
 								title="Todoを削除してもよろしいですか?"
 								acceptLabel="削除"
 								destractiveDialog
-								onClose={() => setIsShowDeleteModal(false)}
+								onClose={() => setIsOpenDeleteModal(false)}
 								onAccept={async () => {
 
 									const result = await TodoService.deleteTodo(todoId!)
