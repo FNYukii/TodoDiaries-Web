@@ -75,6 +75,49 @@ function TodoContextMenu(props: Props) {
 		}
 	}
 
+	async function achieveTodo() {
+
+		const newAchievedAt = new Date()
+
+		// 更新
+		const result = await TodoService.updateTodo(
+			props.todo.id,
+			props.todo.content,
+			null,
+			null,
+			newAchievedAt
+		)
+
+		// 失敗
+		if (result === null) {
+			alert("Todoの更新に失敗しました。")
+		}
+	}
+
+	async function unachieveTodo() {
+
+		// 新しいorderの値を決定
+		const maxOrder = await TodoService.readOrder(true, true)
+		if (maxOrder === null) {
+			return
+		}
+		const newOrder = maxOrder + 100
+
+		// 更新
+		const result = await TodoService.updateTodo(
+			props.todo.id,
+			props.todo.content,
+			false,
+			newOrder,
+			null
+		)
+
+		// 失敗
+		if (result === null) {
+			alert("Todoの更新に失敗しました。")
+		}
+	}
+
 	return (
 		<div>
 
@@ -115,7 +158,7 @@ function TodoContextMenu(props: Props) {
 
 					< MenuItem >
 
-						<button className="py-1 flex items-center gap-4">
+						<button onClick={() => achieveTodo()} className="py-1 flex items-center gap-4">
 
 							<BsCheckLg className="text-lg text-zinc-500" />
 							<span>達成済みにする</span>
@@ -127,7 +170,7 @@ function TodoContextMenu(props: Props) {
 
 					< MenuItem >
 
-						<button className="py-1 flex items-center gap-4">
+						<button onClick={() => unachieveTodo()} className="py-1 flex items-center gap-4">
 
 							<AiOutlineClose className="text-lg text-zinc-500" />
 							<span>未達成にする</span>
