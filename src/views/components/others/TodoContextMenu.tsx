@@ -196,6 +196,7 @@ function TodoContextMenu(props: Props) {
 
 				<StateModal
 					title="Todoを削除してもよろしいですか?"
+					message={props.todo.content}
 					acceptLabel="削除"
 					destractiveDialog
 					onClose={() => setIsOpenDeleteModal(false)}

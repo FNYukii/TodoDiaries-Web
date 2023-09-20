@@ -4,6 +4,7 @@ import { MdOutlineClose } from "react-icons/md"
 interface Props {
 
 	title: string
+	message?: string
 	acceptLabel: string
 	destractiveDialog?: boolean
 	onClose: () => any
@@ -52,6 +53,10 @@ function StateModal(props: Props) {
 				</div>
 
 				<p className="mt-4 mx-8 text-xl font-bold">{props.title}</p>
+
+				{props.message &&
+				<p className="mt-2 mx-8 text-zinc-500 ">{props.message}</p>
+				}
 
 				<div className="flex mt-5 mx-4 pb-8 justify-between">
 
