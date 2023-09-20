@@ -149,13 +149,13 @@ function SecondColumn(props: Props) {
 
 				{isLoaded && groupedTodos === null &&
 					<div>
-						<p className="mt-4">Failed reading todos</p>
+						<p className="mt-4 text-zinc-500">読み取りに失敗しました</p>
 					</div>
 				}
 
 				{isLoaded && groupedTodos !== null && groupedTodos.length === 0 &&
 					<div>
-						<p className="mt-4">There is no todo</p>
+						<p className="mt-4 text-zinc-500">達成済みのTodoはありません</p>
 					</div>
 				}
 

@@ -11,11 +11,11 @@ function ThirdColumn(props: Props) {
 			<h2 className="text-2xl font-bold">統計</h2>
 
 			<div className="mt-4 bg-white px-4 py-3 rounded-xl dark:bg-zinc-800">
-				<p>Vertical bar chart</p>
+				<p className="text-zinc-500">Vertical bar chart</p>
 			</div>
 
 			<div className="mt-4 bg-white px-4 py-3 rounded-xl dark:bg-zinc-800">
-				<p>Horizontal bar chart</p>
+				<p className="text-zinc-500">Horizontal bar chart</p>
 			</div>
 		</section>
 	)

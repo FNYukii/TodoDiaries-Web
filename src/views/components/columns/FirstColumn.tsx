@@ -168,13 +168,13 @@ function FirstColumn(props: Props) {
 
 				{isLoadedPinnedTodos && isLoadedUnpinnedTodos && (pinnedTodos === null || unpinnedTodos === null) &&
 					<div>
-						<p className="mt-4">Failed reading todos</p>
+						<p className="mt-4 text-zinc-500">読み取りに失敗しました</p>
 					</div>
 				}
 
 				{isLoadedPinnedTodos && isLoadedUnpinnedTodos && pinnedTodos !== null && unpinnedTodos !== null && pinnedTodos.length === 0 && unpinnedTodos.length === 0 &&
 					<div>
-						<p className="mt-4">There is no todo</p>
+						<p className="mt-4 text-zinc-500">未達成のTodoはありません</p>
 					</div>
 				}
 
