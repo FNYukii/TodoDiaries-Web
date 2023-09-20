@@ -45,6 +45,24 @@ function TodoContextMenu(props: Props) {
 		}
 	}
 
+	async function unpinTodo() {
+
+		// 新しいorderの値を決定
+		const minOrder = await TodoService.readOrder(false, false)
+		if (minOrder === null) {
+			return
+		}
+		const newOrder = minOrder - 100
+
+		// 更新
+		const result = await TodoService.updateTodo(props.todo.id, props.todo.content, false, newOrder, null)
+
+		// 失敗
+		if (result === null) {
+			alert("Todoの更新に失敗しました。")
+		}
+	}
+
 	return (
 		<div>
 
@@ -60,7 +78,7 @@ function TodoContextMenu(props: Props) {
 				{props.todo.achievedAt === null && props.todo.isPinned! &&
 					<MenuItem>
 
-						<button className="py-1 flex items-center gap-4">
+						<button onClick={() => unpinTodo()} className="py-1 flex items-center gap-4">
 							<BsPin className="text-lg text-zinc-500" />
 							<span>固定をやめる</span>
 						</button>
