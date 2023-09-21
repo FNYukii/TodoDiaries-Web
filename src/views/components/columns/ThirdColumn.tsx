@@ -1,8 +1,12 @@
+import AchieveCountAtMonthBarChart from "../charts/AchieveCountAtMonthBarChart"
+
 interface Props {
 	className?: string
 }
 
 function ThirdColumn(props: Props) {
+
+
 
 	return (
 
@@ -10,9 +14,7 @@ function ThirdColumn(props: Props) {
 
 			<h2 className="text-2xl font-bold">統計</h2>
 
-			<div className="mt-4 bg-white px-4 py-3 rounded-xl dark:bg-zinc-800">
-				<p className="text-zinc-500">Vertical bar chart</p>
-			</div>
+			<AchieveCountAtMonthBarChart className="mt-4" />
 
 			<div className="mt-4 bg-white px-4 py-3 rounded-xl dark:bg-zinc-800">
 				<p className="text-zinc-500">Horizontal bar chart</p>

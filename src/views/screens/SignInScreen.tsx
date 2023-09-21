@@ -1,5 +1,5 @@
 import { useState } from "react"
-import URLModal from "../components/others/URLModal"
+import URLModal from "../components/modals/URLModal"
 import SignInSection from "../components/sections/SignInSection"
 import SignUpSection from "../components/sections/SignUpSection"
 

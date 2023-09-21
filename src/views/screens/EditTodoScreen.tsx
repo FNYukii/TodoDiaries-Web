@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
-import URLModal from "../components/others/URLModal"
+import URLModal from "../components/modals/URLModal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin, BsTrash3 } from "react-icons/bs"
 import MyDatePicker from "../components/inputs/MyDatePicker"
@@ -8,7 +8,7 @@ import MyTimePicker from "../components/inputs/MyTimePicker"
 import { useNavigate, useParams } from "react-router-dom"
 import TodoService from "../../utilities/TodoService"
 import Todo from "../../entities/Todo"
-import StateModal from "../components/others/StateModal"
+import StateModal from "../components/modals/StateModal"
 
 function EditTodoScreen() {
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import DynamicTextarea from "../components/inputs/DynamicTextarea"
-import URLModal from "../components/others/URLModal"
+import URLModal from "../components/modals/URLModal"
 import SubmitButton from "../components/buttons/SubmitButton"
 import TodoService from "../../utilities/TodoService"
 import { useNavigate } from "react-router-dom"
