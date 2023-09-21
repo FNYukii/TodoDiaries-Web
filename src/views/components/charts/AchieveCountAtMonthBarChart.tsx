@@ -6,6 +6,7 @@ import Todo from "../../../entities/Todo"
 import AuthService from "../../../utilities/AuthService"
 import TodoService from "../../../utilities/TodoService"
 import { db } from "../../../utilities/firebase"
+import ReactLoading from "react-loading"
 
 interface Props {
 	className?: string
@@ -124,11 +125,22 @@ function AchieveCountAtMonthBarChart(props: Props) {
 			<p className="text-xl">{dayjs().format("YYYY年 M月")}</p>
 
 			{!isLoaded &&
-				<p className="mt-2">Loading...</p>
+				<div className="flex justify-center">
+
+					<ReactLoading
+						type="spin"
+						color="#666"
+						height="20px"
+						width="20px"
+						className="mt-4"
+					/>
+				</div>
 			}
 
 			{isLoaded && data === null &&
-				<p className="mt-2">読み取りに失敗しました</p>
+				<div>
+					<p className="mt-2 text-zinc-500">読み取りに失敗しました</p>
+				</div>
 			}
 
 			{isLoaded && data !== null &&
