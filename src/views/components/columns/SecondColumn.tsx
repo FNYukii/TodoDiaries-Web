@@ -105,23 +105,16 @@ function SecondColumn(props: Props) {
 
 	useEffect(() => {
 
-		listenTodos()
-
-		return () => {
-			if (unsub !== null) {
-				unsub()
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(() => {
-
-		// 既存リスナーデタッチ
+		// 既存リスナーがあればデタッチ
 		if (unsub) unsub()
 
 		// 新リスナー設定
 		listenTodos()
+
+		// クリーンアップ時にリスナーをデタッチ
+		return () => {
+			if (unsub) unsub()
+		}
 
 		// eslint-disable-next-line
 	}, [readLimit])
