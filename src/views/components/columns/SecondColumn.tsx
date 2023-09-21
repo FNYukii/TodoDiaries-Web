@@ -52,6 +52,9 @@ function SecondColumn(props: Props) {
 		// リアルタイムリスナーを設定
 		unsub = onSnapshot(q, async (querySnapshot) => {
 
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {

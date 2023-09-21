@@ -70,7 +70,7 @@ class TodoService {
 
 		} catch (e) {
 
-			console.log("Fail! Error reading todo.", e)
+			console.log("FAIL! Error reading todo.", e)
 		}
 
 		return null
@@ -83,7 +83,7 @@ class TodoService {
 
 		if (uid === null) {
 
-			console.log('Fail! uidを取得できません')
+			console.log('FAIL! uidを取得できません')
 			return null
 		}
 
@@ -119,7 +119,7 @@ class TodoService {
 		} catch (error) {
 
 			// 失敗
-			console.log(`Fail! Todo reading failed. ${error}`)
+			console.log(`FAIL! Todo reading failed. ${error}`)
 			return null
 		}
 	}
@@ -166,7 +166,7 @@ class TodoService {
 
 		} catch (error) {
 
-			console.log(`Failed to Todo creation. ${error}`)
+			console.log(`FAIL! Error to Todo creation. ${error}`)
 			return null
 		}
 	}
@@ -202,7 +202,7 @@ class TodoService {
 
 		} catch (error) {
 
-			console.log(`Failed to Todo creation. ${error}`)
+			console.log(`FAIL! Error to Todo creation. ${error}`)
 			return null
 		}
 	}
@@ -240,7 +240,7 @@ class TodoService {
 
 		} catch (error) {
 
-			console.log(`Fail! Error to update todo. ${error}`)
+			console.log(`FAIL! Error to update todo. ${error}`)
 			return null
 		}
 	}
@@ -269,7 +269,7 @@ class TodoService {
 
 		} catch (error) {
 
-			console.log(`Fail! Error to update todo. ${error}`)
+			console.log(`FAIL! Error to update todo. ${error}`)
 			return null
 		}
 	}
@@ -340,7 +340,7 @@ class TodoService {
 			})
 			.catch((error) => {
 
-				console.log(`Fail! Error deleting todo. ${error}`)
+				console.log(`FAIL! Error deleting todo. ${error}`)
 				return null
 			})
 	}

@@ -32,7 +32,7 @@ function FirstColumn(props: Props) {
 		// 未ログインなら、エラーとする
 		if (userId === null) {
 
-			console.log("Fail! Error listening todos. 未ログイン状態です。")
+			console.log("FAIL! Error listening todos. 未ログイン状態です。")
 			setIsLoadedPinnedTodos(true)
 			return
 		}
@@ -50,6 +50,9 @@ function FirstColumn(props: Props) {
 		// リアルタイムリスナーを設定
 		unsubPinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -65,7 +68,7 @@ function FirstColumn(props: Props) {
 		}, (error) => {
 
 			// エラーならログ出力 & State更新
-			console.log(`Fail! Error listening todos. ${error}`)
+			console.log(`FAIL! Error listening todos. ${error}`)
 			setIsLoadedPinnedTodos(true)
 		})
 	}
@@ -78,7 +81,7 @@ function FirstColumn(props: Props) {
 		// 未ログインなら、エラーとする
 		if (userId === null) {
 
-			console.log("Fail! Error listening todos. 未ログイン状態です。")
+			console.log("FAIL! Error listening todos. 未ログイン状態です。")
 			setIsLoadedUnpinnedTodos(true)
 			return
 		}
@@ -96,6 +99,9 @@ function FirstColumn(props: Props) {
 		// リアルタイムリスナーを設定
 		unsubUnpinnedTodos = onSnapshot(q, async (querySnapshot) => {
 
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -111,7 +117,7 @@ function FirstColumn(props: Props) {
 		}, (error) => {
 
 			// エラーならログ出力 & State更新
-			console.log(`Fail! Error listening todos. ${error}`)
+			console.log(`FAIL! Error listening todos. ${error}`)
 			setIsLoadedUnpinnedTodos(true)
 		})
 	}
