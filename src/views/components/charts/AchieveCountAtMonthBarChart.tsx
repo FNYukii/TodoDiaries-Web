@@ -60,19 +60,41 @@ function AchieveCountAtMonthBarChart(props: Props) {
 				todos.push(todo)
 			})
 
-			// todosの内容を確認
-			// todos.forEach(todo => {
-			// 	console.log(`Todo: ${todo.content}`)
-			// })
-			// console.log(`${todos.length} Todos`)
-
-			// todosをdataに変換
-
 			// 今月の日数
 			const dayCount = dayjs().daysInMonth()
 			console.log(`days: ${dayCount}`)
 
+			// todosを元にdataを生成
+			let data: { day: string, value: number }[] = []
+
+			for (let i = 1; i < dayCount + 1; i++) {
+
+				// この日のTodo達成数
+				let achieveCount = 0
+
+				// 全てのTodoを検査し、この日のTodo達成数を取得する
+				todos.forEach(todo => {
+
+					// Todo達成日時、この日、この日の次の日の3つのDate
+					const achievedAt = todo.achievedAt!
+					const currentDay = dayjs(`${currentYear}-${currentMonth}-${i}`).toDate()
+					const nextDay = dayjs(`${currentYear}-${currentMonth}-${i + 1}`).toDate()
+
+					// 3つのDateを比較して、達成日時が今日と明日の間かどうか判定
+					if (achievedAt >= currentDay && achievedAt < nextDay) {
+						achieveCount += 1
+					}
+				})
+
+				// この日のTodo達成数が取得できたら、配列dataに要素を追加
+				data.push({
+					day: `${i}日`,
+					value: achieveCount
+				})
+			}
+
 			// Stateを更新
+			setData(data)
 			setIsLoaded(true)
 
 		}, (error) => {
@@ -91,12 +113,12 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		return () => {
 			if (unsub !== null) unsub()
 		}
-	}, [])
+	})
 
 	return (
 		<div className={`bg-white px-4 py-3 rounded-xl dark:bg-zinc-800 ${props.className}`}>
-			<p className="text-xl">2023年 9月</p>
-			<p className="text-zinc-500">達成したTodo 32</p>
+			<p className="text-xl">xxxx年 xx月</p>
+			<p className="text-zinc-500">達成したTodo xx</p>
 
 			{!isLoaded &&
 				<p className="mt-2">Loading...</p>
@@ -117,7 +139,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 					<CartesianGrid stroke="#444" />
 					<XAxis dataKey="day" />
 					<YAxis width={20} />
-					<Bar dataKey="todoCount" fill="#3b82f6" />
+					<Bar dataKey="value" fill="#3b82f6" />
 				</BarChart>
 			}
 		</div>
