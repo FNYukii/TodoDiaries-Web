@@ -121,7 +121,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 	})
 
 	return (
-		<div className={`bg-white px-4 py-3 rounded-xl dark:bg-zinc-800 ${props.className}`}>
+		<div className={`bg-white px-4 pt-3 pb-1 rounded-xl dark:bg-zinc-800 ${props.className}`}>
 			<p className="text-xl">{dayjs().format("YYYY年 M月")}</p>
 
 			{!isLoaded &&
@@ -147,7 +147,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 				<div>
 
-					<p className="text-zinc-500">達成したTodo {achieveCountAtMonth ?? "--"}</p>
+					<p className="mt-1 text-zinc-500">達成したTodo {achieveCountAtMonth ?? "--"}</p>
 
 					<BarChart
 						width={300}
@@ -155,9 +155,9 @@ function AchieveCountAtMonthBarChart(props: Props) {
 						data={data}
 						className="mt-2"
 					>
-						<CartesianGrid stroke="#444" />
-						<XAxis dataKey="day" />
-						<YAxis width={20} />
+						<CartesianGrid stroke="#7774" />
+						<XAxis dataKey="day" stroke="#777A"/>
+						<YAxis width={20} stroke="#777A" />
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
 				</div>
