@@ -32,7 +32,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		// 未ログインなら、エラーとする
 		if (userId === null) {
 
-			console.log("Fail! Error listening todos. 未ログイン状態です。")
+			console.log("FAIL! Error listening todos. 未ログイン状態です。")
 			setIsLoaded(true)
 			return
 		}
@@ -56,6 +56,9 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		// リアルタイムリスナーを設定
 		unsub = onSnapshot(q, async (querySnapshot) => {
 
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
 			// Todoの配列を作成
 			let todos: Todo[] = []
 			querySnapshot.forEach((doc) => {
@@ -66,7 +69,6 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 			// 今月の日数
 			const dayCount = dayjs().daysInMonth()
-			console.log(`days: ${dayCount}`)
 
 			// todosを元にdataを生成
 			let data: { day: string, value: number }[] = []
@@ -105,10 +107,9 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		}, (error) => {
 
 			// エラーならログ出力 & State更新
-			console.log(`Fail! Error listening todos. ${error}`)
+			console.log(`FAIL! Error listening todos. ${error}`)
 			setIsLoaded(true)
 		})
-
 	}
 
 	useEffect(() => {
@@ -118,7 +119,8 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		return () => {
 			if (unsub !== null) unsub()
 		}
-	})
+		// eslint-disable-next-line
+	}, [])
 
 	return (
 		<div className={`bg-white px-4 pt-3 pb-1 rounded-xl dark:bg-zinc-800 ${props.className}`}>
@@ -156,7 +158,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
-						<XAxis dataKey="day" stroke="#777A"/>
+						<XAxis dataKey="day" stroke="#777A" />
 						<YAxis width={20} stroke="#777A" />
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
