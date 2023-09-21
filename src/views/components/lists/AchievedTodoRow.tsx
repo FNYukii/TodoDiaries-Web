@@ -2,7 +2,7 @@ import dayjs from "dayjs"
 import Todo from "../../../entities/Todo"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import TodoContextMenu from "../others/TodoContextMenu"
+import TodoContextMenu from "../menus/TodoContextMenu"
 
 interface Props {
 	todo: Todo

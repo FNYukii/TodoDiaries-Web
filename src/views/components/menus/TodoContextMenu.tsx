@@ -4,7 +4,7 @@ import Todo from "../../../entities/Todo"
 import { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import TodoService from "../../../utilities/TodoService"
-import StateModal from "./StateModal"
+import StateModal from "../modals/StateModal"
 
 interface Props {
 	isOpen: boolean

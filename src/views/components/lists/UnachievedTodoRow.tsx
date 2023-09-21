@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import '@szhsin/react-menu/dist/index.css'
 import "@szhsin/react-menu/dist/theme-dark.css"
-import TodoContextMenu from "../others/TodoContextMenu"
+import TodoContextMenu from "../menus/TodoContextMenu"
 
 interface Props {
 	todo: Todo
