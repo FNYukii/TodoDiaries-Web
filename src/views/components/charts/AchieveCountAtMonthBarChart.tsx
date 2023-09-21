@@ -20,6 +20,9 @@ function AchieveCountAtMonthBarChart(props: Props) {
 	const [data, setData] = useState<{ day: string, value: number }[] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
+	// 今月のTodo達成数
+	const [achieveCountAtMonth, setAchieveCountAtMonth] = useState<number | null>(null)
+
 	async function listenTodos() {
 
 		// UserIDを取得
@@ -95,6 +98,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 			// Stateを更新
 			setData(data)
+			setAchieveCountAtMonth(todos.length)
 			setIsLoaded(true)
 
 		}, (error) => {
@@ -117,8 +121,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 	return (
 		<div className={`bg-white px-4 py-3 rounded-xl dark:bg-zinc-800 ${props.className}`}>
-			<p className="text-xl">xxxx年 xx月</p>
-			<p className="text-zinc-500">達成したTodo xx</p>
+			<p className="text-xl">{dayjs().format("YYYY年 M月")}</p>
 
 			{!isLoaded &&
 				<p className="mt-2">Loading...</p>
@@ -130,17 +133,23 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 			{isLoaded && data !== null &&
 
-				<BarChart
-					width={300}
-					height={300}
-					data={data}
-					className="mt-2"
-				>
-					<CartesianGrid stroke="#444" />
-					<XAxis dataKey="day" />
-					<YAxis width={20} />
-					<Bar dataKey="value" fill="#3b82f6" />
-				</BarChart>
+				<div>
+
+					<p className="text-zinc-500">達成したTodo {achieveCountAtMonth ?? "--"}</p>
+
+					<BarChart
+						width={300}
+						height={300}
+						data={data}
+						className="mt-2"
+					>
+						<CartesianGrid stroke="#444" />
+						<XAxis dataKey="day" />
+						<YAxis width={20} />
+						<Bar dataKey="value" fill="#3b82f6" />
+					</BarChart>
+				</div>
+
 			}
 		</div>
 	)
