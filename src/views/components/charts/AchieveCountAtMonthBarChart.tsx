@@ -60,13 +60,17 @@ function AchieveCountAtMonthBarChart(props: Props) {
 				todos.push(todo)
 			})
 
-			// TODO: todosをdataに変換
+			// todosの内容を確認
+			// todos.forEach(todo => {
+			// 	console.log(`Todo: ${todo.content}`)
+			// })
+			// console.log(`${todos.length} Todos`)
 
-			// 動作確認
-			todos.forEach(todo => {
-				console.log(`Todo: ${todo.content}`)
-			})
-			console.log(`${todos.length} Todos`)
+			// todosをdataに変換
+
+			// 今月の日数
+			const dayCount = dayjs().daysInMonth()
+			console.log(`days: ${dayCount}`)
 
 			// Stateを更新
 			setIsLoaded(true)
