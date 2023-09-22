@@ -1,4 +1,3 @@
-import dayjs from "dayjs"
 import { Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import ReactLoading from "react-loading"
@@ -46,7 +45,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 	}, [])
 
 	return (
-		<div className={`bg-white px-4 pt-3 pb-1 rounded-xl dark:bg-zinc-800 ${props.className}`}>
+		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
 
 			{!isLoaded &&
 				<div className="flex justify-center">
@@ -56,7 +55,6 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						color="#666"
 						height="20px"
 						width="20px"
-						className="mt-4"
 					/>
 				</div>
 			}
