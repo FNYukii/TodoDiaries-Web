@@ -77,7 +77,17 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 
 				<div>
 
-					<p>今日のTodo達成数は昨日よりもxxxxです。</p>
+					{data[0].value > data[1].value &&
+						<p>今日のTodo達成数は昨日よりも多いです。</p>
+					}
+
+					{data[0].value < data[1].value &&
+						<p>今日のTodo達成数は昨日よりも少ないです。</p>
+					}
+
+					{data[0].value == data[1].value &&
+						<p>今日のTodo達成数は昨日と同じです。</p>
+					}
 
 					<BarChart
 						width={300}
