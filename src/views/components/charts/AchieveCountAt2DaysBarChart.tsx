@@ -174,7 +174,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
-						<XAxis type="number" stroke="#777A" />
+						<XAxis type="number" stroke="#777A" domain={[0, (dataMax: number) => (dataMax < 5 ? 5 : dataMax)]} />
 						<YAxis type="category" dataKey="label" width={34} stroke="#777A" />
 						<Bar dataKey="value" barSize={30} fill="#3b82f6" />
 					</BarChart>
