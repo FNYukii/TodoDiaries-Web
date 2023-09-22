@@ -14,9 +14,19 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 	let unsub: Unsubscribe | null = null
 
 	// Chartにセットするデータ
-	const [data, setData] = useState<{ day: string, value: number }[] | null>(null)
-	const [isLoaded, setIsLoaded] = useState(false)
+	// const [data, setData] = useState<{ day: string, value: number }[] | null>(null)
+	const [isLoaded, setIsLoaded] = useState(true)
 
+	const data = [
+		{
+			label: "今日",
+			value: 4
+		},
+		{
+			label: "昨日",
+			value: 1
+		}
+	]
 
 	async function listenTodos() {
 
@@ -30,8 +40,6 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 			setIsLoaded(true)
 			return
 		}
-
-		
 	}
 
 	useEffect(() => {
@@ -69,19 +77,21 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 
 				<div>
 
+					<p>今日のTodo達成数は昨日よりもxxxxです。</p>
+
 					<BarChart
 						width={300}
-						height={300}
+						height={200}
 						data={data}
+						layout="vertical"
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
-						<XAxis dataKey="day" stroke="#777A" />
-						<YAxis width={20} stroke="#777A" />
+						<XAxis type="number" stroke="#777A" />
+						<YAxis type="category" dataKey="label" width={34} stroke="#777A" />
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
 				</div>
-
 			}
 		</div>
 	)
