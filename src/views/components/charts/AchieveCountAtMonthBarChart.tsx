@@ -18,7 +18,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 	let unsub: Unsubscribe | null = null
 
 	// Chartにセットするデータ
-	const [data, setData] = useState<{ day: string, value: number }[] | null>(null)
+	const [data, setData] = useState<{ label: string, value: number }[] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	// 今月のTodo達成数
@@ -37,7 +37,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 			return
 		}
 
-		// 今月の開始日と終了日を取得
+		// 今月の開始日時と来月の開始日時を取得
 		const currentYear = dayjs().year()
 		const currentMonth = dayjs().month() + 1
 		const startDate: Date = dayjs(`${currentYear}-${currentMonth}-01`).toDate()
@@ -71,7 +71,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 			const dayCount = dayjs().daysInMonth()
 
 			// todosを元にdataを生成
-			let data: { day: string, value: number }[] = []
+			let data: { label: string, value: number }[] = []
 
 			for (let i = 1; i < dayCount + 1; i++) {
 
@@ -94,7 +94,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 				// この日のTodo達成数が取得できたら、配列dataに要素を追加
 				data.push({
-					day: `${i}日`,
+					label: `${i}日`,
 					value: achieveCount
 				})
 			}
@@ -123,7 +123,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 	}, [])
 
 	return (
-		<div className={`bg-white px-4 pt-3 pb-1 rounded-xl dark:bg-zinc-800 ${props.className}`}>
+		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
 			<p className="text-xl">{dayjs().format("YYYY年 M月")}</p>
 
 			{!isLoaded &&
@@ -158,7 +158,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
-						<XAxis dataKey="day" stroke="#777A" />
+						<XAxis dataKey="label" height={16} stroke="#777A" />
 						<YAxis width={20} stroke="#777A" />
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
