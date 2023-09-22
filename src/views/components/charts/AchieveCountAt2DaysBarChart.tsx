@@ -85,7 +85,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						<p>今日のTodo達成数は昨日よりも少ないです。</p>
 					}
 
-					{data[0].value == data[1].value &&
+					{data[0].value === data[1].value &&
 						<p>今日のTodo達成数は昨日と同じです。</p>
 					}
 
