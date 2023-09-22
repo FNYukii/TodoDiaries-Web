@@ -37,7 +37,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 			return
 		}
 
-		// 今月の開始日と終了日を取得
+		// 今月の開始日時と来月の開始日時を取得
 		const currentYear = dayjs().year()
 		const currentMonth = dayjs().month() + 1
 		const startDate: Date = dayjs(`${currentYear}-${currentMonth}-01`).toDate()
