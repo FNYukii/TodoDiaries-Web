@@ -18,7 +18,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 	let unsub: Unsubscribe | null = null
 
 	// Chartにセットするデータ
-	const [data, setData] = useState<{ day: string, value: number }[] | null>(null)
+	const [data, setData] = useState<{ label: string, value: number }[] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	async function listenTodos() {
@@ -34,10 +34,10 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 			return
 		}
 
-		// 昨日の開始日時と明後日の開始日時を取得
+		// 昨日の開始日時と明日の開始日時を取得
 		const now = dayjs()
-		const startDate: Date = dayjs(`${now.year()}-${now.month()}-${now.date()}`).toDate()
-		const endDate: Date = dayjs(`${now.year()}-${now.month()}-${now.date() + 1}`).toDate()
+		const startDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
+		const endDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
 
 		// 読み取りクエリを作成
 		const q = query(
@@ -62,6 +62,54 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 				const todo = TodoService.toTodo(doc)
 				todos.push(todo)
 			})
+
+			// 昨日のTodo達成数を取得
+			let achieveCountAtYesterday = 0
+			todos.forEach(todo => {
+
+				// Todo達成日時、昨日、今日の3つのDate
+				const achievedAt = todo.achievedAt!
+				const now = dayjs()
+				const yesterday = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
+				const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
+
+				// 3つのDateを比較して、達成日時が昨日と今日の間かどうか判定
+				if (achievedAt >= yesterday && achievedAt < today) {
+					achieveCountAtYesterday += 1
+				}
+			})
+
+			// 今日のTodo達成数を取得
+			let achieveCountAtToday = 0
+			todos.forEach(todo => {
+
+				// Todo達成日時、今日、明日の3つのDate
+				const achievedAt = todo.achievedAt!
+				const now = dayjs()
+				const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
+				const tomorrow = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
+
+				// 3つのDateを比較して、達成日時が今日と明日の間かどうか判定
+				if (achievedAt >= today && achievedAt < tomorrow) {
+					achieveCountAtToday += 1
+				}
+			})
+
+			// 昨日と今日のTodo達成数をもとに、dataを生成する
+			const data = [
+				{
+					label: "今日",
+					value: achieveCountAtToday
+				},
+				{
+					label: "昨日",
+					value: achieveCountAtYesterday
+				}
+			]
+
+			// 画面に反映
+			setData(data)
+			setIsLoaded(true)
 
 		}, (error) => {
 
