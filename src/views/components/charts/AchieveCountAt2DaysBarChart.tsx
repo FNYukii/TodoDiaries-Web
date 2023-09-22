@@ -89,7 +89,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						<CartesianGrid stroke="#7774" />
 						<XAxis type="number" stroke="#777A" />
 						<YAxis type="category" dataKey="label" width={34} stroke="#777A" />
-						<Bar dataKey="value" fill="#3b82f6" />
+						<Bar dataKey="value" barSize={30} fill="#3b82f6" />
 					</BarChart>
 				</div>
 			}
