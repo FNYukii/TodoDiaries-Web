@@ -1,7 +1,7 @@
 import { Unsubscribe, collection, endAt, limit, onSnapshot, orderBy, query, startAt, where } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import ReactLoading from "react-loading"
-import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts"
+import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Cell } from "recharts"
 import AuthService from "../../../utilities/AuthService"
 import dayjs from "dayjs"
 import { db } from "../../../utilities/firebase"
@@ -176,7 +176,14 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						<CartesianGrid stroke="#7774" />
 						<XAxis type="number" stroke="#777A" domain={[0, (dataMax: number) => (dataMax < 5 ? 5 : dataMax)]} />
 						<YAxis type="category" dataKey="label" width={34} stroke="#777A" />
-						<Bar dataKey="value" barSize={30} fill="#3b82f6" />
+						<Bar dataKey="value" barSize={30} >
+
+							{
+								data.map((entry, index) => (
+									<Cell key={index} fill={index === 0 ? "#3b82f6" : "#666"} />
+								))
+							}
+						</Bar>
 					</BarChart>
 				</div>
 			}
