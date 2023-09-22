@@ -44,6 +44,7 @@ class TodoService {
 
 			// データ読み取り
 			const doc = await getDocFromCache(docRef)
+			console.log(`SUCCESS! Read 1 Todo from cache.`)
 
 			// フィールドの値を取得
 			const id: string = doc.id ?? ""
@@ -101,6 +102,7 @@ class TodoService {
 
 			// サーバーorキャッシュから読み取り
 			const querySnapshot = await getDocs(q)
+			console.log(`SUCCESS! Read 1 Todo.`)
 
 			// 成功
 			// orderの最大値/最小値を取得する
@@ -161,6 +163,7 @@ class TodoService {
 				createdAt: serverTimestamp(),
 				achievedAt: null
 			})
+			console.log(`SUCCESS! Created 1 Todo.`)
 
 			return ref.id
 
@@ -197,6 +200,7 @@ class TodoService {
 				createdAt: serverTimestamp(),
 				achievedAt: achievedAt
 			})
+			console.log(`SUCCESS! Created 1 Todo.`)
 
 			return ref.id
 
@@ -235,6 +239,7 @@ class TodoService {
 				isPinned: isPinned,
 				achievedAt: achievedAt
 			})
+			console.log(`SUCCESS! Updated 1 Todo.`)
 
 			return todoId
 
@@ -264,6 +269,7 @@ class TodoService {
 			await updateDoc(todoRef, {
 				order: order
 			})
+			console.log(`SUCCESS! Updated 1 Todo.`)
 
 			return todoId
 
@@ -275,8 +281,6 @@ class TodoService {
 	}
 
 	static async moveTodo(todos: Todo[], from: number, destination: number): Promise<string | null> {
-
-		console.log(`${from} -> ${destination}`)
 
 		// 移動しないなら終了
 		if (from === destination) {
@@ -335,6 +339,8 @@ class TodoService {
 
 		return deleteDoc(doc(db, "todos", todoId))
 			.then(() => {
+
+				console.log(`SUCCESS! Deleted 1 Todo.`)
 
 				return todoId
 			})
