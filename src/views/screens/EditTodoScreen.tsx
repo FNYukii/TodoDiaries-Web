@@ -160,7 +160,7 @@ function EditTodoScreen() {
 			document.removeEventListener("keydown", onKeyDown, false)
 		}
 		// eslint-disable-next-line
-	}, [content])
+	}, [content, isPinned, achievedAt])
 
 	return (
 

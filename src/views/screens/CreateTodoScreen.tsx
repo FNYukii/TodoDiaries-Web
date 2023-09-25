@@ -42,7 +42,7 @@ function CreateTodoScreen() {
 			document.removeEventListener("keydown", onKeyDown, false)
 		}
 		// eslint-disable-next-line
-	}, [content])
+	}, [content, isPinned, achievedAt])
 
 	async function createTodo() {
 
