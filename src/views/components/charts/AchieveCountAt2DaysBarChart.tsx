@@ -180,7 +180,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 
 							{
 								data.map((entry, index) => (
-									<Cell key={index} fill={index === 0 ? "#3b82f6" : "#666"} />
+									<Cell key={index} fill={index === 0 ? "#3b82f6" : "#777"} />
 								))
 							}
 						</Bar>
