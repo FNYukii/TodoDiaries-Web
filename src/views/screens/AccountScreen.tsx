@@ -28,8 +28,8 @@ function AccountScreen() {
 				{isShowSignOutModal &&
 
 					<StateModal
-						title="Todoを削除してもよろしいですか?"
-						acceptLabel="削除"
+						title="サインアウトしてもよろしいですか?"
+						acceptLabel="サインアウト"
 						destractiveDialog
 						onClose={() => setIsShowSignOutModal(false)}
 						onAccept={async () => {
