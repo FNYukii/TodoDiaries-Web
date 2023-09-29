@@ -40,7 +40,7 @@ function App() {
 		// スプラッシュ画面の最低表示時間を設定
 		setTimeout(() => {
 			setIsTimeouted(true)
-		}, 500);
+		}, 200);
 
 		// ログイン状態を取得
 		onAuthStateChanged(auth, (user) => {
