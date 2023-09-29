@@ -20,13 +20,6 @@ class AuthService {
 		})
 	}
 
-	static uidFromLocalStorage(): string | null {
-
-		// Reactページ生成直後はAuthからUIDを取得できないので、LocalStorageから取得する
-		const uid = localStorage.getItem('uid')
-		return uid
-	}
-
 	static email(): string | null {
 
 		const user = auth.currentUser
