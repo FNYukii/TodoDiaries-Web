@@ -32,10 +32,17 @@ function App() {
 	// ログイン状態
 	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [isLoaded, setIsLoaded] = useState(false)
+	const [isTimeouted, setIsTimeouted] = useState(false)
 
 	// ログイン状態を監視
 	useEffect(() => {
 
+		// スプラッシュ画面の最低表示時間を設定
+		setTimeout(() => {
+			setIsTimeouted(true)
+		}, 500);
+
+		// ログイン状態を取得
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 
@@ -58,7 +65,11 @@ function App() {
 				<SplashScreen />
 			}
 
-			{isLoaded && !isSignedIn &&
+			{isLoaded && !isTimeouted &&
+				<SplashScreen />
+			}
+
+			{isLoaded && isTimeouted && !isSignedIn &&
 
 				<div>
 
@@ -79,7 +90,7 @@ function App() {
 				</div>
 			}
 
-			{isLoaded && isSignedIn &&
+			{isLoaded && isTimeouted && isSignedIn &&
 
 				<div>
 
