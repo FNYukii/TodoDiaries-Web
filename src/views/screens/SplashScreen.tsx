@@ -1,12 +1,10 @@
 function SplashScreen() {
 
 	return (
-		<div>
 
-			<div>
+		<div className="bg-white dark:bg-black flex justify-center items-center h-screen">
 
-				<h1>Todo Diaries</h1>
-			</div>
+			<h1 className="text-center text-5xl">Todo Diaries</h1>
 		</div>
 	)
 }
