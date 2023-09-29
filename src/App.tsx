@@ -7,10 +7,10 @@ import { onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { auth } from "./utilities/firebase"
 import AccountScreen from "./views/screens/AccountScreen"
-import AuthService from "./utilities/AuthService"
 import CreateTodoScreen from "./views/screens/CreateTodoScreen"
 import EditTodoScreen from "./views/screens/EditTodoScreen"
 import NKeyupNavigator from "./views/components/others/NKeyupNavigator"
+import SplashScreen from "./views/screens/SplashScreen"
 
 function App() {
 
@@ -31,15 +31,16 @@ function App() {
 
 	// ログイン状態
 	const [isSignedIn, setIsSignedIn] = useState(false)
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	// ログイン状態を監視
 	useEffect(() => {
 
 		// Auth初期化前はAuthStateを取得できないので、それまではLocalStorageに保存しておいたUIDを確認
-		const uid = AuthService.uidFromLocalStorage()
-		if (uid) {
-			setIsSignedIn(true)
-		}
+		// const uid = AuthService.uidFromLocalStorage()
+		// if (uid) {
+		// 	setIsSignedIn(true)
+		// }
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -51,28 +52,61 @@ function App() {
 				// 未ログイン
 				setIsSignedIn(false)
 			}
+
+			setIsLoaded(true)
 		})
 	}, [])
 
 	return (
-		<div className="dark:text-white">
+		<div>
 
-			<Routes location={isShowModal ? previousPath : currentPath}>
+			{!isLoaded &&
+				<SplashScreen />
+			}
 
-				<Route path="/" element={isSignedIn ? <HomeScreen /> : <WelcomeScreen />} />
-				<Route path="*" element={<NotFoundScreen />} />
-			</Routes>
+			{isLoaded && !isSignedIn &&
 
-			<Routes location={isShowModal ? currentPath : ""}>
+				<div>
 
-				<Route path="/" element={isSignedIn ? <NKeyupNavigator /> : <div />} />
+					<Routes location={isShowModal ? previousPath : currentPath}>
 
-				<Route path="/sign-in" element={isSignedIn ? <NotFoundScreen onForeground /> : <SignInScreen />} />
-				<Route path="/new" element={isSignedIn ? <CreateTodoScreen /> : <NotFoundScreen onForeground />} />
-				<Route path="/todos/:todoId" element={isSignedIn ? <EditTodoScreen /> : <NotFoundScreen onForeground />} />
-				<Route path="/account" element={isSignedIn ? <AccountScreen /> : <NotFoundScreen onForeground />} />
-				<Route path='*' element={<div />} />
-			</Routes>
+						<Route path="/" element={<WelcomeScreen />} />
+						<Route path="*" element={<NotFoundScreen />} />
+					</Routes>
+
+					<Routes location={isShowModal ? currentPath : ""}>
+
+						<Route path="/sign-in" element={<SignInScreen />} />
+						<Route path="/new" element={<NotFoundScreen onForeground />} />
+						<Route path="/todos/:todoId" element={<NotFoundScreen onForeground />} />
+						<Route path="/account" element={<NotFoundScreen onForeground />} />
+						<Route path='*' element={<div />} />
+					</Routes>
+				</div>
+			}
+
+			{isLoaded && isSignedIn &&
+
+				<div>
+
+					<Routes location={isShowModal ? previousPath : currentPath}>
+
+						<Route path="/" element={<HomeScreen />} />
+						<Route path="*" element={<NotFoundScreen />} />
+					</Routes>
+
+					<Routes location={isShowModal ? currentPath : ""}>
+
+						<Route path="/" element={<NKeyupNavigator />} />
+
+						<Route path="/sign-in" element={<NotFoundScreen onForeground />} />
+						<Route path="/new" element={<CreateTodoScreen />} />
+						<Route path="/todos/:todoId" element={<EditTodoScreen />} />
+						<Route path="/account" element={<AccountScreen />} />
+						<Route path='*' element={<div />} />
+					</Routes>
+				</div>
+			}
 		</div>
 	)
 }
