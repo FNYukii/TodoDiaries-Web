@@ -17,8 +17,7 @@ function ThirdColumn(props: Props) {
 
 			<AchieveCountAtMonthBarChart className="mt-4" />
 
-			<p className="mt-4 text-zinc-500">ハイライト</p>
-			<AchieveCountAt2DaysBarChart className="mt-1"/>
+			<AchieveCountAt2DaysBarChart className="mt-8"/>
 		</section>
 	)
 }
