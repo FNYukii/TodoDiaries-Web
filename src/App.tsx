@@ -61,8 +61,12 @@ function App() {
 	return (
 		<div>
 
-			{!isLoaded &&
+			{!isLoaded && !isTimeouted &&
 				<SplashScreen />
+			}
+
+			{!isLoaded && isTimeouted &&
+				<SplashScreen showLoading />
 			}
 
 			{isLoaded && !isTimeouted &&
