@@ -159,7 +159,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 					>
 						<CartesianGrid stroke="#7774" />
 						<XAxis dataKey="label" height={16} stroke="#777A" />
-						<YAxis width={20} stroke="#777A" />
+						<YAxis width={20} stroke="#777A" domain={[0, (dataMax: number) => (dataMax < 5 ? 5 : dataMax)]} tickCount={6} />
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
 				</div>
