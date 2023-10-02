@@ -8,7 +8,6 @@ import TodoContextMenu from "../menus/TodoContextMenu"
 
 interface Props {
 	todo: Todo
-
 	className?: string
 }
 
@@ -53,7 +52,6 @@ function UnachievedTodoRow(props: Props) {
 
 					<p className="whitespace-pre-line text-left">{props.todo.content}</p>
 				</button>
-
 			</div>
 
 			<TodoContextMenu isOpen={isOpen} setIsOpen={setIsOpen} anchorPoint={anchorPoint} todo={props.todo} />
