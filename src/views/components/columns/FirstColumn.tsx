@@ -144,7 +144,7 @@ function FirstColumn(props: Props) {
 
 	return (
 
-		<div className={props.className}>
+		<div className={`pb-8 ${props.className}`}>
 
 			<div className="flex justify-between">
 
