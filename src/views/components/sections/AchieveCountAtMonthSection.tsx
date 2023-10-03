@@ -23,11 +23,11 @@ function AchieveCountAtMonthSection(props: Props) {
 
 					<div className="gap-2 mt-negative-3 mr-negative-3">
 
-						<button onClick={() => setOffset(value => value - 1)} className="p-3 hover:bg-zinc-100 rounded-full transition">
+						<button onClick={() => setOffset(value => value - 1)} className="p-3 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-full transition">
 							<MdKeyboardArrowLeft className="text-2xl text-zinc-500" />
 						</button>
 
-						<button onClick={() => setOffset(value => value + 1)} className="p-3 hover:bg-zinc-100 rounded-full transition">
+						<button onClick={() => setOffset(value => value + 1)} className="p-3 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-full transition">
 							<MdKeyboardArrowRight className="text-2xl text-zinc-500" />
 						</button>
 					</div>
