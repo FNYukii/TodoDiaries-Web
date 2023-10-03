@@ -28,8 +28,12 @@
 		width: 400px;
 	}
 
-	.mt-negative-3 {
-		margin-top: -0.75rem;
+	.mt-negative-2 {
+		margin-top: -0.5rem;
+	}
+
+	.mr-negative-2 {
+		margin-right: -0.5rem;
 	}
 
 	.mr-negative-3 {
