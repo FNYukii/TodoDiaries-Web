@@ -9,6 +9,7 @@ import { db } from "../../../utilities/firebase"
 import ReactLoading from "react-loading"
 
 interface Props {
+	offset: number
 	className?: string
 }
 
@@ -38,8 +39,10 @@ function AchieveCountAtMonthBarChart(props: Props) {
 		}
 
 		// 今月の開始日時と来月の開始日時を取得
-		const currentYear = dayjs().year()
-		const currentMonth = dayjs().month() + 1
+		const now = dayjs()
+		const shiftedNow = now.add(props.offset, 'month')
+		const currentYear = shiftedNow.year()
+		const currentMonth = shiftedNow.month() + 1
 		const startDate: Date = dayjs(`${currentYear}-${currentMonth}-01`).toDate()
 		const endDate: Date = dayjs(`${currentYear}-${currentMonth + 1}-01`).toDate()
 
@@ -114,17 +117,19 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 	useEffect(() => {
 
+		// リスナーがあればデタッチ
+		if (unsub !== null) unsub()
+
 		listenTodos()
 
 		return () => {
 			if (unsub !== null) unsub()
 		}
 		// eslint-disable-next-line
-	}, [])
+	}, [props.offset])
 
 	return (
-		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
-			<p className="text-xl">{dayjs().format("YYYY年 M月")}</p>
+		<div className={` ${props.className}`}>
 
 			{!isLoaded &&
 				<div className="flex justify-center">
@@ -163,7 +168,6 @@ function AchieveCountAtMonthBarChart(props: Props) {
 						<Bar dataKey="value" fill="#3b82f6" />
 					</BarChart>
 				</div>
-
 			}
 		</div>
 	)
