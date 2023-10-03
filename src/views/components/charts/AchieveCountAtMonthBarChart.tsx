@@ -126,8 +126,8 @@ function AchieveCountAtMonthBarChart(props: Props) {
 	}, [])
 
 	return (
-		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
-			<p className="text-xl">{dayjs().add(props.offset, 'month').format("YYYY年 M月")}</p>
+		<div className={` ${props.className}`}>
+			
 
 			{!isLoaded &&
 				<div className="flex justify-center">

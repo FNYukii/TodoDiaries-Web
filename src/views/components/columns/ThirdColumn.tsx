@@ -1,5 +1,5 @@
 import AchieveCountAt2DaysBarChart from "../charts/AchieveCountAt2DaysBarChart"
-import AchieveCountAtMonthBarChart from "../charts/AchieveCountAtMonthBarChart"
+import AchieveCountAtMonthSection from "../sections/AchieveCountAtMonthSection"
 
 interface Props {
 	className?: string
@@ -13,7 +13,7 @@ function ThirdColumn(props: Props) {
 
 			<h2 className="text-2xl font-bold">統計</h2>
 
-			<AchieveCountAtMonthBarChart offset={0} className="mt-4" />
+			<AchieveCountAtMonthSection className="mt-4"/>
 
 			<AchieveCountAt2DaysBarChart className="mt-8" />
 		</section>
