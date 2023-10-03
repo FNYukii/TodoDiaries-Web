@@ -117,17 +117,20 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 	useEffect(() => {
 
+		// リスナーがあればデタッチ
+		if (unsub !== null) unsub()
+
 		listenTodos()
 
 		return () => {
 			if (unsub !== null) unsub()
 		}
 		// eslint-disable-next-line
-	}, [])
+	}, [props.offset])
 
 	return (
 		<div className={` ${props.className}`}>
-			
+
 
 			{!isLoaded &&
 				<div className="flex justify-center">
