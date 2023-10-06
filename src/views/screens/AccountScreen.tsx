@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import AuthService from "../../utilities/AuthService";
-import URLModal from "../components/modals/URLModal";
-import { useState } from "react";
-import StateModal from "../components/modals/StateModal";
+import { useNavigate } from "react-router-dom"
+import AuthService from "../../utilities/AuthService"
+import URLModal from "../components/modals/URLModal"
+import { useState } from "react"
+import StateModal from "../components/modals/StateModal"
 
 function AccountScreen() {
 
@@ -51,7 +51,7 @@ function AccountScreen() {
 				}
 			</div>
 		</URLModal>
-	);
+	)
 }
 
-export default AccountScreen;
+export default AccountScreen
