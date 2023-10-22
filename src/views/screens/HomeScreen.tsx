@@ -10,7 +10,6 @@ function HomeScreen() {
 
 	document.title = "Todo Diaries"
 
-	// eslint-disable-next-line
 	const [tab, setTab] = useState(1)
 
 	return (
@@ -29,18 +28,18 @@ function HomeScreen() {
 				</div>
 			</div>
 
-			<div className="border-t px-4 py-4 flex justify-around gap-4">
+			<div className="sm:hidden sticky top-full border-t px-4 py-4 flex justify-around gap-4">
 
 				<button onClick={() => setTab(1)}>
-					<AiOutlineCheck className={`text-2xl ${tab === 1 ? "text-blue-500" : "text-zinc-500"}`}/>
+					<AiOutlineCheck className={`text-2xl ${tab === 1 ? "text-blue-500" : "text-zinc-500"}`} />
 				</button>
 
 				<button onClick={() => setTab(2)}>
-					<BsCalendarCheck className={`text-2xl ${tab === 2 ? "text-blue-500" : "text-zinc-500"}`}/>
+					<BsCalendarCheck className={`text-2xl ${tab === 2 ? "text-blue-500" : "text-zinc-500"}`} />
 				</button>
 
 				<button onClick={() => setTab(3)}>
-					<BsBarChartLine className={`text-2xl ${tab === 3 ? "text-blue-500" : "text-zinc-500"}`}/>
+					<BsBarChartLine className={`text-2xl ${tab === 3 ? "text-blue-500" : "text-zinc-500"}`} />
 				</button>
 			</div>
 		</div>
