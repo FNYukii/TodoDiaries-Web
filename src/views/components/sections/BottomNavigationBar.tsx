@@ -14,7 +14,7 @@ function BottomNavigationBar(props: Props) {
 
 		<div className={props.className}>
 
-			<div className="border-t px-4 py-4 flex justify-around gap-4">
+			<div className="border-t border-zinc-200 dark:border-zinc-900 px-4 py-4 flex justify-around gap-4">
 
 				<button onClick={() => props.setTab(1)}>
 					<AiOutlineCheck className={`text-2xl ${props.tab === 1 ? "text-blue-500" : "text-zinc-500"}`} />
