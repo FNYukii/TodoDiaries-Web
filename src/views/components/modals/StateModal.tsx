@@ -43,7 +43,7 @@ function StateModal(props: Props) {
 
 			<div onClick={props.onClose} className="w-full h-full bg-black/30 dark:bg-white/20"></div>
 
-			<div className="absolute bg-white rounded-xl md:width-400 w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
+			<div className="absolute bg-white rounded-xl md:w-[400px] w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
 
 				<div className="pt-4 pl-4">
 

@@ -28,7 +28,7 @@ function WelcomeScreen() {
 
 			<Header />
 
-			<main className="mt-4 pb-16 w-full mx-auto px-4 lg:width-lg lg:px-0">
+			<main className="mt-4 pb-16 w-full mx-auto px-4 lg:w-[1024px] lg:px-0">
 
 				<section className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 

@@ -4,30 +4,6 @@
 
 @layer components {
 
-	.width-xl {
-		width: 1280px;
-	}
-
-	.width-lg {
-		width: 1024px;
-	}
-
-	.width-md {
-		width: 768px;
-	}
-
-	.width-sm {
-		width: 640px;
-	}
-
-	.width-600 {
-		width: 600px;
-	}
-
-	.width-400 {
-		width: 400px;
-	}
-
 	.mt-negative-2 {
 		margin-top: -0.5rem;
 	}

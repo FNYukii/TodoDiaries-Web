@@ -10,7 +10,7 @@ function Header(props: Props) {
 
 	return (
 
-		<header className='w-full mx-auto px-4 lg:width-lg lg:px-0'>
+		<header className='w-full mx-auto px-4 lg:w-[1024px] lg:px-0'>
 
 			<div className='py-1 flex justify-between items-center'>
 

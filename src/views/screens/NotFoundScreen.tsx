@@ -15,7 +15,7 @@ function NotFoundScreen(props: Props) {
 
 			<Header />
 
-			<main className="mt-4 w-full mx-auto px-4 lg:width-lg lg:px-0">
+			<main className="mt-4 w-full mx-auto px-4 lg:w-[1024px] lg:px-0">
 
 				<h1 className="text-2xl font-bold text-center">Page not found</h1>
 				<p className="mt-2 text-center">このページは存在しないか、現在のサインイン状態ではアクセスできません。</p>
