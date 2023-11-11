@@ -7,6 +7,7 @@ import dayjs from "dayjs"
 import { db } from "../../../utilities/firebase"
 import Todo from "../../../entities/Todo"
 import TodoService from "../../../utilities/TodoService"
+import { useMediaQuery } from "@mui/material"
 
 interface Props {
 	className?: string
@@ -129,6 +130,8 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 		// eslint-disable-next-line
 	}, [])
 
+	const isLightMode = useMediaQuery('(prefers-color-scheme: dark)')
+
 	return (
 		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
 
@@ -174,13 +177,15 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
+
 						<XAxis type="number" stroke="#777A" domain={[0, (dataMax: number) => (dataMax < 5 ? 5 : dataMax)]} tickCount={6} />
 						<YAxis type="category" dataKey="label" width={34} stroke="#777A" />
+
 						<Bar dataKey="value" barSize={30} >
 
 							{
 								data.map((entry, index) => (
-									<Cell key={index} fill={index === 0 ? "#3b82f6" : "#777"} />
+									<Cell key={index} fill={index === 0 ? "#3b82f6" : `${isLightMode ? "#555" : "#aaa"}`} />
 								))
 							}
 						</Bar>
