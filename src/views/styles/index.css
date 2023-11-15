@@ -4,34 +4,6 @@
 
 @layer components {
 
-	.mt-negative-2 {
-		margin-top: -0.5rem;
-	}
-
-	.mr-negative-2 {
-		margin-right: -0.5rem;
-	}
-
-	.mr-negative-3 {
-		margin-right: -0.75rem;
-	}
-
-	.mr-negative-4 {
-		margin-right: -1rem;
-	}
-
-	.ml-negative-3 {
-		margin-left: -0.75rem;
-	}
-
-	.ml-negative-4 {
-		margin-left: -1rem;
-	}
-
-	.scrollbar-none::-webkit-scrollbar {
-		@apply hidden
-	}
-
 	.scrollbar-styled {
 		scrollbar-gutter: stable;
 	}
@@ -46,5 +18,14 @@
 
 	.scrollbar-styled:hover::-webkit-scrollbar-thumb {
 		@apply bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-400 dark:hover:bg-zinc-700 rounded-full
+	}
+
+
+	.scrollbar-left {
+		direction: rtl;
+	}
+
+	.scrollbar-left * {
+		direction: ltr;
 	}
 }

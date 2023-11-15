@@ -39,7 +39,7 @@ function URLModal(props: Props) {
 
 			<div className="absolute pt-4 px-8 bg-white rounded-xl md:w-[600px] w-11/12 max-height-screen-90 overflow-y-auto dark:bg-black">
 
-				<button onClick={() => navigate(-1)} className="ml-negative-4 p-4 transition rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900">
+				<button onClick={() => navigate(-1)} className="ml-[-1rem] p-4 transition rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900">
 					<MdOutlineClose className="text-2xl text-zinc-500" />
 				</button>
 

@@ -176,7 +176,7 @@ function EditTodoScreen() {
 
 					<div className="flex gap-2 items-center">
 
-						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="ml-negative-3 p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent dark:disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
+						<button type="button" onClick={() => setIsPinned(!isPinned)} disabled={achievedAt !== null} className="ml-[-0.75rem] p-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition disabled:bg-transparent dark:disabled:bg-transparent disabled:text-zinc-300 dark:disabled:text-zinc-700">
 
 							{!isPinned &&
 								<BsPin className="text-xl" />
@@ -245,7 +245,7 @@ function EditTodoScreen() {
 						}
 					</div>
 
-					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} className="mr-negative-4" />
+					<SubmitButton text="完了" isLoading={isLoading} disabled={content === ""} className="mr-[-1rem]" />
 				</div>
 			</form>
 		</URLModal>
