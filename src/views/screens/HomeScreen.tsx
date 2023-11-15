@@ -21,9 +21,9 @@ function HomeScreen() {
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
 
-					<FirstColumn className={`pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled ${tab === 1 ? "block" : "hidden sm:block"}`} />
-					<SecondColumn className={`pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled ${tab === 2 ? "block" : "hidden sm:block"}`} />
-					<ThirdColumn className={`pt-4 overflow-y-auto ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
+					<FirstColumn className={`pt-4 pb-8 pr-2 overflow-y-auto scrollbar-styled ${tab === 1 ? "block" : "hidden sm:block"}`} />
+					<SecondColumn className={`pt-4 pb-7 pr-2 overflow-y-auto scrollbar-styled ${tab === 2 ? "block" : "hidden sm:block"}`} />
+					<ThirdColumn className={`pt-4 pb-8 overflow-y-auto ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
 				</div>
 			</div>
 
