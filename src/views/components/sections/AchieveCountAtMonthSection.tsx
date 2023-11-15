@@ -21,7 +21,7 @@ function AchieveCountAtMonthSection(props: Props) {
 
 					<span className="text-xl">{dayjs().add(offset, 'month').format("YYYY年 M月")}</span>
 
-					<div className="gap-2 mt-negative-2 mr-negative-2">
+					<div className="gap-2 mt-[-0.5rem] mr-[-0.5rem]">
 
 						<button onClick={() => setOffset(value => value - 1)} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-full transition">
 							<MdKeyboardArrowLeft className="text-2xl text-zinc-500" />
