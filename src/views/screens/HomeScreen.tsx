@@ -23,7 +23,7 @@ function HomeScreen() {
 
 					<FirstColumn className={`pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled ${tab === 1 ? "block" : "hidden sm:block"}`} />
 					<SecondColumn className={`pt-4 pb-8 pr-2 h-full overflow-y-auto scrollbar-styled ${tab === 2 ? "block" : "hidden sm:block"}`} />
-					<ThirdColumn className={`pt-4 ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
+					<ThirdColumn className={`pt-4 overflow-y-auto ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
 				</div>
 			</div>
 
