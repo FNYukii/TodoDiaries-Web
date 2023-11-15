@@ -17,15 +17,15 @@ function HomeScreen() {
 
 			<Header showAccountButton />
 
-			<div className="w-full mx-auto px-4 lg:w-[1024px] lg:px-0 overflow-y-auto scrollbar-none">
+			<main className="w-full mx-auto px-4 lg:w-[1024px] lg:px-0   overflow-y-hidden">
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 h-full   overflow-x-visible">
 
 					<FirstColumn className={`pt-4 pb-8 pr-2 scrollbar-styled overflow-y-auto ${tab === 1 ? "block" : "hidden sm:block"}`} />
 					<SecondColumn className={`pt-4 pb-7 pr-2 scrollbar-styled overflow-y-auto ${tab === 2 ? "block" : "hidden sm:block"}`} />
-					<ThirdColumn className={`pt-4 pb-8 pr-2 scrollbar-styled overflow-y-auto ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
+					<ThirdColumn className={`pt-4 pb-8 pr-2 mr-[-1rem] scrollbar-styled overflow-y-auto overflow-x-visible ${tab === 3 ? "block sm:hidden lg:block" : "hidden lg:block"}`} />
 				</div>
-			</div>
+			</main>
 
 			<BottomNavigationBar tab={tab} setTab={setTab} className="sm:hidden sticky top-full"/>
 		</div>

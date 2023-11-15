@@ -4,10 +4,6 @@
 
 @layer components {
 
-	.scrollbar-none::-webkit-scrollbar {
-		@apply hidden
-	}
-
 	.scrollbar-styled {
 		scrollbar-gutter: stable;
 	}
