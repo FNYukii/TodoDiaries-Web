@@ -37,16 +37,9 @@ class AuthService {
 
 		return signInWithPopup(auth, provider)
 			.then((result) => {
-
-				// Google APIにアクセスするために、Googleアクセストークンを取得
-				// const credential = GoogleAuthProvider.credentialFromResult(result)
-				// const token = credential.accessToken
-
+				
 				// サインインしたユーザーのUIDを取得
 				const uid = result.user.uid
-
-				// LocalStorageにUIDを保存
-				localStorage.setItem('uid', uid)
 
 				// UIDを返す
 				return uid
@@ -78,9 +71,6 @@ class AuthService {
 			.then(() => {
 
 				// 成功
-				// LocalStorageに保存していたUIDの値を削除
-				localStorage.removeItem('uid')
-
 				return uid
 			})
 			.catch((error) => {
