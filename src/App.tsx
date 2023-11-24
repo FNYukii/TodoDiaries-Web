@@ -60,16 +60,7 @@ function App() {
 
 	return (
 		<div>
-
-			{!isLoaded && !is200msPassed &&
-				<SplashScreen />
-			}
-
-			{!isLoaded && is200msPassed &&
-				<SplashScreen />
-			}
-
-			{isLoaded && !is200msPassed &&
+			{(!isLoaded || !is200msPassed) &&
 				<SplashScreen />
 			}
 
