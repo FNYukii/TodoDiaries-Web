@@ -3,10 +3,10 @@ import NavLinkToModal from "../others/NavLinkToModal"
 import { useEffect, useState } from "react"
 import Todo from "../../../entities/Todo"
 import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
-import AuthService from "../../../utilities/AuthService"
-import { db } from "../../../utilities/firebase"
+import AuthService from "../../../utils/AuthService"
+import { db } from "../../../utils/firebase"
 import ReactLoading from "react-loading"
-import TodoService from "../../../utilities/TodoService"
+import TodoService from "../../../utils/TodoService"
 import UnachievedTodoList from "../lists/UnachievedTodoList"
 
 interface Props {

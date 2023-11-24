@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth"
 import { useEffect, useState } from "react"
-import { auth } from "../../../utilities/firebase"
-import AuthService from "../../../utilities/AuthService"
+import { auth } from "../../../utils/firebase"
+import AuthService from "../../../utils/AuthService"
 
 function AuthStateChecker() {
 

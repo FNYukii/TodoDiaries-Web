@@ -6,7 +6,7 @@ import { BsCalendarCheck, BsCalendarCheckFill, BsFillPinFill, BsPin, BsTrash3 } 
 import MyDatePicker from "../components/inputs/MyDatePicker"
 import MyTimePicker from "../components/inputs/MyTimePicker"
 import { useNavigate, useParams } from "react-router-dom"
-import TodoService from "../../utilities/TodoService"
+import TodoService from "../../utils/TodoService"
 import Todo from "../../entities/Todo"
 import StateModal from "../components/modals/StateModal"
 
