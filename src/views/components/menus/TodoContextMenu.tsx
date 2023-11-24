@@ -3,7 +3,7 @@ import { BsPin, BsFillPinFill, BsCheckLg, BsTrash3 } from "react-icons/bs"
 import Todo from "../../../entities/Todo"
 import { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
-import TodoService from "../../../utilities/TodoService"
+import TodoService from "../../../utils/TodoService"
 import StateModal from "../modals/StateModal"
 
 interface Props {

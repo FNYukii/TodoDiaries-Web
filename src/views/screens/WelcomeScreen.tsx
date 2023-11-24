@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/sections/Header";
-import AuthService from "../../utilities/AuthService";
+import AuthService from "../../utils/AuthService";
 import NavLinkToModal from "../components/others/NavLinkToModal";
 
 function WelcomeScreen() {

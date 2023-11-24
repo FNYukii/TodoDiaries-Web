@@ -1,13 +1,13 @@
 import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import Todo from "../../../entities/Todo"
-import AuthService from "../../../utilities/AuthService"
-import { db } from "../../../utilities/firebase"
+import AuthService from "../../../utils/AuthService"
+import { db } from "../../../utils/firebase"
 import AchievedTodoList from "../lists/AchievedTodoList"
 import dayjs from "dayjs"
 import 'dayjs/locale/ja'
 import ReactLoading from "react-loading"
-import TodoService from "../../../utilities/TodoService"
+import TodoService from "../../../utils/TodoService"
 
 interface Props {
 	className?: string

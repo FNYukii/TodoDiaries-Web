@@ -2,11 +2,11 @@ import { Unsubscribe, collection, endAt, limit, onSnapshot, orderBy, query, star
 import { useState, useEffect } from "react"
 import ReactLoading from "react-loading"
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Cell } from "recharts"
-import AuthService from "../../../utilities/AuthService"
+import AuthService from "../../../utils/AuthService"
 import dayjs from "dayjs"
-import { db } from "../../../utilities/firebase"
+import { db } from "../../../utils/firebase"
 import Todo from "../../../entities/Todo"
-import TodoService from "../../../utilities/TodoService"
+import TodoService from "../../../utils/TodoService"
 import { useMediaQuery } from "@mui/material"
 
 interface Props {

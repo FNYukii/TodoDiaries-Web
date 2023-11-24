@@ -2,7 +2,7 @@ import { useSensors, useSensor, KeyboardSensor, DragEndEvent, DndContext, closes
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import Todo from "../../../entities/Todo"
 import UnachievedTodoRow from "./UnachievedTodoRow"
-import TodoService from "../../../utilities/TodoService"
+import TodoService from "../../../utils/TodoService"
 
 interface Props {
 	todos: Todo[]

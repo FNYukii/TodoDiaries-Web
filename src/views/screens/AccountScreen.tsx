@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import AuthService from "../../utilities/AuthService"
+import AuthService from "../../utils/AuthService"
 import URLModal from "../components/modals/URLModal"
 import { useState } from "react"
 import StateModal from "../components/modals/StateModal"

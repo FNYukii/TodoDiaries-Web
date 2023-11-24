@@ -3,9 +3,9 @@ import { Unsubscribe, collection, endAt, limit, onSnapshot, orderBy, query, star
 import { useEffect, useState } from "react"
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts"
 import Todo from "../../../entities/Todo"
-import AuthService from "../../../utilities/AuthService"
-import TodoService from "../../../utilities/TodoService"
-import { db } from "../../../utilities/firebase"
+import AuthService from "../../../utils/AuthService"
+import TodoService from "../../../utils/TodoService"
+import { db } from "../../../utils/firebase"
 import ReactLoading from "react-loading"
 
 interface Props {
