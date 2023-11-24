@@ -1,10 +1,14 @@
+import { useState } from "react"
 import ReactLoading from "react-loading"
 
-interface Props {
-	showLoading?: boolean
-}
+function SplashScreen() {
 
-function SplashScreen(props: Props) {
+	const [is1000msPassed, setIs1000msPassed] = useState(false)
+
+	// ローディングアイコンを表示する時間を設定
+	setTimeout(() => {
+		setIs1000msPassed(true)
+	}, 1000);
 
 	return (
 
@@ -19,7 +23,7 @@ function SplashScreen(props: Props) {
 					color="#666"
 					height="20px"
 					width="20px"
-					className={props.showLoading ? "" : "opacity-0"}
+					className={is1000msPassed ? "" : "opacity-0"}
 				/>
 			</div>
 		</div>

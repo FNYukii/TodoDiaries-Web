@@ -33,7 +33,6 @@ function App() {
 	const [isSignedIn, setIsSignedIn] = useState(false)
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [is200msPassed, setIs200msPassed] = useState(false)
-	const [is1000msPassed, setIs1000msPassed] = useState(false)
 
 	// ログイン状態を監視
 	useEffect(() => {
@@ -42,11 +41,6 @@ function App() {
 		setTimeout(() => {
 			setIs200msPassed(true)
 		}, 200);
-
-		// ローディングアイコンを表示する時間を設定
-		setTimeout(() => {
-			setIs1000msPassed(true)
-		}, 1000);
 
 		// ログイン状態を取得
 		onAuthStateChanged(auth, (user) => {
@@ -71,12 +65,8 @@ function App() {
 				<SplashScreen />
 			}
 
-			{!isLoaded && is200msPassed && !is1000msPassed &&
+			{!isLoaded && is200msPassed &&
 				<SplashScreen />
-			}
-
-			{!isLoaded && is200msPassed && is1000msPassed &&
-				<SplashScreen showLoading />
 			}
 
 			{isLoaded && !is200msPassed &&
