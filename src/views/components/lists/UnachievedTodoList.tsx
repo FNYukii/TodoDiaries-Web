@@ -59,14 +59,13 @@ function UnachievedTodoList(props: Props) {
 
 					<SortableContext items={props.todos} strategy={verticalListSortingStrategy}>
 
-						<div>
+						<div className="divide-y divide-zinc-200 dark:divide-zinc-700">
 
 							{props.todos.map((todo, index) => (
 
 								<UnachievedTodoRow
 									todo={todo}
 									key={todo.id}
-									className={`border-b border-zinc-200 dark:border-zinc-700 ${index === 0 ? "rounded-t-xl" : ""} ${index === props.todos.length - 1 ? "rounded-b-xl border-none" : ""}`}
 								/>
 							))}
 						</div>
