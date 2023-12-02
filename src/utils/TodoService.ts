@@ -36,6 +36,8 @@ class TodoService {
 		return todo
 	}
 
+
+
 	static async readTodo(todoId: string): Promise<Todo | null> {
 
 		const docRef = doc(db, "todos", todoId)
@@ -76,6 +78,8 @@ class TodoService {
 
 		return null
 	}
+
+
 
 	static async readOrder(isPinned: boolean, maxOrder: boolean): Promise<number | null> {
 
@@ -126,6 +130,8 @@ class TodoService {
 		}
 	}
 
+
+
 	static async createUnachievedTodo(content: string, isPinned: boolean): Promise<string | null> {
 
 		// UserIdを取得
@@ -174,6 +180,8 @@ class TodoService {
 		}
 	}
 
+
+
 	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
 
 		// UserIdを取得
@@ -210,6 +218,8 @@ class TodoService {
 			return null
 		}
 	}
+
+
 
 	static async updateTodo(
 		todoId: string,
@@ -250,6 +260,8 @@ class TodoService {
 		}
 	}
 
+
+
 	static async updateTodoOrder(todoId: string, order: number): Promise<string | null> {
 
 		// UserIdを取得
@@ -279,6 +291,8 @@ class TodoService {
 			return null
 		}
 	}
+
+
 
 	static async moveTodo(todos: Todo[], from: number, destination: number): Promise<string | null> {
 
