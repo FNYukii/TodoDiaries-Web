@@ -29,9 +29,13 @@ function AchievedTodoRow(props: Props) {
 
 	return (
 
-		<div onContextMenu={onContextMenu} className="bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition first:rounded-t-xl last:rounded-b-xl">
+		<div className="group">
 
-			<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4 flex gap-3">
+			<button
+				onClick={() => { navigate(`/todos/${props.todo.id}`) }}
+				onContextMenu={onContextMenu}
+				className="w-full   py-3 px-4 flex gap-3   bg-white dark:bg-zinc-800   hover:bg-zinc-200 dark:hover:bg-zinc-700 transition   group-first:rounded-t-xl group-last:rounded-b-xl"
+			>
 
 				<span className="text-zinc-500">
 					{dayjs(props.todo.achievedAt).format('HH:mm')}
