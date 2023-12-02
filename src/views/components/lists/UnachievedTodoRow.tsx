@@ -46,6 +46,7 @@ function UnachievedTodoRow(props: Props) {
 				{...listeners}
 				onContextMenu={onContextMenu}
 				className={`bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition ${props.className}`}
+				tabIndex={-1}
 			>
 
 				<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4">
