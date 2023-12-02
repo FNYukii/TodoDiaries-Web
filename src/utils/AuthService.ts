@@ -20,6 +20,8 @@ class AuthService {
 		})
 	}
 
+
+
 	static email(): string | null {
 
 		const user = auth.currentUser
@@ -30,6 +32,8 @@ class AuthService {
 
 		return email
 	}
+
+
 
 	static async signInWithGoogle(): Promise<string | null> {
 
@@ -56,6 +60,8 @@ class AuthService {
 				return null
 			})
 	}
+
+	
 
 	static async signOut(): Promise<string | null> {
 
