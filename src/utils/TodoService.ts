@@ -349,6 +349,8 @@ class TodoService {
 		return result
 	}
 
+	
+
 	static async deleteTodo(todoId: string): Promise<string | null> {
 
 		return deleteDoc(doc(db, "todos", todoId))
