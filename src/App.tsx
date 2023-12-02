@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 import NotFoundScreen from "./views/screens/NotFoundScreen"
 import SignInScreen from "./views/screens/SignInScreen"
 import HomeScreen from "./views/screens/HomeScreen"
@@ -49,7 +49,7 @@ function App() {
 
 	return (
 
-		<div>
+		<BrowserRouter>
 
 			{(!isLoaded || !is200msPassed) &&
 				<SplashScreen />
@@ -102,7 +102,7 @@ function App() {
 					</Routes>
 				</div>
 			}
-		</div>
+		</BrowserRouter>
 	)
 }
 
