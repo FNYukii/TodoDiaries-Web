@@ -21,7 +21,7 @@ const db = initializeFirestore(app, {
 	localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 })
 
-// Anthenticationへの参照を取得
+// Authenticationへの参照を取得
 const auth = getAuth(app)
 
 // データベースや認証への参照をエクスポート
