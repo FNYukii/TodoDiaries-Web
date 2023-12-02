@@ -8,7 +8,6 @@ import TodoContextMenu from "../menus/TodoContextMenu"
 
 interface Props {
 	todo: Todo
-	className?: string
 }
 
 function UnachievedTodoRow(props: Props) {
@@ -38,25 +37,27 @@ function UnachievedTodoRow(props: Props) {
 
 	return (
 
-		<>
+		<div className="group">
 
 			<div
 				ref={setNodeRef}
 				{...attributes}
 				{...listeners}
-				onContextMenu={onContextMenu}
-				className={`bg-white dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition ${props.className}`}
 				tabIndex={-1}
 			>
 
-				<button onClick={() => { navigate(`/todos/${props.todo.id}`) }} className="w-full h-full py-3 px-4">
+				<button
+					onClick={() => { navigate(`/todos/${props.todo.id}`) }}
+					onContextMenu={onContextMenu}
+					className="w-full   py-3 px-4 flex gap-3   bg-white dark:bg-zinc-800   hover:bg-zinc-200 dark:hover:bg-zinc-700 transition   group-first:rounded-t-xl group-last:rounded-b-xl"
+				>
 
 					<p className="whitespace-pre-line text-left">{props.todo.content}</p>
 				</button>
 			</div>
 
 			<TodoContextMenu isOpen={isOpen} setIsOpen={setIsOpen} anchorPoint={anchorPoint} todo={props.todo} />
-		</>
+		</div>
 	)
 }
 
