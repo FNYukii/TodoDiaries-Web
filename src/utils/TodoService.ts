@@ -1,4 +1,4 @@
-import { DocumentData, QueryDocumentSnapshot, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { DocumentData, QueryDocumentSnapshot, Unsubscribe, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -182,6 +182,52 @@ class TodoService {
 
 
 
+	static async onUnachievedTodosChanged(
+		isPinned: boolean,
+		callback: (payments: Todo[]) => unknown,
+		cancelCallback: (error: Error) => unknown,
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("achievedAt", "==", null),
+			where("isPinned", "==", isPinned),
+			where("userId", "==", userId),
+			orderBy("order", "asc"),
+			limit(100)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			// Stateを更新
+			callback(todos)
+
+		}, (error) => {
+
+			// エラーならログ出力 & State更新
+			console.log(`FAIL! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
 	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
 
 		// UserIdを取得
@@ -349,7 +395,7 @@ class TodoService {
 		return result
 	}
 
-	
+
 
 	static async deleteTodo(todoId: string): Promise<string | null> {
 

@@ -2,9 +2,7 @@ import { AiOutlinePlus } from "react-icons/ai"
 import NavLinkToModal from "../others/NavLinkToModal"
 import { useEffect, useState } from "react"
 import Todo from "../../../entities/Todo"
-import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
-import AuthService from "../../../utils/AuthService"
-import { db } from "../../../utils/firebase"
+import { Unsubscribe } from "firebase/firestore"
 import ReactLoading from "react-loading"
 import TodoService from "../../../utils/TodoService"
 import UnachievedTodoList from "../lists/UnachievedTodoList"
@@ -15,132 +13,67 @@ interface Props {
 
 function FirstColumn(props: Props) {
 
+	// Pinned Todos
 	const [pinnedTodos, setPinnedTodos] = useState<Todo[] | null>(null)
-	const [unpinnedTodos, setunpinnedTodos] = useState<Todo[] | null>(null)
-	let unsubPinnedTodos: Unsubscribe | null = null
-
-
 	const [isLoadedPinnedTodos, setIsLoadedPinnedTodos] = useState(false)
+
+	// Unpinned Todos
+	const [unpinnedTodos, setUnpinnedTodos] = useState<Todo[] | null>(null)
 	const [isLoadedUnpinnedTodos, setIsLoadedUnpinnedTodos] = useState(false)
-	let unsubUnpinnedTodos: Unsubscribe | null = null
 
-	async function listenPinnedTodos() {
 
-		// UserIDを取得
-		const userId = await AuthService.uid()
 
-		// 未ログインなら、エラーとする
-		if (userId === null) {
-
-			console.log("FAIL! Error listening todos. 未ログイン状態です。")
-			setIsLoadedPinnedTodos(true)
-			return
-		}
-
-		// 読み取りクエリを作成
-		const q = query(
-			collection(db, "todos"),
-			where("achievedAt", "==", null),
-			where("isPinned", "==", true),
-			where("userId", "==", userId),
-			orderBy("order", "asc"),
-			limit(100)
-		)
-
-		// リアルタイムリスナーを設定
-		unsubPinnedTodos = onSnapshot(q, async (querySnapshot) => {
-
-			// 成功
-			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
-
-			// Todoの配列を作成
-			let todos: Todo[] = []
-			querySnapshot.forEach((doc) => {
-
-				const todo = TodoService.toTodo(doc)
-				todos.push(todo)
-			})
-
-			// Stateを更新
-			setPinnedTodos(todos)
-			setIsLoadedPinnedTodos(true)
-
-		}, (error) => {
-
-			// エラーならログ出力 & State更新
-			console.log(`FAIL! Error listening todos. ${error}`)
-			setIsLoadedPinnedTodos(true)
-		})
-	}
-
-	async function listenUnpinnedTodos() {
-
-		// UserIDを取得
-		const userId = await AuthService.uid()
-
-		// 未ログインなら、エラーとする
-		if (userId === null) {
-
-			console.log("FAIL! Error listening todos. 未ログイン状態です。")
-			setIsLoadedUnpinnedTodos(true)
-			return
-		}
-
-		// 読み取りクエリを作成
-		const q = query(
-			collection(db, "todos"),
-			where("achievedAt", "==", null),
-			where("isPinned", "==", false),
-			where("userId", "==", userId),
-			orderBy("order", "asc"),
-			limit(100)
-		)
-
-		// リアルタイムリスナーを設定
-		unsubUnpinnedTodos = onSnapshot(q, async (querySnapshot) => {
-
-			// 成功
-			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
-
-			// Todoの配列を作成
-			let todos: Todo[] = []
-			querySnapshot.forEach((doc) => {
-
-				const todo = TodoService.toTodo(doc)
-				todos.push(todo)
-			})
-
-			// Stateを更新
-			setunpinnedTodos(todos)
-			setIsLoadedUnpinnedTodos(true)
-
-		}, (error) => {
-
-			// エラーならログ出力 & State更新
-			console.log(`FAIL! Error listening todos. ${error}`)
-			setIsLoadedUnpinnedTodos(true)
-		})
-	}
-
+	// Pinned Todosを読み取るリスナー
 	useEffect(() => {
 
-		// リスナーを設定
-		listenPinnedTodos()
-		listenUnpinnedTodos()
+		let unsubscribe: Unsubscribe
+
+		(async () => {
+
+			unsubscribe = await TodoService.onUnachievedTodosChanged(false, todos => {
+
+				setUnpinnedTodos(todos)
+				setIsLoadedUnpinnedTodos(true)
+
+			}, (error) => {
+
+				setIsLoadedUnpinnedTodos(true)
+			})
+
+		})()
 
 		return () => {
-
-			// リスナーをデタッチ
-			if (unsubPinnedTodos !== null) {
-				unsubPinnedTodos()
-			}
-
-			if (unsubUnpinnedTodos !== null) {
-				unsubUnpinnedTodos()
-			}
+			if (unsubscribe) unsubscribe()
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+
+
+	// Unpinned Todosを読み取るリスナー
+	useEffect(() => {
+
+		let unsubscribe: Unsubscribe
+
+		(async () => {
+
+			unsubscribe = await TodoService.onUnachievedTodosChanged(true, todos => {
+
+				setPinnedTodos(todos)
+				setIsLoadedPinnedTodos(true)
+
+			}, (error) => {
+
+				setIsLoadedPinnedTodos(true)
+			})
+
+		})()
+
+		return () => {
+			if (unsubscribe) unsubscribe()
+		}
+	}, [])
+
+
 
 	return (
 
