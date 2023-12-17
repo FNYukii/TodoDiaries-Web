@@ -1,8 +1,6 @@
-import { query, collection, where, orderBy, limit, onSnapshot, Unsubscribe } from "firebase/firestore"
+import { Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import Todo from "../../../entities/Todo"
-import AuthService from "../../../utils/AuthService"
-import { db } from "../../../utils/firebase"
 import AchievedTodoList from "../lists/AchievedTodoList"
 import dayjs from "dayjs"
 import 'dayjs/locale/ja'
@@ -21,103 +19,36 @@ function SecondColumn(props: Props) {
 	const [groupedTodos, setGroupedTodos] = useState<Todo[][] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	// リスナーをデタッチするメソッド
-	let unsub: Unsubscribe | null = null
-
 	// 読み取り上限数
-	const [readLimit, setReadLimit] = useState(50)
+	const [limit, setLimit] = useState(50)
 
-	async function listenTodos() {
 
-		// UserIDを取得
-		const userId = await AuthService.uid()
 
-		// 未ログインなら、エラーとする
-		if (userId === null) {
-
-			console.log("Fail! Error listening todos. 未ログイン状態です。")
-			setIsLoaded(true)
-			return
-		}
-
-		// 読み取りクエリを作成
-		const q = query(
-			collection(db, "todos"),
-			where("userId", "==", userId),
-			where("achievedAt", "!=", null),
-			orderBy("achievedAt", "desc"),
-			limit(readLimit)
-		)
-
-		// リアルタイムリスナーを設定
-		unsub = onSnapshot(q, async (querySnapshot) => {
-
-			// 成功
-			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
-
-			// Todoの配列を作成
-			let todos: Todo[] = []
-			querySnapshot.forEach((doc) => {
-
-				const todo = TodoService.toTodo(doc)
-				todos.push(todo)
-			})
-
-			// 配列todosを二次元配列groupedTodosに変換
-			let groupedTodos: Todo[][] = []
-			let beforeAchievedDay: string | null = null
-			let dayCounter = 0
-			todos.forEach(todo => {
-
-				// このTodoの達成日を取得
-				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
-
-				// 初回ループ
-				if (beforeAchievedDay === null) {
-					groupedTodos.push([])
-				}
-
-				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
-				else if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
-
-					dayCounter += 1
-					groupedTodos.push([])
-				}
-
-				// 二次元配列にTodoを追加
-				groupedTodos[dayCounter].push(todo)
-
-				// 今回の達成日を前回の達成日にする
-				beforeAchievedDay = currentAchievedDay
-			})
-
-			// Stateを更新
-			setGroupedTodos(groupedTodos)
-			setIsLoaded(true)
-
-		}, (error) => {
-
-			// エラーならログ出力 & State更新
-			console.log(`Fail! Error listening todos. ${error}`)
-			setIsLoaded(true)
-		})
-	}
-
+	// 読み取りリスナーを設定
 	useEffect(() => {
 
-		// 既存リスナーがあればデタッチ
-		if (unsub) unsub()
+		let unsubscribe: Unsubscribe
 
-		// 新リスナー設定
-		listenTodos()
+		(async () => {
 
-		// クリーンアップ時にリスナーをデタッチ
+			unsubscribe = await TodoService.onAchievedTodosChanged(limit, todos => {
+
+				setGroupedTodos(todos)
+				setIsLoaded(true)
+
+			}, (error) => {
+
+				setIsLoaded(true)
+			})
+
+		})()
+
 		return () => {
-			if (unsub) unsub()
+			if (unsubscribe) unsubscribe()
 		}
+	}, [limit])
 
-		// eslint-disable-next-line
-	}, [readLimit])
+
 
 	return (
 
@@ -171,9 +102,9 @@ function SecondColumn(props: Props) {
 						<div className="mt-4 flex justify-center">
 
 							<button onClick={() => {
-								
+
 								// 上限緩和
-								setReadLimit((prevValue) => prevValue + 50)
+								setLimit((prevValue) => prevValue + 50)
 
 							}} className="py-1 px-4 text-blue-500 rounded-full transition hover:bg-blue-100 dark:hover:bg-blue-900/50">もっと読み込む</button>
 						</div>

@@ -2,6 +2,7 @@ import { DocumentData, QueryDocumentSnapshot, Unsubscribe, addDoc, collection, d
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
+import dayjs from "dayjs"
 
 class TodoService {
 
@@ -222,6 +223,77 @@ class TodoService {
 
 			// エラーならログ出力 & State更新
 			console.log(`FAIL! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
+	static async onAchievedTodosChanged(
+		readLimit: number,
+		callback: (todos: Todo[][]) => unknown,
+		cancelCallback: (error: Error) => unknown
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("userId", "==", userId),
+			where("achievedAt", "!=", null),
+			orderBy("achievedAt", "desc"),
+			limit(readLimit)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			// 配列todosを二次元配列groupedTodosに変換
+			let groupedTodos: Todo[][] = []
+			let beforeAchievedDay: string | null = null
+			let dayCounter = 0
+			todos.forEach(todo => {
+
+				// このTodoの達成日を取得
+				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
+
+				// 初回ループ
+				if (beforeAchievedDay === null) {
+					groupedTodos.push([])
+				}
+
+				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
+				else if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
+
+					dayCounter += 1
+					groupedTodos.push([])
+				}
+
+				// 二次元配列にTodoを追加
+				groupedTodos[dayCounter].push(todo)
+
+				// 今回の達成日を前回の達成日にする
+				beforeAchievedDay = currentAchievedDay
+			})
+
+			callback(groupedTodos)
+
+		}, (error) => {
+
+			console.log(`Fail! Error listening todos. ${error}`)
 			cancelCallback(error)
 		})
 	}
