@@ -1,7 +1,8 @@
-import { DocumentData, QueryDocumentSnapshot, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { DocumentData, QueryDocumentSnapshot, Unsubscribe, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
+import dayjs from "dayjs"
 
 class TodoService {
 
@@ -182,6 +183,123 @@ class TodoService {
 
 
 
+	static async onUnachievedTodosChanged(
+		isPinned: boolean,
+		callback: (payments: Todo[]) => unknown,
+		cancelCallback: (error: Error) => unknown,
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("achievedAt", "==", null),
+			where("isPinned", "==", isPinned),
+			where("userId", "==", userId),
+			orderBy("order", "asc"),
+			limit(100)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			// Stateを更新
+			callback(todos)
+
+		}, (error) => {
+
+			// エラーならログ出力 & State更新
+			console.log(`FAIL! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
+	static async onAchievedTodosChanged(
+		readLimit: number,
+		callback: (todos: Todo[][]) => unknown,
+		cancelCallback: (error: Error) => unknown
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("userId", "==", userId),
+			where("achievedAt", "!=", null),
+			orderBy("achievedAt", "desc"),
+			limit(readLimit)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			// 配列todosを二次元配列groupedTodosに変換
+			let groupedTodos: Todo[][] = []
+			let beforeAchievedDay: string | null = null
+			let dayCounter = 0
+			todos.forEach(todo => {
+
+				// このTodoの達成日を取得
+				const currentAchievedDay = dayjs(todo.achievedAt!).format('YYYYMMDD')
+
+				// 初回ループ
+				if (beforeAchievedDay === null) {
+					groupedTodos.push([])
+				}
+
+				// 初回ループでない & 前回と達成日が違うならdayCounterをインクリメント
+				else if (beforeAchievedDay !== null && beforeAchievedDay !== currentAchievedDay) {
+
+					dayCounter += 1
+					groupedTodos.push([])
+				}
+
+				// 二次元配列にTodoを追加
+				groupedTodos[dayCounter].push(todo)
+
+				// 今回の達成日を前回の達成日にする
+				beforeAchievedDay = currentAchievedDay
+			})
+
+			callback(groupedTodos)
+
+		}, (error) => {
+
+			console.log(`Fail! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
 	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
 
 		// UserIdを取得
@@ -349,7 +467,7 @@ class TodoService {
 		return result
 	}
 
-	
+
 
 	static async deleteTodo(todoId: string): Promise<string | null> {
 
