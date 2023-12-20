@@ -1,13 +1,11 @@
-import { Unsubscribe, collection, endAt, limit, onSnapshot, orderBy, query, startAt, where } from "firebase/firestore"
+import { Unsubscribe } from "firebase/firestore"
 import { useState, useEffect } from "react"
 import ReactLoading from "react-loading"
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Cell } from "recharts"
-import AuthService from "../../../utils/AuthService"
-import dayjs from "dayjs"
-import { db } from "../../../utils/firebase"
-import Todo from "../../../entities/Todo"
 import TodoService from "../../../utils/TodoService"
 import { useMediaQuery } from "@mui/material"
+import ChartRecord from "../../../entities/ChartRecord"
+import ChartService from "../../../utils/ChartService"
 
 interface Props {
 	className?: string
@@ -15,127 +13,51 @@ interface Props {
 
 function AchieveCountAt2DaysBarChart(props: Props) {
 
-	// リスナーをデタッチするためのオブジェクト
-	let unsub: Unsubscribe | null = null
-
 	// Chartにセットするデータ
-	const [data, setData] = useState<{ label: string, value: number }[] | null>(null)
+	const [chartRecords, setChartRecords] = useState<ChartRecord[] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	async function listenTodos() {
 
-		// UserIDを取得
-		const userId = await AuthService.uid()
-
-		// 未ログインなら、エラーとする
-		if (userId === null) {
-
-			console.log("FAIL! Error listening todos. 未ログイン状態です。")
-			setIsLoaded(true)
-			return
-		}
-
-		// 昨日の開始日時と明日の開始日時を取得
-		const now = dayjs()
-		const startDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
-		const endDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
-
-		// 読み取りクエリを作成
-		const q = query(
-			collection(db, "todos"),
-			where("userId", "==", userId),
-			orderBy("achievedAt", "asc"),
-			startAt(startDate),
-			endAt(endDate),
-			limit(1000)
-		)
-
-		// リアルタイムリスナーを設定
-		unsub = onSnapshot(q, async (querySnapshot) => {
-
-			// 成功
-			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
-
-			// Todoの配列を作成
-			let todos: Todo[] = []
-			querySnapshot.forEach((doc) => {
-
-				const todo = TodoService.toTodo(doc)
-				todos.push(todo)
-			})
-
-			// 昨日のTodo達成数を取得
-			let achieveCountAtYesterday = 0
-			todos.forEach(todo => {
-
-				// Todo達成日時、昨日、今日の3つのDate
-				const achievedAt = todo.achievedAt!
-				const now = dayjs()
-				const yesterday = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
-				const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
-
-				// 3つのDateを比較して、達成日時が昨日と今日の間かどうか判定
-				if (achievedAt >= yesterday && achievedAt < today) {
-					achieveCountAtYesterday += 1
-				}
-			})
-
-			// 今日のTodo達成数を取得
-			let achieveCountAtToday = 0
-			todos.forEach(todo => {
-
-				// Todo達成日時、今日、明日の3つのDate
-				const achievedAt = todo.achievedAt!
-				const now = dayjs()
-				const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
-				const tomorrow = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
-
-				// 3つのDateを比較して、達成日時が今日と明日の間かどうか判定
-				if (achievedAt >= today && achievedAt < tomorrow) {
-					achieveCountAtToday += 1
-				}
-			})
-
-			// 昨日と今日のTodo達成数をもとに、dataを生成する
-			const data = [
-				{
-					label: "今日",
-					value: achieveCountAtToday
-				},
-				{
-					label: "昨日",
-					value: achieveCountAtYesterday
-				}
-			]
-
-			// 画面に反映
-			setData(data)
-			setIsLoaded(true)
-
-		}, (error) => {
-
-			// 失敗
-			console.log(`FAIL! Error listening todos. ${error}`)
-			setIsLoaded(true)
-		})
-	}
 
 	useEffect(() => {
 
-		listenTodos()
+		let unsubscribe: Unsubscribe
+
+		(async () => {
+
+			unsubscribe = await TodoService.onAchievedTodosAt2DaysChanged(todos => {
+
+				// Todo[]をChartRecord[]に変換
+				const chartRecords = ChartService.to2DaysChartRecords(todos)
+
+				// Stateを更新
+				setChartRecords(chartRecords)
+				setIsLoaded(true)
+
+			}, (error) => {
+
+				setIsLoaded(true)
+			})
+
+		})()
 
 		return () => {
-			if (unsub !== null) unsub()
+			if (unsubscribe) unsubscribe()
 		}
-		// eslint-disable-next-line
 	}, [])
+
+
 
 	const isLightMode = useMediaQuery('(prefers-color-scheme: dark)')
 
+
+
 	return (
+
 		<div className={`bg-white p-4 rounded-xl dark:bg-zinc-800 ${props.className}`}>
 
 			{!isLoaded &&
+
 				<div className="flex justify-center">
 
 					<ReactLoading
@@ -147,32 +69,33 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 				</div>
 			}
 
-			{isLoaded && data === null &&
+			{isLoaded && chartRecords === null &&
+			
 				<div>
 					<p className="mt-2 text-zinc-500">読み取りに失敗しました</p>
 				</div>
 			}
 
-			{isLoaded && data !== null &&
+			{isLoaded && chartRecords !== null &&
 
 				<div>
 
-					{data[0].value > data[1].value &&
+					{chartRecords[0].value > chartRecords[1].value &&
 						<p>今日のTodo達成数は昨日よりも多いです。</p>
 					}
 
-					{data[0].value < data[1].value &&
+					{chartRecords[0].value < chartRecords[1].value &&
 						<p>今日のTodo達成数は昨日よりも少ないです。</p>
 					}
 
-					{data[0].value === data[1].value &&
+					{chartRecords[0].value === chartRecords[1].value &&
 						<p>今日のTodo達成数は昨日と同じです。</p>
 					}
 
 					<BarChart
 						width={300}
 						height={200}
-						data={data}
+						data={chartRecords}
 						layout="vertical"
 						className="mt-2"
 					>
@@ -184,7 +107,7 @@ function AchieveCountAt2DaysBarChart(props: Props) {
 						<Bar dataKey="value" barSize={30} >
 
 							{
-								data.map((entry, index) => (
+								chartRecords.map((entry, index) => (
 									<Cell key={index} fill={index === 0 ? "#3b82f6" : `${isLightMode ? "#555" : "#aaa"}`} />
 								))
 							}

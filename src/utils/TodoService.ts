@@ -352,6 +352,55 @@ class TodoService {
 
 
 
+	static async onAchievedTodosAt2DaysChanged(
+		callback: (todos: Todo[]) => unknown,
+		cancelCallback: (error: Error) => unknown
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 昨日の開始日時と明日の開始日時を取得
+		const now = dayjs()
+		const startDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
+		const endDate: Date = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("userId", "==", userId),
+			orderBy("achievedAt", "asc"),
+			startAt(startDate),
+			endAt(endDate),
+			limit(1000)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			callback(todos)
+
+		}, (error) => {
+
+			// 失敗
+			console.log(`FAIL! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
 	static async createAchievedTodo(content: string, achievedAt: Date): Promise<string | null> {
 
 		// UserIdを取得

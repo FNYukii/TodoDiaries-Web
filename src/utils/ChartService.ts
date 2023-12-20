@@ -51,6 +51,59 @@ class ChartService {
 		return chartRecords
 	}
 
+
+
+	static to2DaysChartRecords(from: Todo[]): ChartRecord[] {
+
+		const todos = from
+
+		// 昨日のTodo達成数を取得
+		let achieveCountAtYesterday = 0
+		todos.forEach(todo => {
+
+			// Todo達成日時、昨日、今日の3つのDate
+			const achievedAt = todo.achievedAt!
+			const now = dayjs()
+			const yesterday = dayjs(`${now.year()}-${now.month() + 1}-${now.date() - 1}`).toDate()
+			const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
+
+			// 3つのDateを比較して、達成日時が昨日と今日の間かどうか判定
+			if (achievedAt >= yesterday && achievedAt < today) {
+				achieveCountAtYesterday += 1
+			}
+		})
+
+		// 今日のTodo達成数を取得
+		let achieveCountAtToday = 0
+		todos.forEach(todo => {
+
+			// Todo達成日時、今日、明日の3つのDate
+			const achievedAt = todo.achievedAt!
+			const now = dayjs()
+			const today = dayjs(`${now.year()}-${now.month() + 1}-${now.date()}`).toDate()
+			const tomorrow = dayjs(`${now.year()}-${now.month() + 1}-${now.date() + 1}`).toDate()
+
+			// 3つのDateを比較して、達成日時が今日と明日の間かどうか判定
+			if (achievedAt >= today && achievedAt < tomorrow) {
+				achieveCountAtToday += 1
+			}
+		})
+
+		// 昨日と今日のTodo達成数をもとに、dataを生成する
+		const chartRecords = [
+			{
+				label: "今日",
+				value: achieveCountAtToday
+			},
+			{
+				label: "昨日",
+				value: achieveCountAtYesterday
+			}
+		]
+
+		return chartRecords
+	}
+
 }
 
 export default ChartService
