@@ -58,6 +58,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 
 
 	return (
+		
 		<div className={` ${props.className}`}>
 
 			{!isLoaded &&
