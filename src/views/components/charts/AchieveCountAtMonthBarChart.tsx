@@ -1,4 +1,3 @@
-import dayjs from "dayjs"
 import { useEffect, useState } from "react"
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts"
 import { Unsubscribe } from "firebase/firestore"
