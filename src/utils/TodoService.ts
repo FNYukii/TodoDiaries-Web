@@ -1,4 +1,4 @@
-import { DocumentData, QueryDocumentSnapshot, Unsubscribe, addDoc, collection, deleteDoc, doc, getDocFromCache, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from "firebase/firestore"
+import { DocumentData, QueryDocumentSnapshot, Unsubscribe, addDoc, collection, deleteDoc, doc, endAt, getDocFromCache, getDocs, limit, onSnapshot, orderBy, query, serverTimestamp, startAt, updateDoc, where } from "firebase/firestore"
 import AuthService from "./AuthService"
 import { db } from "./firebase"
 import Todo from "../entities/Todo"
@@ -294,6 +294,58 @@ class TodoService {
 		}, (error) => {
 
 			console.log(`Fail! Error listening todos. ${error}`)
+			cancelCallback(error)
+		})
+	}
+
+
+
+	static async onAchievedTodosAtMonthChanged(
+		offset: number,
+		callback: (todos: Todo[]) => unknown,
+		cancelCallback: (error: Error) => unknown
+	): Promise<Unsubscribe> {
+
+		// UserIDを取得
+		const userId = await AuthService.uid()
+
+		// 今月の開始日時と来月の開始日時を取得
+		const now = dayjs()
+		const shiftedNow = now.add(offset, 'month')
+		const currentYear = shiftedNow.year()
+		const currentMonth = shiftedNow.month() + 1
+		const startDate: Date = dayjs(`${currentYear}-${currentMonth}-01`).toDate()
+		const endDate: Date = dayjs(`${currentYear}-${currentMonth + 1}-01`).toDate()
+
+		// 読み取りクエリを作成
+		const q = query(
+			collection(db, "todos"),
+			where("userId", "==", userId),
+			orderBy("achievedAt", "asc"),
+			startAt(startDate),
+			endAt(endDate),
+			limit(1000)
+		)
+
+		// リアルタイムリスナーを設定
+		return onSnapshot(q, async (querySnapshot) => {
+
+			// 成功
+			console.log(`SUCCESS! Read ${querySnapshot.size} todos.`)
+
+			// Todoの配列を作成
+			let todos: Todo[] = []
+			querySnapshot.forEach((doc) => {
+
+				const todo = TodoService.toTodo(doc)
+				todos.push(todo)
+			})
+
+			callback(todos)
+
+		}, (error) => {
+
+			console.log(`FAIL! Error listening todos. ${error}`)
 			cancelCallback(error)
 		})
 	}
