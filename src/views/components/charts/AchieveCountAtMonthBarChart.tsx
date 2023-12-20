@@ -4,6 +4,7 @@ import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts"
 import { Unsubscribe } from "firebase/firestore"
 import TodoService from "../../../utils/TodoService"
 import ReactLoading from "react-loading"
+import ChartRecord from "../../../entities/ChartRecord"
 
 
 
@@ -17,7 +18,7 @@ interface Props {
 function AchieveCountAtMonthBarChart(props: Props) {
 
 	// Chartにセットするデータ
-	const [data, setData] = useState<{ label: string, value: number }[] | null>(null)
+	const [chartRecords, setChartRecords] = useState<ChartRecord[] | null>(null)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	// 今月のTodo達成数
@@ -43,7 +44,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 				const dayCount = dayjs().daysInMonth()
 
 				// todosを元にdataを生成
-				let data: { label: string, value: number }[] = []
+				let chartRecords: ChartRecord[] = []
 
 				for (let i = 1; i < dayCount + 1; i++) {
 
@@ -65,14 +66,16 @@ function AchieveCountAtMonthBarChart(props: Props) {
 					})
 
 					// この日のTodo達成数が取得できたら、配列dataに要素を追加
-					data.push({
+					const chartRecord = {
 						label: `${i}日`,
 						value: achieveCount
-					})
+					}
+
+					chartRecords.push(chartRecord)
 				}
 
 				// Stateを更新
-				setData(data)
+				setChartRecords(chartRecords)
 				setAchieveCountAtMonth(todos.length)
 				setIsLoaded(true)
 
@@ -106,13 +109,13 @@ function AchieveCountAtMonthBarChart(props: Props) {
 				</div>
 			}
 
-			{isLoaded && data === null &&
+			{isLoaded && chartRecords === null &&
 				<div>
 					<p className="mt-2 text-zinc-500">読み取りに失敗しました</p>
 				</div>
 			}
 
-			{isLoaded && data !== null &&
+			{isLoaded && chartRecords !== null &&
 
 				<div>
 
@@ -121,7 +124,7 @@ function AchieveCountAtMonthBarChart(props: Props) {
 					<BarChart
 						width={300}
 						height={300}
-						data={data}
+						data={chartRecords}
 						className="mt-2"
 					>
 						<CartesianGrid stroke="#7774" />
