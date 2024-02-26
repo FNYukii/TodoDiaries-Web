@@ -2,7 +2,7 @@
 ## 概要
 Web向けのTodo管理アプリです。 データはクラウドに保存されます。
 
-以前iOSアプリとして制作したTodo DiariesのWebブラウザ版です。やるべきことを確認できるだけでなく、完了したことを振り返ることもできます。
+以前iOSアプリとして制作した[Todo Diaries](https://github.com/FNYukii/TodoDiaries-iOS)のWebブラウザ版です。やるべきことを確認できるだけでなく、完了したことを振り返ることもできます。
 
 ## 主な使用技術
 - TypeScript
