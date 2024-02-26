@@ -5,6 +5,7 @@ Web向けのTodo管理アプリです。 データはクラウドに保存され
 以前iOSアプリとして制作したTodo DiariesのWebブラウザ版です。やるべきことを確認できるだけでなく、完了したことを振り返ることもできます。
 
 ## 主な使用技術
+- TypeScript
 - React
 - Tailwind CSS
 - Firebase
