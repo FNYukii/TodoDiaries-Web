@@ -136,60 +136,41 @@ function TodoContextMenu(props: Props) {
 
 				{props.todo.achievedAt === null && props.todo.isPinned! &&
 
-					<MenuItem>
-
-						<button onClick={() => unpinTodo()} className="py-1 flex items-center gap-4">
-
-							<BsPin className="text-lg text-zinc-500" />
-							<span>固定をやめる</span>
-						</button>
+					<MenuItem onClick={() => unpinTodo()} className="flex items-center gap-4">
+						<BsPin className="my-2 text-lg text-zinc-500" />
+						<span>固定をやめる</span>
 					</MenuItem>
 				}
 
 				{props.todo.achievedAt === null && !props.todo.isPinned! &&
 
-					<MenuItem>
-
-						<button onClick={() => pinTodo()} className="py-1 flex items-center gap-4">
-
-							<BsFillPinFill className="text-lg text-zinc-500" />
-							<span>固定する</span>
-						</button>
+					<MenuItem onClick={() => pinTodo()} className="flex items-center gap-4">
+						<BsFillPinFill className="my-2 text-lg text-zinc-500" />
+						<span>固定する</span>
 					</MenuItem>
 				}
 
 				{props.todo.achievedAt === null &&
 
-					< MenuItem >
-
-						<button onClick={() => achieveTodo()} className="py-1 flex items-center gap-4">
-
-							<BsCheckLg className="text-lg text-zinc-500" />
-							<span>達成済みにする</span>
-						</button>
+					<MenuItem onClick={() => achieveTodo()} className="flex items-center gap-4">
+						<BsCheckLg className="my-2 text-lg text-zinc-500" />
+						<span>達成済みにする</span>
 					</MenuItem>
 				}
 
 				{props.todo.achievedAt !== null &&
 
-					< MenuItem >
-
-						<button onClick={() => unachieveTodo()} className="py-1 flex items-center gap-4">
-
-							<AiOutlineClose className="text-lg text-zinc-500" />
-							<span>未達成にする</span>
-						</button>
+					<MenuItem onClick={() => unachieveTodo()} className="flex items-center gap-4">
+						<AiOutlineClose className="my-2 text-lg text-zinc-500" />
+						<span>未達成にする</span>
 					</MenuItem>
 				}
 
-				<MenuItem>
-
-					<button onClick={() => setIsOpenDeleteModal(true)} className="py-1 flex items-center gap-4 text-red-500">
-
-						<BsTrash3 className="text-lg" />
-						<span>削除</span>
-					</button>
+				<MenuItem onClick={() => setIsOpenDeleteModal(true)} className="flex items-center gap-4 text-red-500">
+					<BsTrash3 className="my-2 text-lg" />
+					<span>削除</span>
 				</MenuItem>
+				
 			</ControlledMenu>
 
 			{isOpenDeleteModal &&
